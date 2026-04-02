@@ -31,11 +31,11 @@ export const FAQS = [
   },
   {
     question: "How do I know if therapy is right for me?",
-    answer: "If you're feeling stuck, struggling with emotions, or wanting to understand yourself better, therapy can help. You don't need to be in crisis. The best time to start is when you notice you could benefit from support. Take the Therapy Fit Quiz to learn more about what might work for you."
+    answer: "If you're feeling stuck, struggling with emotions, or wanting to understand yourself better, therapy can help. You don't need to be in crisis. The best time to start is when you notice you could benefit from support. Reach out for a free consultation to learn more."
   },
   {
     question: "What if I'm not sure what type of therapy I need?",
-    answer: "That's completely normal! Our first session is a chance to explore together. I'll help you identify your needs and recommend approaches that fit your situation. You can also take the 2-minute Therapy Fit Quiz on this site to get personalized recommendations."
+    answer: "That's completely normal! Our first session is a chance to explore together. I'll help you identify your needs and recommend approaches that fit your situation."
   },
   {
     question: "How do I schedule my first session?",
@@ -114,11 +114,11 @@ export const CONTACT_INFO = {
 };
 
 export const INSURANCE_PLANS = [
-  "Aetna",
-  "Blue Cross Blue Shield",
-  "Cigna",
-  "UnitedHealthcare",
-  "Superbills for out-of-network reimbursement"
+  "Medicaid",
+  "Badger Care",
+  "United Healthcare",
+  "WPS",
+  "Medicare (Pending)"
 ];
 
 export const THERAPIST_INFO = {

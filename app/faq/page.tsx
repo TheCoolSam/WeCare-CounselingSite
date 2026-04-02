@@ -141,22 +141,22 @@ export default function FAQPage() {
               I'm here to help. Reach out to discuss your needs and see if we're a good fit.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Link href="/contact">
+              <Link href="/">
                 <motion.span
-                  className="inline-block px-7 py-3 bg-forest-600 hover:bg-forest-700 text-white font-semibold rounded-full transition-colors cursor-pointer"
+                  className="inline-block px-7 py-3 bg-forest-600 hover:bg-forest-700 text-white font-semibold rounded-full transition-colors cursor-pointer shadow-lg shadow-forest-200/30"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  Get in Touch
+                  Return to Home
                 </motion.span>
               </Link>
-              <Link href="/quiz">
+              <Link href="/contact">
                 <motion.span
                   className="inline-block px-7 py-3 bg-white hover:bg-forest-50 text-forest-700 font-semibold rounded-full border-2 border-forest-200 transition-colors cursor-pointer"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  Take the Quiz
+                  Get in Touch
                 </motion.span>
               </Link>
             </div>

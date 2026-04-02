@@ -192,15 +192,6 @@ export default function HealingJourney() {
             Every journey starts with a single step. Let's take that step together.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Link href="/quiz">
-              <motion.span
-                className="inline-block px-7 py-3.5 bg-white hover:bg-forest-50 text-forest-700 font-semibold rounded-full border-2 border-forest-200 transition-colors cursor-pointer"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                Take the Therapy Fit Quiz
-              </motion.span>
-            </Link>
             <Link href="/contact">
               <motion.span
                 className="inline-block px-7 py-3.5 bg-forest-600 hover:bg-forest-700 text-white font-semibold rounded-full transition-colors cursor-pointer shadow-lg shadow-forest-200/30"

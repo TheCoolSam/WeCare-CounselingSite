@@ -109,15 +109,9 @@ export default function ContactPage() {
 
               <div className="bg-forest-50 rounded-xl p-5 border border-forest-200">
                 <h3 className="text-base font-semibold text-stone-900 mb-2">Prefer to talk first?</h3>
-                <p className="text-sm text-stone-600 mb-3">
+                <p className="text-sm text-stone-600">
                   All initial consultations are free and confidential. Call or email to schedule yours today.
                 </p>
-                <Link
-                  href="/quiz"
-                  className="inline-block text-sm font-medium text-forest-600 hover:text-forest-700 transition-colors"
-                >
-                  Take the Quiz to find the right fit →
-                </Link>
               </div>
             </motion.div>
 

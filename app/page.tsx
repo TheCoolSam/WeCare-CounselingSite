@@ -50,6 +50,7 @@ function Navigation() {
     { label: 'Home', href: '#hero' },
     { label: 'About', href: '#about' },
     { label: 'Services', href: '#services' },
+    { label: 'Insurance', href: '#insurance' },
     { label: 'FAQ', href: '/faq' },
   ];
 
@@ -243,23 +244,14 @@ function HeroSection() {
 
             <ScrollReveal delay={0.3}>
               <div className="flex flex-col sm:flex-row gap-3">
-                <Link href="/quiz">
+                <Link href="/contact">
                   <motion.div
                     className="flex items-center justify-center gap-2 px-7 py-3.5 bg-forest-600 hover:bg-forest-700 text-white font-semibold rounded-full shadow-lg shadow-forest-200/50 transition-colors cursor-pointer"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                   >
-                    Take the 2-Minute Quiz
-                    <ArrowRight className="w-4 h-4" />
-                  </motion.div>
-                </Link>
-                <Link href="/contact">
-                  <motion.div
-                    className="flex items-center justify-center gap-2 px-7 py-3.5 bg-white hover:bg-forest-50 text-forest-700 font-semibold rounded-full border-2 border-forest-200 transition-colors cursor-pointer"
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
                     Get in Touch
+                    <ArrowRight className="w-4 h-4" />
                   </motion.div>
                 </Link>
               </div>
@@ -566,6 +558,74 @@ function TestimonialsSection() {
           <p className="text-center text-sm text-stone-500 mt-8 italic">
             Names shown as initials to protect client confidentiality. All testimonials are shared with consent.
           </p>
+        </ScrollReveal>
+      </div>
+    </section>
+  );
+}
+
+// Insurance Section
+function InsuranceSection() {
+  const insurancePlans = [
+    { name: 'Medicaid', icon: '🏥' },
+    { name: 'Badger Care', icon: '🛡️' },
+    { name: 'United Healthcare', icon: '🤝' },
+    { name: 'WPS', icon: '📄' },
+    { name: 'Medicare (Pending)', icon: '⏳', isPending: true }
+  ];
+
+  return (
+    <section id="insurance" className="py-16 sm:py-24 px-5 sm:px-8 bg-white overflow-hidden">
+      <div className="max-w-6xl mx-auto">
+        <ScrollReveal>
+          <div className="text-center mb-16">
+            <span className="text-sm font-semibold text-forest-600 uppercase tracking-widest mb-3 block">Insurance</span>
+            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-stone-900 mb-4">
+              Accepted Plans
+            </h2>
+            <p className="text-base sm:text-lg text-stone-600 max-w-2xl mx-auto leading-relaxed">
+              I believe mental health care should be accessible. I am currently an in-network provider for several major plans.
+            </p>
+          </div>
+        </ScrollReveal>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {insurancePlans.map((plan, index) => (
+            <ScrollReveal key={index} delay={0.1 * index}>
+              <motion.div
+                className={`relative p-8 rounded-2xl border ${plan.isPending
+                  ? 'bg-ivory-50 border-ivory-300 border-dashed opacity-80'
+                  : 'bg-white border-stone-200/60 shadow-sm hover:shadow-md hover:border-forest-200'
+                  } transition-all duration-300 group`}
+                whileHover={{ y: -4 }}
+              >
+                <div className="flex items-center gap-4 mb-2">
+                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-2xl ${plan.isPending ? 'bg-stone-100' : 'bg-forest-50'
+                    }`}>
+                    {plan.icon}
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-stone-900 group-hover:text-forest-700 transition-colors">
+                      {plan.name}
+                    </h3>
+                    {plan.isPending && (
+                      <span className="inline-block mt-1 px-2.5 py-0.5 bg-gold-100 text-gold-800 text-xs font-bold rounded-full uppercase tracking-wider">
+                        Coming Soon
+                      </span>
+                    )}
+                  </div>
+                </div>
+              </motion.div>
+            </ScrollReveal>
+          ))}
+        </div>
+
+        <ScrollReveal delay={0.5}>
+          <div className="mt-12 p-6 bg-forest-50/50 rounded-2xl border border-forest-100/50 text-center">
+            <p className="text-stone-600 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
+              Don't see your plan listed? Contact me to discuss your options. I can often provide a "superbill" that you can submit to your insurance company for potential out-of-network reimbursement.
+            </p>
+          </div>
         </ScrollReveal>
       </div>
     </section>
@@ -928,6 +988,7 @@ export default function Home() {
         <ServicesSection />
         <TestimonialsSection />
         <FAQSection />
+        <InsuranceSection />
         <ContactSection />
       </main>
       <Footer />

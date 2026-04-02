@@ -63,10 +63,6 @@ export default function PrivacyPolicy() {
                   <p>When you use our contact form, we collect your name, email address, phone number, and message. This information is processed through Formspree, a third-party service provider, and is used solely to respond to your inquiry.</p>
                 </div>
                 <div>
-                  <h3 className="font-semibold text-charcoal-900 mb-2">Therapy Quiz</h3>
-                  <p>The therapy fit quiz does not collect personal information. Your responses are processed locally in your browser to generate personalized recommendations. No data is stored on our servers.</p>
-                </div>
-                <div>
                   <h3 className="font-semibold text-charcoal-900 mb-2">Automatic Information</h3>
                   <p>We may automatically collect certain information about your device, including browser type, operating system, and referring URLs. This data helps us improve our website and user experience.</p>
                 </div>
