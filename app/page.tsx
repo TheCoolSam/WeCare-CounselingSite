@@ -593,20 +593,12 @@ function InsuranceSection() {
           {insurancePlans.map((plan, index) => (
             <ScrollReveal key={index} delay={0.1 * index}>
               <motion.div
-                className={`relative px-8 py-10 rounded-2xl border text-center ${plan.isPending
-                  ? 'bg-transparent border-stone-200 border-dashed opacity-60'
-                  : 'bg-white border-stone-200/60 shadow-sm hover:shadow-md hover:border-forest-200 transition-all duration-500'
-                  }`}
-                whileHover={!plan.isPending ? { y: -4 } : {}}
+                className="relative px-8 py-10 rounded-2xl border text-center bg-white border-stone-200/60 shadow-sm hover:shadow-md hover:border-forest-200 transition-all duration-500"
+                whileHover={{ y: -4 }}
               >
                 <h3 className="text-xl sm:text-2xl font-serif font-bold text-stone-900 mb-1">
                   {plan.name}
                 </h3>
-                {plan.isPending && (
-                  <p className="text-xs font-semibold text-forest-600 uppercase tracking-widest mt-2">
-                    Pending
-                  </p>
-                )}
               </motion.div>
             </ScrollReveal>
           ))}
