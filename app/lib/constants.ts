@@ -118,7 +118,7 @@ export const INSURANCE_PLANS = [
   "Badger Care",
   "United Healthcare",
   "WPS",
-  "Medicare (Pending)"
+  "Medicare"
 ];
 
 export const THERAPIST_INFO = {

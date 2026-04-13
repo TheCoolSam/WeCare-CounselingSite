@@ -571,7 +571,7 @@ function InsuranceSection() {
     { name: 'Badger Care' },
     { name: 'United Healthcare' },
     { name: 'WPS' },
-    { name: 'Medicare (Pending)', isPending: true }
+    { name: 'Medicare' }
   ];
 
   return (
