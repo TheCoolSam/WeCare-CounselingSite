@@ -38,22 +38,11 @@ body::before {
   }
 }
 
-/* Elegant editorial utilities */
-.editorial-grid {
-  background-size: 40px 40px;
-  background-image: linear-gradient(to right, rgba(34, 33, 30, 0.02) 1px, transparent 1px),
-                    linear-gradient(to bottom, rgba(34, 33, 30, 0.02) 1px, transparent 1px);
-}
-
-.drop-cap::first-letter {
-  font-family: var(--font-cormorant), Georgia, serif;
-  font-size: 5.5rem;
-  font-weight: 300;
-  float: left;
-  line-height: 0.85;
-  margin-right: 0.6rem;
-  margin-top: 0.15rem;
-  color: var(--primary);
+/* Sleek minimalist modern utilities */
+.text-gradient {
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 /* Smooth scroll behavior */
