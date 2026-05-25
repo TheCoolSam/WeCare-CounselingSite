@@ -1,16 +1,19 @@
 import React from 'react';
-import { Playfair_Display, DM_Sans } from 'next/font/google';
+import { Cormorant_Garamond, Plus_Jakarta_Sans } from 'next/font/google';
 import './globals.css';
 
-const playfair = Playfair_Display({
+const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
-  variable: '--font-playfair',
+  variable: '--font-cormorant',
+  weight: ['300', '400', '500', '600', '700'],
+  style: ['normal', 'italic'],
   display: 'swap',
 });
 
-const dmSans = DM_Sans({
+const plusJakarta = Plus_Jakarta_Sans({
   subsets: ['latin'],
-  variable: '--font-dm-sans',
+  variable: '--font-plus-jakarta',
+  weight: ['300', '400', '500', '600', '700', '800'],
   display: 'swap',
 });
 
@@ -35,7 +38,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${playfair.variable} ${dmSans.variable}`}>
+    <html lang="en" className={`${cormorant.variable} ${plusJakarta.variable}`}>
       <head>
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />

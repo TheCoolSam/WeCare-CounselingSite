@@ -56,15 +56,14 @@ WeCare-CounselingSite/
 
 ## 📮 Contact Form Integration
 
-The contact form UI is ready but needs backend integration. To make it functional:
+The contact form is configured to work with Formspree. To configure your custom form:
 
 1. Sign up at [Formspree.io](https://formspree.io) (free tier available)
-2. Create a new form and get your form endpoint
-3. Update the form in `app/page.tsx`:
-
-```tsx
-<form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-```
+2. Create a new form and copy your Form ID
+3. Set it in `.env.local` (local development) or in your hosting provider's environment variables (production):
+   ```env
+   NEXT_PUBLIC_FORMSPREE_FORM_ID=your_form_id
+   ```
 
 Alternative services: Netlify Forms, Basin, FormSubmit
 

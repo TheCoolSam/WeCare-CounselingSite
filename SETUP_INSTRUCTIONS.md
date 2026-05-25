@@ -48,14 +48,12 @@
 The form is ready but needs a Formspree account:
 
 1. Go to **https://formspree.io/** and create a free account
-2. Create a new form and get your Form ID
-3. Open `app/page.tsx` and find line ~825:
-   ```tsx
-   // TODO: Replace 'YOUR_FORM_ID' with your actual Formspree form ID
-   const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+2. Create a new form and get your Form ID (looks like `xaqqenpb` or `xwkyabcd`)
+3. Open or create `.env.local` in your root folder and set your ID:
+   ```env
+   NEXT_PUBLIC_FORMSPREE_FORM_ID=your_actual_form_id
    ```
-4. Replace `YOUR_FORM_ID` with your actual ID (looks like `xwkyabcd`)
-5. **That's it!** Form submissions will now go to your email.
+4. **That's it!** Form submissions will now go to your email. You can also configure this environment variable directly in your production hosting platform (Vercel, Netlify, etc.) without having to change the code.
 
 **Alternative Form Services (if you prefer):**
 
@@ -243,7 +241,7 @@ This creates optimized static files in the `out/` folder.
 
 If you need help with any setup steps, the most common issues are:
 
-1. Formspree Form ID not replaced (search for "YOUR_FORM_ID" in page.tsx)
+1. Formspree Form ID not configured in `.env.local` (ensure `NEXT_PUBLIC_FORMSPREE_FORM_ID` is set correctly)
 2. Image paths incorrect (must be in /public folder)
 3. Phone/email not updated (search for "123" in page.tsx)
 
