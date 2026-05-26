@@ -96,10 +96,7 @@ function TimelineItem({ stage, index }: { stage: JourneyStage; index: number }) 
         transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
         className={`pl-16 md:pl-0 md:col-span-5 ${isEven ? 'md:col-start-1 text-left md:text-right' : 'md:col-start-8'}`}
       >
-        <span className="text-xs font-bold text-forest-600 uppercase tracking-widest mb-2 block">
-          Stage {stage.number} / {stage.subtitle}
-        </span>
-        <h3 className="font-sans font-extrabold text-2xl sm:text-3xl text-stone-950 mb-4">
+        <h3 className="font-sans font-extrabold text-2xl sm:text-3xl text-stone-955 mb-4">
           {stage.title}
         </h3>
         <p className="text-sm sm:text-base text-stone-500 leading-relaxed font-sans font-normal max-w-lg md:ml-auto md:mr-0 group-even:md:mr-auto">

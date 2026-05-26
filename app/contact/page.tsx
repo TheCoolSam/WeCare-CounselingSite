@@ -139,14 +139,14 @@ export default function ContactPage() {
                 <h3 className="font-sans font-bold text-stone-900 text-lg mb-6 text-left">Submit Secure Inquiry</h3>
 
                 {submitStatus === 'success' && (
-                  <div className="mb-6 p-4 border border-forest-300 bg-forest-50 text-forest-800 text-xs font-semibold rounded-xl uppercase tracking-wider">
-                    ✓ Thank you! I typically respond personally within 24 hours.
+                  <div className="mb-6 p-4 border border-forest-300 bg-forest-50 text-forest-800 text-xs font-bold rounded-xl uppercase tracking-wider">
+                    Thank you! I typically respond personally within 24 hours.
                   </div>
                 )}
 
                 {submitStatus === 'error' && (
-                  <div className="mb-6 p-4 border border-red-300 bg-red-50 text-red-800 text-xs font-semibold rounded-xl uppercase tracking-wider">
-                    ⚠️ Submission issue. Please try calling or emailing directly.
+                  <div className="mb-6 p-4 border border-red-300 bg-red-50 text-red-800 text-xs font-bold rounded-xl uppercase tracking-wider">
+                    Submission issue. Please try calling or emailing directly.
                   </div>
                 )}
 
