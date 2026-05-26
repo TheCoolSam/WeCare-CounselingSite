@@ -8,7 +8,6 @@ import { Check, ArrowRight } from 'lucide-react';
 interface JourneyStage {
   number: number;
   title: string;
-  subtitle: string;
   description: string;
   approaches: string[];
   milestone: string;
@@ -18,54 +17,50 @@ const stages: JourneyStage[] = [
   {
     number: 1,
     title: "Exploration",
-    subtitle: "Planting the Seed",
-    description: "We begin by creating a secure, validating space where you can share your story. This initial phase is about understanding where you are, what brought you here, and establishing a trusted clinical alliance.",
+    description: "We start by creating a safe, comfortable space where you can share what's on your mind. This is about getting to know you — what brought you here, what you're hoping for, and how we can work together.",
     approaches: [
-      "Initial clinical assessment",
-      "Building trust and secure rapport",
-      "Identifying behavioral patterns",
-      "Co-designing therapeutic goals"
+      "Getting to know your story",
+      "Building trust together",
+      "Understanding patterns",
+      "Setting goals for therapy"
     ],
-    milestone: "A felt sense of being deeply heard and understood, with clear objectives for your healing journey."
+    milestone: "Feeling heard and understood, with a clear sense of direction."
   },
   {
     number: 2,
     title: "Connection",
-    subtitle: "Taking Root",
-    description: "As trust deepens, we venture into the core of your challenges. You'll cultivate deep self-awareness around how past narratives influence your present behaviors and learn active somatic/cognitive tools.",
+    description: "As we get more comfortable together, we'll dig into the deeper stuff. You'll start to see how past experiences shape the way you think and feel today, and you'll pick up real tools to help you cope.",
     approaches: [
-      "Exploring core formative causes",
-      "Somatic coping strategies",
-      "Challenging rigid belief cycles",
-      "Processing difficult emotions safely"
+      "Exploring root causes",
+      "Learning coping tools",
+      "Working through difficult emotions",
+      "Challenging unhelpful thought patterns"
     ],
-    milestone: "Tangible shifts in how you relate to stress, trigger points, and your inner dialogue."
+    milestone: "New awareness of how your past shapes your present, with practical tools to cope."
   },
   {
     number: 3,
     title: "Growth",
-    subtitle: "Reaching Upward",
-    description: "This is the active phase of integration. You are daily practicing new skills, expanding comfort zones, and establishing healthy relationship structures. Growth during this stage feels nonlinear and dynamic.",
+    description: "This is where things start clicking. You're practicing new skills in your everyday life, trying things that used to feel hard, and noticing real change. It won't always be linear, and that's okay.",
     approaches: [
-      "Implementing new behavioral choices",
-      "Building emotional resilience",
-      "Strengthening relational boundaries",
-      "Integrating insights in real time"
+      "Practicing new skills daily",
+      "Expanding your comfort zone",
+      "Setting healthy boundaries",
+      "Applying insights to real life"
     ],
-    milestone: "Measurable improvements in daily emotional stability, confidence, and interpersonal connections."
+    milestone: "Real improvements in your daily emotional well-being and relationships."
   },
   {
     number: 4,
     title: "Transformation",
-    subtitle: "Bearing Fruit",
-    description: "You have integrated the therapeutic process into your identity. The self-awareness and clinical tools you have gained are now second-nature, transitioning our relationship toward completion.",
+    description: "The work you've done is becoming part of who you are. You're handling things differently now — not because you have to think about it, but because it comes naturally. We'll start preparing for your next chapter.",
     approaches: [
-      "Consolidating personal growth gains",
-      "Planning for future vulnerabilities",
-      "Celebrating narrative transformation",
-      "Transitioning to clinical maintenance"
+      "Recognizing your growth",
+      "Preparing for future challenges",
+      "Celebrating how far you've come",
+      "Transitioning to independence"
     ],
-    milestone: "Full emotional independence, feeling deeply equipped to navigate life with profound self-compassion and wisdom."
+    milestone: "Confidence and self-compassion to navigate life on your own terms."
   }
 ];
 
@@ -105,9 +100,7 @@ function TimelineItem({
         transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
         className={`pl-20 md:pl-0 md:col-span-5 ${isEven ? 'md:col-start-1 text-left md:text-right' : 'md:col-start-8'} mb-6 md:mb-0`}
       >
-        <span className="font-serif italic text-forest-700 text-sm sm:text-base block mb-1">
-          {stage.subtitle}
-        </span>
+
         <h3 className="font-sans font-extrabold text-2xl sm:text-3xl text-stone-900 mb-4 tracking-tight">
           {stage.title}
         </h3>
@@ -125,7 +118,7 @@ function TimelineItem({
       >
         <div className="flex flex-col justify-between h-full relative text-left">
           <div>
-            <h4 className="text-sm font-semibold text-stone-900 mb-3 text-left">Key approaches</h4>
+
             <ul className="space-y-3 mb-6">
               {stage.approaches.map((approach, i) => (
                 <li key={i} className="flex items-start gap-2.5 text-xs sm:text-sm text-stone-600 text-left">
@@ -137,7 +130,7 @@ function TimelineItem({
           </div>
 
           <div className="border-t border-stone-200/60 pt-5 mt-auto text-left">
-            <span className="text-xs font-bold text-forest-700 block mb-2">Clinical milestone</span>
+            <span className="text-xs font-bold text-forest-700 block mb-2">What to expect</span>
             <p className="text-xs sm:text-sm text-stone-800 leading-relaxed font-sans font-normal">
               {stage.milestone}
             </p>
@@ -203,7 +196,7 @@ export default function HealingJourney() {
             Your Healing Journey
           </h2>
           <p className="text-base sm:text-lg text-stone-500 leading-relaxed font-sans font-normal">
-            Therapy is not a straight diagnostic line — it is a continuous spiral of self-realization and healing. Here is the structured pathway we navigate together toward clinical restoration.
+            Therapy isn't a straight line — it's a process of discovery, growth, and real change. Here's what working together looks like.
           </p>
         </motion.div>
 
@@ -247,10 +240,10 @@ export default function HealingJourney() {
           className="mt-28 text-center max-w-2xl mx-auto"
         >
           <h3 className="font-sans font-extrabold text-3xl sm:text-4xl text-stone-900 mb-4 tracking-tight">
-            Ready to Begin Restoration?
+            Ready to Start?
           </h3>
           <p className="text-base sm:text-lg text-stone-500 mb-8 max-w-xl mx-auto leading-relaxed font-sans font-normal">
-            Every transformative journey starts with a singular step of courage. Let's walk that pathway together in an environment of complete clinical excellence and safety.
+            Every journey begins with a single step. I'd love to walk that path with you.
           </p>
           <div className="flex justify-center">
             <Link href="/contact">

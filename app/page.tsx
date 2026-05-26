@@ -4,7 +4,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Phone, Mail, ArrowRight, Menu, X, ChevronDown, Check, Award, Compass, Heart } from 'lucide-react';
+import { Phone, Mail, ArrowRight, Menu, X, ChevronDown } from 'lucide-react';
 import HealingJourney from './components/HealingJourney';
 import ginaPhoto from './components/gina.jpg';
 
@@ -141,7 +141,7 @@ function Navigation() {
                         <Link
                           href={link.href}
                           onClick={() => setMobileOpen(false)}
-                          className="block py-3 px-4 text-sm font-bold uppercase tracking-wider text-stone-850 hover:text-forest-600 hover:bg-stone-50 rounded-xl transition-colors"
+                          className="block py-3 px-4 text-sm font-bold uppercase tracking-wider text-stone-800 hover:text-forest-600 hover:bg-stone-50 rounded-xl transition-colors"
                         >
                           {link.label}
                         </Link>
@@ -149,7 +149,7 @@ function Navigation() {
                         <a
                           href={link.href}
                           onClick={() => setMobileOpen(false)}
-                          className="block py-3 px-4 text-sm font-bold uppercase tracking-wider text-stone-850 hover:text-forest-600 hover:bg-stone-50 rounded-xl transition-colors"
+                          className="block py-3 px-4 text-sm font-bold uppercase tracking-wider text-stone-800 hover:text-forest-600 hover:bg-stone-50 rounded-xl transition-colors"
                         >
                           {link.label}
                         </a>
@@ -243,41 +243,25 @@ function HeroSection() {
           </div>
 
           {/* Right Column (Minimalist cards) */}
-          <div className="lg:col-span-5 space-y-4">
-            {[
-              {
-                title: 'Personalized Care',
-                desc: 'Therapy tailored to your unique needs, goals, and life circumstances.',
-                icon: <Compass className="w-5 h-5 text-forest-600" />
-              },
-              {
-                title: 'Holistic Approach',
-                desc: 'Addressing mind, emotions, relationships, and personal growth together.',
-                icon: <Heart className="w-5 h-5 text-forest-600" />
-              },
-              {
-                title: 'Proven Excellence',
-                desc: 'Three decades of helping individuals, couples, and teams thrive.',
-                icon: <Award className="w-5 h-5 text-forest-600" />
-              }
-            ].map((item, i) => (
-              <ScrollReveal key={i} delay={0.15 * i}>
-                <motion.div
-                  className="bg-white p-6 rounded-2xl border border-stone-200 transition-all duration-300"
-                  whileHover={{ y: -2 }}
-                >
-                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 bg-stone-50 rounded-xl flex items-center justify-center flex-shrink-0">
-                      {item.icon}
-                    </div>
-                    <div>
-                      <h3 className="text-base font-bold text-stone-900 mb-1">{item.title}</h3>
-                      <p className="text-sm text-stone-550 leading-relaxed font-normal">{item.desc}</p>
-                    </div>
-                  </div>
-                </motion.div>
-              </ScrollReveal>
-            ))}
+          <div className="lg:col-span-5 space-y-8">
+            <ScrollReveal delay={0.15}>
+              <div className="border-l-2 border-stone-200 pl-6">
+                <h3 className="text-base font-semibold text-stone-900 mb-1">Personalized Care</h3>
+                <p className="text-sm text-stone-500">Therapy shaped around your specific needs, goals, and life.</p>
+              </div>
+            </ScrollReveal>
+            <ScrollReveal delay={0.3}>
+              <div className="border-l-2 border-stone-200 pl-6">
+                <h3 className="text-base font-semibold text-stone-900 mb-1">Holistic Approach</h3>
+                <p className="text-sm text-stone-500">Addressing mind, emotions, relationships, and personal growth together.</p>
+              </div>
+            </ScrollReveal>
+            <ScrollReveal delay={0.45}>
+              <div className="border-l-2 border-stone-200 pl-6">
+                <h3 className="text-base font-semibold text-stone-900 mb-1">Proven Experience</h3>
+                <p className="text-sm text-stone-500">Three decades of helping individuals, couples, and teams thrive.</p>
+              </div>
+            </ScrollReveal>
           </div>
         </div>
       </div>
@@ -339,19 +323,15 @@ function AboutSection() {
                 <div className="grid sm:grid-cols-2 gap-x-8 gap-y-6 text-sm text-stone-600 font-sans leading-relaxed">
                   <div>
                     <p className="font-bold text-stone-900">Licensed Clinical Social Worker</p>
-                    <p className="text-xs text-stone-400 mt-1">LCSW State Licensure</p>
                   </div>
                   <div>
                     <p className="font-bold text-stone-900">Master of Clinical Social Work</p>
-                    <p className="text-xs text-stone-400 mt-1">Advanced Academic Degree</p>
                   </div>
                   <div>
                     <p className="font-bold text-stone-900">30+ Years Private & Clinical Practice</p>
-                    <p className="text-xs text-stone-400 mt-1">Continuous Patient Advocacy</p>
                   </div>
                   <div>
-                    <p className="font-bold text-stone-900">Advanced Systems Theory Specialization</p>
-                    <p className="text-xs text-stone-400 mt-1">Complex Relational Modalities</p>
+                    <p className="font-bold text-stone-900">Specialized Training in Family Systems</p>
                   </div>
                 </div>
               </div>
@@ -370,19 +350,19 @@ function ServicesSection() {
       num: '01',
       title: 'Individual Therapy',
       description: 'Grounded, one-on-one sessions addressing anxiety, depressive cycles, life transitions, and intentional personal growth.',
-      focus: 'Personalized treatment plans • Cognitive & somatic approaches • Safe, validating space • Flexible scheduling'
+      focus: 'Personalized plans • Cognitive & body-based methods • A safe, supportive space • Flexible scheduling'
     },
     {
       num: '02',
       title: 'Couples Therapy',
       description: 'Rebuild trust, break repetitive conflict cycles, and deeply enrich intimacy through structured communication and partnership work.',
-      focus: 'Communication skill-building • Root conflict resolution • Intimacy & connection • Pre-marital alignment'
+      focus: 'Communication skills • Resolving recurring conflicts • Rebuilding intimacy • Pre-marital counseling'
     },
     {
       num: '03',
       title: 'Family & Team Support',
       description: 'Navigate complex family dynamics and organizational team challenges with solution-focused communication plans.',
-      focus: 'Family systems analysis • Conscious parenting support • Collaborative dynamics • Systemic wellness planning'
+      focus: 'Family dynamics • Parenting support • Team communication • Whole-system wellness'
     }
   ];
 
@@ -395,7 +375,7 @@ function ServicesSection() {
               How I Can Help
             </h2>
             <p className="text-base sm:text-lg text-stone-500 leading-relaxed font-normal">
-              Tailored, evidence-based therapy pathways configured to honor your individual narrative and goals.
+              Thoughtful, personalized approaches designed around your unique story.
             </p>
           </div>
         </ScrollReveal>
@@ -486,22 +466,22 @@ function InsuranceSection() {
 function TestimonialsSection() {
   const testimonials = [
     {
-      quote: "I avoided starting therapy for years because I feared clinical stiffness. Gina completely dissolved that barrier. She offers a validating, warm space combined with active clinical tools that yield immediate, practical healing.",
+      quote: "I put off therapy for years because I expected it to feel cold and clinical. Gina was the opposite — warm, real, and genuinely helpful. She gave me practical tools I still use every day.",
       author: "S.M.",
       type: "Individual Client",
     },
     {
-      quote: "My partner and I were structurally drifting. Gina didn't just referee; she helped us uncover formative causes, rebuild trust, and develop deep relational boundaries that we continue to rely on.",
+      quote: "My partner and I were growing apart. Gina helped us understand why, rebuild trust, and communicate in ways that actually stick.",
       author: "M. & J.",
       type: "Couples Counseling Clients",
     },
     {
-      quote: "I have consulted multiple practitioners, but Gina is entirely distinctive. She maintains a warm, validating clinical posture—challenging you with gentle, direct wisdom that creates structural self-realization.",
+      quote: "I've seen other therapists before, but Gina is different. She's warm but direct — she'll gently push you to see things you couldn't see on your own.",
       author: "D.L.",
       type: "Individual Therapy Client",
     },
     {
-      quote: "Gina's space immediately establishes absolute safety. She is deeply validating, structured, and completely non-judgmental. Her guidance has structurally transformed my inner mental landscape.",
+      quote: "From the first session, I felt completely safe. Gina is thoughtful, non-judgmental, and her guidance has genuinely changed how I think about myself.",
       author: "A.K.",
       type: "Transitions Client",
     },
@@ -516,7 +496,7 @@ function TestimonialsSection() {
               What Clients Say
             </h2>
             <p className="text-base sm:text-lg text-stone-500 leading-relaxed font-normal">
-              Authentic stories from individuals and couples who have experienced structural healing and emotional wholeness under my care.
+              Words from people who've been where you are.
             </p>
           </div>
         </ScrollReveal>
@@ -525,16 +505,15 @@ function TestimonialsSection() {
           {testimonials.map((testimonial, index) => (
             <ScrollReveal key={index} delay={0.08 * index}>
               <div className="bg-stone-50 p-8 sm:p-10 rounded-2xl border border-stone-200 flex flex-col justify-between h-full">
-                <blockquote className="text-stone-850 leading-relaxed mb-6 text-base font-serif italic text-left">
+                <blockquote className="text-stone-800 leading-relaxed mb-6 text-base font-serif italic text-left">
                   “{testimonial.quote}”
                 </blockquote>
 
-                <div className="border-t border-stone-200 pt-4 flex items-center justify-between mt-auto text-left">
+                <div className="border-t border-stone-200 pt-4 flex items-center mt-auto text-left">
                   <div>
                     <p className="font-sans font-bold text-stone-900 text-xs sm:text-sm uppercase">{testimonial.author}</p>
                     <p className="text-xs text-stone-400 font-semibold uppercase mt-0.5">{testimonial.type}</p>
                   </div>
-                  <span className="text-stone-400 text-xs font-medium">Verified Client Review</span>
                 </div>
               </div>
             </ScrollReveal>
@@ -558,31 +537,31 @@ function FAQSection() {
   const faqs = [
     {
       question: "How much does a therapeutic session cost?",
-      answer: "Individual clinical sessions are structured at $150 per fifty-minute hour. Detailed fee lists and out-of-network alternatives are gladly reviewed during our initial consultation."
+      answer: "Sessions are $150 for a fifty-minute hour. I'm happy to discuss fees and out-of-network options during our first call."
     },
     {
       question: "What should I expect in our initial consultation?",
-      answer: "Our first session functions as a mutual exploration. We will map out your current landscapes, core challenges, and clinical goals. This is a secure, low-pressure diagnostic assessment to ensure my systemic approach aligns beautifully with your vision."
+      answer: "Our first meeting is a chance to get to know each other. We'll talk about what's going on in your life, what you're hoping to change, and whether we're a good fit. No pressure."
     },
     {
       question: "How long does the therapeutic process typically extend?",
-      answer: "This is deeply personalized. Some clients achieve their initial targets in 8 to 12 weekly sessions, while others choose long-term maintenance blocks for continuing restoration and clinical support. We regularly check in on progress metrics together."
+      answer: "It depends on your goals. Some people find what they need in 8-12 sessions, while others prefer ongoing support. We'll check in regularly and adjust as we go."
     },
     {
       question: "Do you offer telehealth / secure virtual sessions?",
-      answer: "Yes. I conduct high-performance telehealth sessions through a completely secure, HIPAA-compliant clinical video platform. Many clients prefer the convenience, grounding safety, and privacy of meeting from their home environment."
+      answer: "Yes, I offer secure video sessions through a HIPAA-compliant platform. Many clients prefer the convenience of meeting from home."
     },
     {
       question: "Is the clinical information completely confidential?",
-      answer: "Absolutely. In strict compliance with HIPAA federal laws and clinical social work ethics, everything you share remains private. The only legal boundaries to confidentiality concern immediate risk of harm to yourself/others, or suspected child/elder abuse."
+      answer: "Everything you share stays between us. The only exceptions are situations involving immediate danger or suspected abuse — these are legally required disclosures."
     },
     {
       question: "What is your clinical cancellation policy?",
-      answer: "I require a strict twenty-four-hour notification for cancellations. Late cancellations or missed consultations without notice are billed at the full standard session fee to respect scheduled clinical blocks."
+      answer: "I ask for 24 hours' notice if you need to cancel. Late cancellations or no-shows are billed at the full session rate."
     },
     {
       question: "How do I determine if this therapeutic framework is right for me?",
-      answer: "If you feel relationally stuck, emotionally stagnant, or are seeking intentional personal growth, therapy is a profound gift. You do not need to be in crisis to invest in clinical growth. Reach out today and we can determine if this is the correct fit."
+      answer: "You don't need to be in crisis to benefit from therapy. If you're feeling stuck, going through a transition, or just want to grow — that's reason enough. Reach out and we'll figure out if it's a good fit."
     }
   ];
 
@@ -595,7 +574,7 @@ function FAQSection() {
               Frequently Asked Questions
             </h2>
             <p className="text-sm sm:text-base text-stone-500 leading-relaxed">
-              Essential procedural details regarding fee structures, session configurations, and getting started on your clinical path.
+              Common questions about therapy, fees, and what to expect.
             </p>
           </div>
         </ScrollReveal>
@@ -644,7 +623,7 @@ function FAQSection() {
                 className="inline-block px-7 py-3 bg-forest-600 hover:bg-forest-700 text-white font-bold text-xs uppercase tracking-widest rounded-full transition-all cursor-pointer shadow-md shadow-forest-600/10"
                 whileTap={{ scale: 0.98 }}
               >
-                Inquire Directly
+                Reach Out
               </motion.span>
             </Link>
           </div>
@@ -697,7 +676,7 @@ function ContactSection() {
       <div className="max-w-5xl mx-auto relative z-10">
         <ScrollReveal>
           <div className="text-center mb-16 max-w-2xl mx-auto">
-            <h2 className="font-sans font-extrabold text-4xl sm:text-5xl text-stone-950 tracking-tight mb-4">
+             <h2 className="font-sans font-extrabold text-4xl sm:text-5xl text-stone-900 tracking-tight mb-4">
               Get in Touch
             </h2>
             <p className="text-base sm:text-lg text-stone-500 leading-relaxed font-normal">
@@ -712,35 +691,24 @@ function ContactSection() {
             <ScrollReveal delay={0.1}>
               <div className="space-y-8">
                 <div>
-                  <h3 className="font-sans font-bold text-stone-900 text-xl mb-3">Direct Channels</h3>
                   <p className="text-sm sm:text-base text-stone-500 font-sans leading-relaxed">
-                    If you prefer direct voice communication or email correspondence, feel free to reach out. All initial consultation coordination and fit assessments are complimentary and confidential.
+                    Prefer to call or email? Initial consultations are always free and confidential.
                   </p>
                 </div>
 
                 <div className="space-y-6 pt-4 border-t border-stone-200/80">
-                  {[
-                    {
-                      label: 'Phone Contact',
-                      value: '+1 (414) 617-2201',
-                      href: 'tel:+14146172201',
-                      icon: <Phone className="w-4 h-4 text-forest-600" />
-                    },
-                    {
-                      label: 'Email',
-                      value: 'Gina@wccounseling.net',
-                      href: 'mailto:Gina@wccounseling.net',
-                      icon: <Mail className="w-4 h-4 text-forest-600" />
-                    }
-                  ].map((item, i) => (
-                    <div key={i} className="text-left">
-                      <span className="text-[10px] tracking-wider font-bold text-stone-400 uppercase block mb-1">{item.label}</span>
-                      <a href={item.href} className="inline-flex items-center gap-2 font-semibold text-stone-800 hover:text-forest-600 transition-colors text-base sm:text-lg">
-                        {item.icon}
-                        {item.value}
-                      </a>
-                    </div>
-                  ))}
+                  <div className="text-left">
+                    <a href="tel:+14146172201" className="inline-flex items-center gap-2 font-semibold text-stone-800 hover:text-forest-600 transition-colors text-base sm:text-lg">
+                      <Phone className="w-4 h-4 text-forest-600" />
+                      +1 (414) 617-2201
+                    </a>
+                  </div>
+                  <div className="text-left">
+                    <a href="mailto:Gina@wccounseling.net" className="inline-flex items-center gap-2 font-semibold text-stone-800 hover:text-forest-600 transition-colors text-base sm:text-lg">
+                      <Mail className="w-4 h-4 text-forest-600" />
+                      Gina@wccounseling.net
+                    </a>
+                  </div>
                 </div>
               </div>
             </ScrollReveal>
@@ -859,7 +827,7 @@ function Footer() {
             </p>
           </div>
           <div>
-            <h4 className="text-xs tracking-widest font-bold text-white uppercase mb-5">Quick Indexes</h4>
+            <h4 className="text-xs tracking-widest font-bold text-white uppercase mb-5">Pages</h4>
             <div className="space-y-3 font-sans text-xs">
               <Link href="/" className="block text-forest-200 hover:text-gold-400 transition-colors font-semibold uppercase tracking-wider">Home</Link>
               <Link href="/faq" className="block text-forest-200 hover:text-gold-400 transition-colors font-semibold uppercase tracking-wider">FAQ</Link>
@@ -881,7 +849,7 @@ function Footer() {
         </div>
         <div className="border-t border-forest-800 pt-8 text-center flex flex-col sm:flex-row justify-between items-center gap-4 text-[10px] tracking-wider font-bold text-forest-300 uppercase">
           <p>© {new Date().getFullYear()} WeCare Counseling. All rights reserved.</p>
-          <p className="text-[9px] text-forest-400">Confidential & HIPAA Compliant Healthcare Space</p>
+          <p className="text-[9px] text-forest-400">HIPAA Compliant</p>
         </div>
       </div>
     </footer>

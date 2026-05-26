@@ -11,39 +11,39 @@ export default function FAQPage() {
   const faqs = [
     {
       question: "How much does a therapeutic session cost?",
-      answer: "Individual and couples sessions are structured at $150 per fifty-minute hour. Detailed fee lists and out-of-network alternatives are gladly reviewed during your initial consultation."
+      answer: "Sessions are $150 for a fifty-minute hour. I'm happy to discuss fees and out-of-network options during our first call."
     },
     {
       question: "What should I expect in our initial consultation?",
-      answer: "Our first session functions as a mutual exploration. We will map out your current relational landscapes, personal threshold challenges, and your clinical goals. This is a secure, low-pressure diagnostic assessment to ensure my systemic approach aligns beautifully with your vision."
+      answer: "Our first meeting is a chance to get to know each other. We'll talk about what's going on in your life, what you're hoping to change, and whether we're a good fit. No pressure."
     },
     {
       question: "How long does the therapeutic process typically extend?",
-      answer: "This is deeply personalized. Some clients achieve their initial targets in 8 to 12 weekly sessions, while others choose long-term maintenance blocks for continuing restoration and clinical support. We regularly check in on progress metrics together."
+      answer: "It depends on your goals. Some people find what they need in 8-12 sessions, while others prefer ongoing support. We'll check in regularly and adjust as we go."
     },
     {
       question: "Do you offer telehealth / secure virtual sessions?",
-      answer: "Yes. I conduct telehealth sessions through a completely secure, HIPAA-compliant clinical video platform. Many clients prefer the convenience, grounding safety, and privacy of meeting from their home environment."
+      answer: "Yes, I offer secure video sessions through a HIPAA-compliant platform. Many clients prefer the convenience of meeting from home."
     },
     {
       question: "Is the clinical information completely confidential?",
-      answer: "Absolutely. In strict compliance with HIPAA federal laws and clinical social work ethics, everything you share remains private. The only legal boundaries to confidentiality concern immediate risk of harm to yourself/others, or suspected child/elder abuse, where clinical intervention is legally mandatory."
+      answer: "Everything you share stays between us. The only exceptions are situations involving immediate danger or suspected abuse — these are legally required disclosures."
     },
     {
       question: "What is your clinical cancellation policy?",
-      answer: "I require a strict twenty-four-hour notification for cancellations. Late cancellations or missed consultations without notice are billed at the full standard session fee to respect scheduled clinical blocks. Exceptional circumstances are gladly discussed individually."
+      answer: "I ask for 24 hours' notice if you need to cancel. Late cancellations or no-shows are billed at the full session rate."
     },
     {
       question: "How do I determine if this therapeutic framework is right for me?",
-      answer: "If you feel relationally stuck, emotionally stagnant, or are seeking personal growth, therapy is a profound gift. You do not need to be in crisis to invest in clinical growth. Reach out today and we can determine if this is the correct fit."
+      answer: "You don't need to be in crisis to benefit from therapy. If you're feeling stuck, going through a transition, or just want to grow — that's reason enough. Reach out and we'll figure out if it's a good fit."
     },
     {
       question: "What types of therapy do you offer?",
-      answer: "I specialize in Individual Psychotherapy, relational Couples Counseling, and family support. My methodology integrates cognitive, behavioral, psychodynamic, and mindfulness-based modalities customized to your specific landscape."
+      answer: "I specialize in individual therapy, couples counseling, and family support. My approach blends cognitive, behavioral, and mindfulness-based methods, customized to what works best for you."
     },
     {
       question: "Can I bring a partner or support person to my session?",
-      answer: "Yes. In couples and family systems, collaborative presence is fundamental. For individual treatment, you are welcome to bring a support person to our initial consultation if it assists your safety and comfort. Please notify me beforehand so we can arrange the session format."
+      answer: "Yes. For couples and family work, having your partner or family member there is often part of the process. For individual sessions, you're welcome to bring a support person to our first meeting if that helps you feel comfortable — just let me know ahead of time."
     }
   ];
 
@@ -58,7 +58,7 @@ export default function FAQPage() {
           <div className="flex items-center gap-6 text-xs uppercase tracking-widest font-bold text-stone-600">
             <Link href="/#about" className="hidden md:inline hover:text-forest-600 transition-colors">About</Link>
             <Link href="/#services" className="hidden md:inline hover:text-forest-600 transition-colors">Services</Link>
-            <Link href="/contact" className="text-forest-600 hover:text-forest-750 transition-colors">Contact</Link>
+            <Link href="/contact" className="text-forest-600 hover:text-forest-700 transition-colors">Contact</Link>
           </div>
         </div>
       </nav>
@@ -77,7 +77,7 @@ export default function FAQPage() {
               Frequently Asked Questions
             </h1>
             <p className="text-sm sm:text-base text-stone-500 max-w-xl mx-auto leading-relaxed">
-              Transparent, practical details regarding session parameters, billing systems, and expectations on getting started.
+              Common questions about therapy, fees, and what to expect.
             </p>
           </motion.div>
 
@@ -102,7 +102,7 @@ export default function FAQPage() {
                   <motion.div
                     animate={{ rotate: openIndex === index ? 180 : 0 }}
                     transition={{ duration: 0.3 }}
-                    className="flex-shrink-0 w-6 h-6 rounded-full border border-stone-200 flex items-center justify-center text-stone-400 group-hover:text-forest-750 transition-colors"
+                    className="flex-shrink-0 w-6 h-6 rounded-full border border-stone-200 flex items-center justify-center text-stone-400 group-hover:text-forest-700 transition-colors"
                   >
                     <ChevronDown className="w-3.5 h-3.5" />
                   </motion.div>

@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { Phone, Mail, ArrowLeft, ArrowRight, Check } from 'lucide-react';
+import { Phone, Mail, ArrowLeft, ArrowRight } from 'lucide-react';
 
 export default function ContactPage() {
   const [formState, setFormState] = useState({
@@ -70,7 +70,7 @@ export default function ContactPage() {
               Get in Touch
             </h1>
             <p className="text-sm sm:text-base text-stone-500 leading-relaxed font-normal">
-              Initiate your consultation today. Reach out to coordinate a secure, confidential session or ask questions about services.
+              Ready to start? Reach out to schedule a session or ask any questions.
             </p>
           </motion.div>
 
@@ -84,35 +84,24 @@ export default function ContactPage() {
             >
               <div className="space-y-8">
                 <div>
-                  <h3 className="font-sans font-bold text-stone-900 text-xl mb-3">Direct Contact</h3>
                   <p className="text-sm sm:text-base text-stone-500 font-sans leading-relaxed">
-                    For voice inquiries or scheduling coordination, please feel free to reach out. All initial fit assessments are complimentary and confidential. I am committed to assisting your transition toward healing and wholeness at every step.
+                    Prefer to call or email? Initial consultations are always free and confidential.
                   </p>
                 </div>
 
                 <div className="space-y-6 pt-6 border-t border-stone-200/80">
-                  {[
-                    {
-                      label: 'Phone Contact',
-                      value: '+1 (414) 617-2201',
-                      href: 'tel:+14146172201',
-                      icon: <Phone className="w-4 h-4 text-forest-600" />
-                    },
-                    {
-                      label: 'Email',
-                      value: 'Gina@wccounseling.net',
-                      href: 'mailto:Gina@wccounseling.net',
-                      icon: <Mail className="w-4 h-4 text-forest-600" />
-                    }
-                  ].map((item, i) => (
-                    <div key={i} className="text-left">
-                      <span className="text-[10px] tracking-wider font-bold text-stone-400 uppercase block mb-1">{item.label}</span>
-                      <a href={item.href} className="inline-flex items-center gap-2 font-semibold text-stone-800 hover:text-forest-600 transition-colors text-base sm:text-lg">
-                        {item.icon}
-                        {item.value}
-                      </a>
-                    </div>
-                  ))}
+                  <div className="text-left">
+                    <a href="tel:+14146172201" className="inline-flex items-center gap-2 font-semibold text-stone-800 hover:text-forest-600 transition-colors text-base sm:text-lg">
+                      <Phone className="w-4 h-4 text-forest-600" />
+                      +1 (414) 617-2201
+                    </a>
+                  </div>
+                  <div className="text-left">
+                    <a href="mailto:Gina@wccounseling.net" className="inline-flex items-center gap-2 font-semibold text-stone-800 hover:text-forest-600 transition-colors text-base sm:text-lg">
+                      <Mail className="w-4 h-4 text-forest-600" />
+                      Gina@wccounseling.net
+                    </a>
+                  </div>
                 </div>
               </div>
             </motion.div>
