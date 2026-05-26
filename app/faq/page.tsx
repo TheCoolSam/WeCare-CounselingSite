@@ -11,7 +11,7 @@ export default function FAQPage() {
   const faqs = [
     {
       question: "How much does a therapeutic session cost?",
-      answer: "Individual and couples clinical sessions are structured at $150 per fifty-minute hour. Detailed fee lists and modular package alternatives are gladly reviewed during your initial consultation."
+      answer: "Individual and couples sessions are structured at $150 per fifty-minute hour. Detailed fee lists and out-of-network alternatives are gladly reviewed during your initial consultation."
     },
     {
       question: "What should I expect in our initial consultation?",
@@ -35,11 +35,11 @@ export default function FAQPage() {
     },
     {
       question: "How do I determine if this therapeutic framework is right for me?",
-      answer: "If you feel relationally stuck, emotionally stagnant, or are consciously seeking structural personal restructuring, therapy is a profound gift. You do not need to be in crisis to invest in clinical growth. Reach out today and we can determine if this is the correct fit."
+      answer: "If you feel relationally stuck, emotionally stagnant, or are seeking personal growth, therapy is a profound gift. You do not need to be in crisis to invest in clinical growth. Reach out today and we can determine if this is the correct fit."
     },
     {
       question: "What types of therapy do you offer?",
-      answer: "I specialize in Individual Psychotherapy, relational Couples Counseling, and systemic Family Support workshops. My methodology integrates cognitive, behavioral, psychodynamic, and mindfulness-based modalities customized to your specific landscape."
+      answer: "I specialize in Individual Psychotherapy, relational Couples Counseling, and family support. My methodology integrates cognitive, behavioral, psychodynamic, and mindfulness-based modalities customized to your specific landscape."
     },
     {
       question: "Can I bring a partner or support person to my session?",
@@ -73,10 +73,7 @@ export default function FAQPage() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <span className="text-xs font-bold tracking-widest text-forest-600 uppercase mb-4 block">
-              Clinical Guidelines & FAQs
-            </span>
-            <h1 className="font-sans font-extrabold text-4xl sm:text-5xl text-stone-955 tracking-tight mb-4 text-balance">
+            <h1 className="font-sans font-extrabold text-4xl sm:text-5xl text-stone-900 tracking-tight mb-4 text-balance">
               Frequently Asked Questions
             </h1>
             <p className="text-sm sm:text-base text-stone-500 max-w-xl mx-auto leading-relaxed">
@@ -132,13 +129,13 @@ export default function FAQPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-center border border-stone-200 bg-white p-8 sm:p-12 rounded-3xl shadow-sm"
+            className="text-center border border-stone-200 bg-white p-8 sm:p-12 rounded-3xl"
           >
-            <h3 className="font-sans font-extrabold text-2xl sm:text-3xl text-stone-950 mb-4">
-              Require Further Systemic Details?
+            <h3 className="font-sans font-extrabold text-2xl sm:text-3xl text-stone-900 mb-4">
+              Need more details?
             </h3>
             <p className="text-xs sm:text-sm text-stone-500 mb-8 max-w-xl mx-auto leading-relaxed font-sans">
-              I am gladly here to review your individual concerns and coordinate a secure alignment check before committing to sessions.
+              I am gladly here to review your individual concerns and coordinate a complimentary consult call before committing to sessions.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/">
@@ -153,11 +150,11 @@ export default function FAQPage() {
               </Link>
               <Link href="/contact">
                 <motion.span
-                  className="inline-block px-8 py-3.5 bg-forest-600 hover:bg-forest-700 text-white text-xs uppercase tracking-widest font-bold transition-all duration-300 cursor-pointer rounded-full shadow-md shadow-forest-900/10"
+                  className="inline-block px-8 py-3.5 bg-forest-600 hover:bg-forest-700 text-white text-xs uppercase tracking-widest font-bold transition-all duration-300 cursor-pointer rounded-full"
                   whileTap={{ scale: 0.98 }}
                 >
                   <span className="flex items-center gap-2 justify-center">
-                    Inquire Securely <ArrowRight className="w-3.5 h-3.5" />
+                    Send Message <ArrowRight className="w-3.5 h-3.5" />
                   </span>
                 </motion.span>
               </Link>
@@ -167,7 +164,7 @@ export default function FAQPage() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-forest-900 text-stone-255 py-16 px-5 sm:px-8 border-t border-forest-800 relative z-10 mt-auto">
+      <footer className="bg-forest-900 text-stone-200 py-16 px-5 sm:px-8 border-t border-forest-800 relative z-10 mt-auto">
         <div className="max-w-6xl mx-auto text-center">
           <h3 className="font-sans font-extrabold text-lg text-white mb-2 tracking-tight">WECARE COUNSELING</h3>
           <p className="text-xs tracking-widest text-gold-400 font-bold uppercase mb-4">Gina Botshtein, LCSW</p>

@@ -66,77 +66,66 @@ export default function ContactPage() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16 max-w-2xl mx-auto"
           >
-            <span className="text-xs font-bold tracking-widest text-forest-600 uppercase mb-4 block">
-              Secure Consultation Portal
-            </span>
-            <h1 className="font-sans font-extrabold text-4xl sm:text-5xl text-stone-950 tracking-tight mb-4">
+            <h1 className="font-sans font-extrabold text-4xl sm:text-5xl text-stone-900 tracking-tight mb-4">
               Get in Touch
             </h1>
             <p className="text-sm sm:text-base text-stone-500 leading-relaxed font-normal">
-              Initiate your clinical partnership today. Reach out to coordinate a secure, confidential session or ask questions about counseling frameworks.
+              Initiate your consultation today. Reach out to coordinate a secure, confidential session or ask questions about services.
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-12 gap-12 items-start">
-            {/* Contact Info (Left Column) */}
+          <div className="grid md:grid-cols-12 gap-12 lg:gap-16 items-start">
+            {/* Contact Info (Left Column - Flat, Apple-Grade) */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="md:col-span-5 space-y-6 text-left"
+              className="md:col-span-5 text-left"
             >
-              <div>
-                <h3 className="font-sans font-bold text-stone-900 text-lg sm:text-xl mb-3">Direct Contact</h3>
-                <p className="text-sm text-stone-500 font-sans leading-relaxed mb-6">
-                  For immediate voice inquiries or scheduling coordination, please feel free to call during typical clinical hours (8 AM - 6 PM CST).
-                </p>
-              </div>
+              <div className="space-y-8">
+                <div>
+                  <h3 className="font-sans font-bold text-stone-900 text-xl mb-3">Direct Contact</h3>
+                  <p className="text-sm sm:text-base text-stone-500 font-sans leading-relaxed">
+                    For voice inquiries or scheduling coordination, please feel free to reach out. All initial fit assessments are complimentary and confidential. I am committed to assisting your transition toward healing and wholeness at every step.
+                  </p>
+                </div>
 
-              <div className="space-y-4">
-                {[
-                  {
-                    label: 'Phone Contact',
-                    value: '+1 (414) 617-2201',
-                    href: 'tel:+14146172201',
-                    icon: <Phone className="w-4 h-4 text-forest-600" />
-                  },
-                  {
-                    label: 'Secure Email',
-                    value: 'Gina@wccounseling.net',
-                    href: 'mailto:Gina@wccounseling.net',
-                    icon: <Mail className="w-4 h-4 text-forest-600" />
-                  }
-                ].map((item, i) => (
-                  <div key={i} className="bg-white border border-stone-200/60 rounded-2xl p-6 shadow-sm">
-                    <span className="text-[10px] tracking-wider font-bold text-stone-400 uppercase block mb-1.5">{item.label}</span>
-                    <a href={item.href} className="inline-flex items-center gap-2.5 font-bold text-stone-850 hover:text-forest-600 transition-colors text-base sm:text-lg">
-                      {item.icon}
-                      {item.value}
-                    </a>
-                  </div>
-                ))}
-              </div>
-
-              <div className="border border-stone-200 bg-white p-6 rounded-2xl shadow-sm">
-                <h4 className="text-xs font-bold text-stone-900 uppercase mb-2 flex items-center gap-2">
-                  <Check className="w-4 h-4 text-forest-600" />
-                  Complimentary Consultations
-                </h4>
-                <p className="text-xs text-stone-500 leading-relaxed font-sans font-normal">
-                  All initial alignment calls are 100% complimentary. I am committed to assisting your transition toward healing and wholeness at every step.
-                </p>
+                <div className="space-y-6 pt-6 border-t border-stone-200/80">
+                  {[
+                    {
+                      label: 'Phone Contact',
+                      value: '+1 (414) 617-2201',
+                      href: 'tel:+14146172201',
+                      icon: <Phone className="w-4 h-4 text-forest-600" />
+                    },
+                    {
+                      label: 'Email',
+                      value: 'Gina@wccounseling.net',
+                      href: 'mailto:Gina@wccounseling.net',
+                      icon: <Mail className="w-4 h-4 text-forest-600" />
+                    }
+                  ].map((item, i) => (
+                    <div key={i} className="text-left">
+                      <span className="text-[10px] tracking-wider font-bold text-stone-400 uppercase block mb-1">{item.label}</span>
+                      <a href={item.href} className="inline-flex items-center gap-2 font-semibold text-stone-800 hover:text-forest-600 transition-colors text-base sm:text-lg">
+                        {item.icon}
+                        {item.value}
+                      </a>
+                    </div>
+                  ))}
+                </div>
               </div>
             </motion.div>
 
-            {/* Contact Form (Right Column) */}
+            {/* Contact Form (Right Column - Flat, Clean) */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               className="md:col-span-7"
             >
-              <div className="border border-stone-200 bg-white p-8 sm:p-10 rounded-2xl shadow-lg relative">
-                <h3 className="font-sans font-bold text-stone-900 text-lg mb-6 text-left">Submit Secure Inquiry</h3>
+              <div className="border border-stone-200 bg-white p-8 sm:p-10 rounded-2xl shadow-sm relative">
+                <h3 className="font-sans font-bold text-stone-900 text-lg mb-6 text-left">Send a Message</h3>
 
                 {submitStatus === 'success' && (
                   <div className="mb-6 p-4 border border-forest-300 bg-forest-50 text-forest-800 text-xs font-bold rounded-xl uppercase tracking-wider">
@@ -191,7 +180,7 @@ export default function ContactPage() {
                       onChange={(e) => setFormState({ ...formState, subject: e.target.value })}
                       className="w-full px-4 py-3 bg-stone-50 border border-stone-200 focus:border-stone-400 focus:bg-white rounded-xl text-sm focus:outline-none transition-all text-stone-600"
                     >
-                      <option value="" disabled className="bg-white">Select Specialty Pathway... *</option>
+                      <option value="" disabled className="bg-white">Select Service Option... *</option>
                       <option value="individual" className="bg-white">Individual Therapy</option>
                       <option value="couples" className="bg-white">Couples Therapy</option>
                       <option value="family" className="bg-white">Family & Team Support</option>
@@ -212,15 +201,15 @@ export default function ContactPage() {
                   <motion.button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full py-4 bg-forest-600 hover:bg-forest-700 disabled:bg-stone-300 text-white font-bold uppercase tracking-wider text-xs rounded-xl shadow-md transition-colors flex justify-center items-center gap-2"
+                    className="w-full py-3 bg-forest-600 hover:bg-forest-700 disabled:bg-stone-300 text-white font-semibold rounded-xl text-xs uppercase tracking-widest transition-all cursor-pointer flex justify-center items-center gap-2"
                     whileTap={{ scale: 0.98 }}
                   >
-                    {isSubmitting ? 'Sending Transmission...' : 'Submit Secure Inquiry'}
+                    {isSubmitting ? 'Sending...' : 'Send Message'}
                     <ArrowRight className="w-3.5 h-3.5" />
                   </motion.button>
 
-                  <p className="text-[10px] tracking-wider text-stone-400 font-bold uppercase text-center mt-4">
-                    By submitting this secure portal inquiry, you authorize confidential correspondence under HIPAA compliance.
+                  <p className="text-[10px] tracking-wider text-stone-400 font-medium text-center mt-4">
+                    Your inquiry is confidential and fully HIPAA compliant.
                   </p>
                 </form>
               </div>
@@ -230,7 +219,7 @@ export default function ContactPage() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-forest-900 text-stone-255 py-16 px-5 sm:px-8 border-t border-forest-800 relative z-10 mt-auto">
+      <footer className="bg-forest-900 text-stone-200 py-16 px-5 sm:px-8 border-t border-forest-800 relative z-10 mt-auto">
         <div className="max-w-6xl mx-auto text-center">
           <h3 className="font-sans font-extrabold text-lg text-white mb-2 tracking-tight">WECARE COUNSELING</h3>
           <p className="text-xs tracking-widest text-gold-400 font-bold uppercase mb-6">Gina Botshtein, LCSW</p>

@@ -49,6 +49,7 @@ function Navigation() {
     { label: 'Home', href: '#hero' },
     { label: 'About', href: '#about' },
     { label: 'Services', href: '#services' },
+    { label: 'Journey', href: '#journey' },
     { label: 'Insurance', href: '#insurance' },
     { label: 'FAQ', href: '/faq' },
   ];
@@ -101,7 +102,7 @@ function Navigation() {
           {/* Mobile Hamburger */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="md:hidden p-2 hover:bg-stone-50 rounded-full transition-colors text-stone-850"
+            className="md:hidden p-2 hover:bg-stone-50 rounded-full transition-colors text-stone-800"
             aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
           >
             {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -140,7 +141,7 @@ function Navigation() {
                         <Link
                           href={link.href}
                           onClick={() => setMobileOpen(false)}
-                          className="block py-3 px-4 text-sm font-bold uppercase tracking-wider text-stone-800 hover:text-forest-600 hover:bg-stone-50 rounded-xl transition-colors"
+                          className="block py-3 px-4 text-sm font-bold uppercase tracking-wider text-stone-850 hover:text-forest-600 hover:bg-stone-50 rounded-xl transition-colors"
                         >
                           {link.label}
                         </Link>
@@ -148,7 +149,7 @@ function Navigation() {
                         <a
                           href={link.href}
                           onClick={() => setMobileOpen(false)}
-                          className="block py-3 px-4 text-sm font-bold uppercase tracking-wider text-stone-800 hover:text-forest-600 hover:bg-stone-50 rounded-xl transition-colors"
+                          className="block py-3 px-4 text-sm font-bold uppercase tracking-wider text-stone-850 hover:text-forest-600 hover:bg-stone-50 rounded-xl transition-colors"
                         >
                           {link.label}
                         </a>
@@ -192,27 +193,17 @@ function Navigation() {
   );
 }
 
-// Hero Section (Clean two-column spread)
+// Hero Section (Pristine background, no generic blobs)
 function HeroSection() {
   return (
     <section id="hero" className="relative min-h-screen flex items-center px-5 sm:px-8 pt-28 pb-20 bg-stone-50 overflow-hidden">
-      {/* Subtle modern soft gradients */}
-      <div className="absolute top-1/4 right-[10%] w-96 h-96 bg-forest-100/30 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-1/4 left-[5%] w-80 h-80 bg-gold-100/20 rounded-full blur-3xl pointer-events-none" />
-
       <div className="max-w-7xl mx-auto w-full relative z-10">
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           
-          {/* Left Column (Huge bold Apple-grade headlines) */}
+          {/* Left Column */}
           <div className="lg:col-span-7">
-            <ScrollReveal delay={0.1}>
-              <span className="text-xs font-bold tracking-widest text-forest-600 uppercase mb-4 block">
-                Gina Botshtein, LCSW
-              </span>
-            </ScrollReveal>
-
             <ScrollReveal delay={0.15}>
-              <h1 className="font-sans font-extrabold text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-stone-950 tracking-tight leading-[1.05] mb-6">
+              <h1 className="font-sans font-extrabold text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-stone-900 tracking-tight leading-[1.05] mb-6">
                 Gina <br />
                 <span className="text-forest-600">Botshtein</span>
               </h1>
@@ -240,7 +231,7 @@ function HeroSection() {
             <ScrollReveal delay={0.35}>
               <Link href="/contact">
                 <motion.span
-                  className="inline-flex items-center gap-2.5 px-7 py-3.5 bg-forest-600 hover:bg-forest-700 text-white font-bold text-xs uppercase tracking-widest rounded-full shadow-lg shadow-forest-600/15 transition-all cursor-pointer"
+                  className="inline-flex items-center gap-2.5 px-7 py-3.5 bg-forest-600 hover:bg-forest-700 text-white font-bold text-xs uppercase tracking-widest rounded-full shadow-lg shadow-forest-600/10 transition-all cursor-pointer"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
@@ -251,7 +242,7 @@ function HeroSection() {
             </ScrollReveal>
           </div>
 
-          {/* Right Column (Minimalist, beautiful card summaries) */}
+          {/* Right Column (Minimalist cards) */}
           <div className="lg:col-span-5 space-y-4">
             {[
               {
@@ -272,7 +263,7 @@ function HeroSection() {
             ].map((item, i) => (
               <ScrollReveal key={i} delay={0.15 * i}>
                 <motion.div
-                  className="bg-white p-6 rounded-2xl border border-stone-200/60 hover:border-forest-200 shadow-sm transition-all duration-300"
+                  className="bg-white p-6 rounded-2xl border border-stone-200 transition-all duration-300"
                   whileHover={{ y: -2 }}
                 >
                   <div className="flex items-start gap-4">
@@ -281,7 +272,7 @@ function HeroSection() {
                     </div>
                     <div>
                       <h3 className="text-base font-bold text-stone-900 mb-1">{item.title}</h3>
-                      <p className="text-sm text-stone-500 leading-relaxed font-normal">{item.desc}</p>
+                      <p className="text-sm text-stone-550 leading-relaxed font-normal">{item.desc}</p>
                     </div>
                   </div>
                 </motion.div>
@@ -301,11 +292,11 @@ function AboutSection() {
       <div className="max-w-6xl mx-auto">
         <div className="grid md:grid-cols-12 gap-12 lg:gap-20 items-center">
           
-          {/* Left Column (Clean, simple rectangular photo spread) */}
+          {/* Left Column */}
           <div className="md:col-span-5">
             <ScrollReveal>
               <div className="relative max-w-sm mx-auto">
-                <div className="aspect-[4/5] rounded-3xl overflow-hidden border border-stone-200/80 shadow-lg relative">
+                <div className="aspect-[4/5] rounded-3xl overflow-hidden border border-stone-200 shadow-md relative">
                   <Image
                     src={ginaPhoto}
                     alt="Gina Botshtein, LCSW"
@@ -318,13 +309,10 @@ function AboutSection() {
             </ScrollReveal>
           </div>
 
-          {/* Right Column (Pure, lightweight high-contrast copy block) */}
+          {/* Right Column */}
           <div className="md:col-span-7">
             <ScrollReveal delay={0.1}>
-              <span className="text-xs font-bold tracking-widest text-forest-600 uppercase mb-4 block">
-                About The Practitioner
-              </span>
-              <h2 className="font-sans font-extrabold text-4xl sm:text-5xl text-stone-950 tracking-tight mb-8">
+              <h2 className="font-sans font-extrabold text-4xl sm:text-5xl text-stone-900 tracking-tight mb-8">
                 Meet Gina
               </h2>
             </ScrollReveal>
@@ -337,31 +325,35 @@ function AboutSection() {
                 <p>
                   My therapeutic methodology integrates clinical expertise with genuine compassion, creating an environment where you feel truly heard, validated, and structurally equipped to cultivate lasting, meaningful change.
                 </p>
-                <blockquote className="pl-5 border-l-4 border-forest-600 font-serif italic text-lg text-stone-850 my-6 py-1 leading-relaxed">
+                <blockquote className="pl-5 border-l-4 border-forest-600 font-serif italic text-lg text-stone-800 my-6 py-1 leading-relaxed">
                   “Healing is not about correcting a broken mechanism; it is about uncovering, honoring, and cultivating the natural wisdom and resilience that has always resided within you.”
                 </blockquote>
               </div>
             </ScrollReveal>
 
             <ScrollReveal delay={0.3}>
-              <div className="mt-8 p-6 bg-stone-50 rounded-2xl border border-stone-200/60">
-                <h3 className="font-bold text-stone-900 text-sm sm:text-base mb-4 flex items-center gap-2">
-                  <Award className="w-5 h-5 text-forest-600" />
-                  Credentials & Training
+              <div className="mt-12 pt-8 border-t border-stone-200">
+                <h3 className="font-sans font-bold text-stone-900 text-xs sm:text-sm tracking-wider uppercase mb-6">
+                  Professional Credentials
                 </h3>
-                <ul className="grid sm:grid-cols-2 gap-3 text-xs sm:text-sm text-stone-600">
-                  {[
-                    'Licensed Clinical Social Worker (LCSW)',
-                    "Master's Degree in Clinical Social Work",
-                    '30+ Years of Private & Clinical Practice',
-                    'Advanced Systems Theory Specialization',
-                  ].map((item, i) => (
-                    <li key={i} className="flex items-center gap-2.5">
-                      <Check className="w-4 h-4 text-forest-600 flex-shrink-0" />
-                      <span className="font-sans font-medium text-stone-600">{item}</span>
-                    </li>
-                  ))}
-                </ul>
+                <div className="grid sm:grid-cols-2 gap-x-8 gap-y-6 text-sm text-stone-600 font-sans leading-relaxed">
+                  <div>
+                    <p className="font-bold text-stone-900">Licensed Clinical Social Worker</p>
+                    <p className="text-xs text-stone-400 mt-1">LCSW State Licensure</p>
+                  </div>
+                  <div>
+                    <p className="font-bold text-stone-900">Master of Clinical Social Work</p>
+                    <p className="text-xs text-stone-400 mt-1">Advanced Academic Degree</p>
+                  </div>
+                  <div>
+                    <p className="font-bold text-stone-900">30+ Years Private & Clinical Practice</p>
+                    <p className="text-xs text-stone-400 mt-1">Continuous Patient Advocacy</p>
+                  </div>
+                  <div>
+                    <p className="font-bold text-stone-900">Advanced Systems Theory Specialization</p>
+                    <p className="text-xs text-stone-400 mt-1">Complex Relational Modalities</p>
+                  </div>
+                </div>
               </div>
             </ScrollReveal>
           </div>
@@ -371,56 +363,26 @@ function AboutSection() {
   );
 }
 
-// Services Section
+// Services Section (Flat, Editorial, Apple-Grade)
 function ServicesSection() {
   const services = [
     {
+      num: '01',
       title: 'Individual Therapy',
       description: 'Grounded, one-on-one sessions addressing anxiety, depressive cycles, life transitions, and intentional personal growth.',
-      features: [
-        'Personalized treatment plans',
-        'Cognitive & somatic approaches',
-        'Safe, highly validating space',
-        'Flexible scheduling options'
-      ],
-      accent: 'forest',
-      svg: (
-        <svg className="w-6 h-6 text-forest-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-        </svg>
-      )
+      focus: 'Personalized treatment plans • Cognitive & somatic approaches • Safe, validating space • Flexible scheduling'
     },
     {
+      num: '02',
       title: 'Couples Therapy',
       description: 'Rebuild trust, break repetitive conflict cycles, and deeply enrich intimacy through structured communication and partnership work.',
-      features: [
-        'Communication skill-building',
-        'Root conflict resolution',
-        'Intimacy & secure connection',
-        'Pre-marital alignment work'
-      ],
-      accent: 'gold',
-      svg: (
-        <svg className="w-6 h-6 text-gold-650" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-        </svg>
-      )
+      focus: 'Communication skill-building • Root conflict resolution • Intimacy & connection • Pre-marital alignment'
     },
     {
+      num: '03',
       title: 'Family & Team Support',
       description: 'Navigate complex family dynamics and organizational team challenges with solution-focused communication plans.',
-      features: [
-        'Family systems analysis',
-        'Conscious parenting support',
-        'Collaborative team dynamics',
-        'Systemic wellness planning'
-      ],
-      accent: 'forest',
-      svg: (
-        <svg className="w-6 h-6 text-forest-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-        </svg>
-      )
+      focus: 'Family systems analysis • Conscious parenting support • Collaborative dynamics • Systemic wellness planning'
     }
   ];
 
@@ -428,11 +390,8 @@ function ServicesSection() {
     <section id="services" className="py-24 sm:py-32 px-5 sm:px-8 bg-stone-50 border-t border-b border-stone-200/50">
       <div className="max-w-6xl mx-auto">
         <ScrollReveal>
-          <div className="text-center mb-16 max-w-2xl mx-auto">
-            <span className="text-xs font-bold tracking-widest text-forest-600 uppercase mb-4 block">
-              Clinical Specializations
-            </span>
-            <h2 className="font-sans font-extrabold text-4xl sm:text-5xl text-stone-950 tracking-tight mb-4">
+          <div className="text-center mb-20 max-w-2xl mx-auto">
+            <h2 className="font-sans font-extrabold text-4xl sm:text-5xl text-stone-900 tracking-tight mb-4">
               How I Can Help
             </h2>
             <p className="text-base sm:text-lg text-stone-500 leading-relaxed font-normal">
@@ -441,42 +400,83 @@ function ServicesSection() {
           </div>
         </ScrollReveal>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-3 gap-12 lg:gap-16">
           {services.map((service, index) => (
             <ScrollReveal key={index} delay={0.08 * index}>
-              <motion.div
-                className="h-full bg-white p-8 rounded-2xl border border-stone-200/60 shadow-sm hover:shadow-xl transition-all duration-350 flex flex-col justify-between"
-                whileHover={{ y: -6 }}
-              >
+              <div className="flex flex-col justify-between h-full text-left">
                 <div>
-                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-6 ${
-                    service.accent === 'gold' ? 'bg-gold-50 text-gold-650' : 'bg-forest-50 text-forest-600'
-                  }`}>
-                    {service.svg}
+                  <div className="font-serif italic text-4xl sm:text-5xl text-stone-300 mb-6 font-light select-none">
+                    {service.num}
                   </div>
-                  <h3 className="text-xl sm:text-2xl font-bold font-sans text-stone-950 mb-3">
+                  <h3 className="text-2xl font-bold font-sans text-stone-900 mb-4">
                     {service.title}
                   </h3>
-                  <p className="text-sm sm:text-base text-stone-550 mb-8 leading-relaxed">
+                  <p className="text-sm sm:text-base text-stone-500 mb-8 leading-relaxed">
                     {service.description}
                   </p>
                 </div>
 
-                <div className="border-t border-stone-100 pt-6">
-                  <h4 className="text-xs font-bold text-forest-750 uppercase tracking-widest mb-4">Core Focus Areas</h4>
-                  <ul className="space-y-2.5">
-                    {service.features.map((feature, i) => (
-                      <li key={i} className="flex items-start gap-2.5 text-xs sm:text-sm text-stone-600">
-                        <Check className="w-4 h-4 text-forest-600 flex-shrink-0 mt-0.5" />
-                        <span className="font-sans font-medium text-stone-600">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
+                <div className="border-t border-stone-200/60 pt-6 mt-auto">
+                  <p className="text-[10px] tracking-wider font-bold text-stone-400 uppercase mb-2">Focus Areas</p>
+                  <p className="text-xs sm:text-sm text-stone-600 leading-relaxed font-sans font-medium">
+                    {service.focus}
+                  </p>
                 </div>
+              </div>
+            </ScrollReveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// Insurance Section
+function InsuranceSection() {
+  const insurancePlans = [
+    { name: 'Medicaid' },
+    { name: 'Badger Care' },
+    { name: 'United Healthcare' },
+    { name: 'WPS' },
+    { name: 'Medicare' }
+  ];
+
+  return (
+    <section id="insurance" className="py-24 sm:py-32 px-5 sm:px-8 bg-stone-50 relative border-t border-b border-stone-200/50">
+      <div className="max-w-6xl mx-auto relative z-10">
+        <ScrollReveal>
+          <div className="text-center mb-16 max-w-2xl mx-auto">
+            <h2 className="font-sans font-extrabold text-4xl sm:text-5xl text-stone-900 tracking-tight mb-4">
+              Accepted Insurance Plans
+            </h2>
+            <p className="text-base sm:text-lg text-stone-500 leading-relaxed">
+              I am currently an in-network provider for several major plans to ensure care remains highly accessible within our community.
+            </p>
+          </div>
+        </ScrollReveal>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+          {insurancePlans.map((plan, index) => (
+            <ScrollReveal key={index} delay={0.08 * index}>
+              <motion.div
+                className="px-6 py-8 rounded-2xl border text-center bg-white border-stone-200 hover:border-forest-600 shadow-sm transition-all duration-300 flex items-center justify-center min-h-[96px]"
+                whileHover={{ y: -3 }}
+              >
+                <h3 className="text-lg font-bold font-sans text-stone-900">
+                  {plan.name}
+                </h3>
               </motion.div>
             </ScrollReveal>
           ))}
         </div>
+
+        <ScrollReveal delay={0.4}>
+          <div className="mt-12 text-center max-w-2xl mx-auto">
+            <p className="text-stone-400 text-xs italic leading-relaxed">
+              * For other insurance carriers, I can provide a comprehensive monthly statement for potential out-of-network reimbursement. We highly recommend verifying your specific mental health benefits with your carrier.
+            </p>
+          </div>
+        </ScrollReveal>
       </div>
     </section>
   );
@@ -512,10 +512,7 @@ function TestimonialsSection() {
       <div className="max-w-6xl mx-auto">
         <ScrollReveal>
           <div className="text-center mb-16 max-w-2xl mx-auto">
-            <span className="text-xs font-bold tracking-widest text-forest-600 uppercase mb-4 block">
-              Client Reflections
-            </span>
-            <h2 className="font-sans font-extrabold text-4xl sm:text-5xl text-stone-950 tracking-tight mb-4">
+            <h2 className="font-sans font-extrabold text-4xl sm:text-5xl text-stone-900 tracking-tight mb-4">
               What Clients Say
             </h2>
             <p className="text-base sm:text-lg text-stone-500 leading-relaxed font-normal">
@@ -527,17 +524,17 @@ function TestimonialsSection() {
         <div className="grid md:grid-cols-2 gap-8">
           {testimonials.map((testimonial, index) => (
             <ScrollReveal key={index} delay={0.08 * index}>
-              <div className="bg-stone-50 p-8 sm:p-10 rounded-2xl border border-stone-200/60 flex flex-col justify-between h-full">
+              <div className="bg-stone-50 p-8 sm:p-10 rounded-2xl border border-stone-200 flex flex-col justify-between h-full">
                 <blockquote className="text-stone-850 leading-relaxed mb-6 text-base font-serif italic text-left">
                   “{testimonial.quote}”
                 </blockquote>
 
-                <div className="border-t border-stone-200/50 pt-4 flex items-center justify-between mt-auto">
+                <div className="border-t border-stone-200 pt-4 flex items-center justify-between mt-auto text-left">
                   <div>
-                    <p className="font-sans font-bold text-stone-950 text-xs sm:text-sm tracking-wider uppercase">{testimonial.author}</p>
+                    <p className="font-sans font-bold text-stone-900 text-xs sm:text-sm uppercase">{testimonial.author}</p>
                     <p className="text-xs text-stone-400 font-semibold uppercase mt-0.5">{testimonial.type}</p>
                   </div>
-                  <span className="text-gold-600 text-xs">★★★★★</span>
+                  <span className="text-stone-400 text-xs font-medium">Verified Client Review</span>
                 </div>
               </div>
             </ScrollReveal>
@@ -548,60 +545,6 @@ function TestimonialsSection() {
           <p className="text-center text-[10px] tracking-wider uppercase font-bold text-stone-400 mt-12">
             * Client initials are utilized to preserve absolute clinical confidentiality in strict compliance with HIPAA frameworks.
           </p>
-        </ScrollReveal>
-      </div>
-    </section>
-  );
-}
-
-// Insurance Section
-function InsuranceSection() {
-  const insurancePlans = [
-    { name: 'Medicaid' },
-    { name: 'Badger Care' },
-    { name: 'United Healthcare' },
-    { name: 'WPS' },
-    { name: 'Medicare' }
-  ];
-
-  return (
-    <section id="insurance" className="py-24 sm:py-32 px-5 sm:px-8 bg-stone-50 relative border-t border-b border-stone-200/50">
-      <div className="max-w-6xl mx-auto relative z-10">
-        <ScrollReveal>
-          <div className="text-center mb-16 max-w-2xl mx-auto">
-            <span className="text-xs font-bold tracking-widest text-forest-600 uppercase mb-4 block">
-              Coverage & Accessibility
-            </span>
-            <h2 className="font-sans font-extrabold text-4xl sm:text-5xl text-stone-950 tracking-tight mb-4">
-              Accepted Insurance Plans
-            </h2>
-            <p className="text-base sm:text-lg text-stone-500 leading-relaxed">
-              I am currently an in-network provider for several major plans to ensure care remains highly accessible within our community.
-            </p>
-          </div>
-        </ScrollReveal>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
-          {insurancePlans.map((plan, index) => (
-            <ScrollReveal key={index} delay={0.08 * index}>
-              <motion.div
-                className="px-6 py-8 rounded-2xl border text-center bg-white border-stone-250 hover:border-forest-600 shadow-sm transition-all duration-300 flex items-center justify-center min-h-[96px]"
-                whileHover={{ y: -3 }}
-              >
-                <h3 className="text-lg font-bold font-sans text-stone-950">
-                  {plan.name}
-                </h3>
-              </motion.div>
-            </ScrollReveal>
-          ))}
-        </div>
-
-        <ScrollReveal delay={0.4}>
-          <div className="mt-12 text-center max-w-2xl mx-auto">
-            <p className="text-stone-400 text-xs italic leading-relaxed">
-              * For other insurance carriers, I can provide a comprehensive monthly statement for potential out-of-network reimbursement. We highly recommend verifying your specific mental health benefits with your carrier.
-            </p>
-          </div>
         </ScrollReveal>
       </div>
     </section>
@@ -644,14 +587,11 @@ function FAQSection() {
   ];
 
   return (
-    <section id="faq" className="py-24 px-5 sm:px-8 bg-white relative">
+    <section id="faq" className="py-24 sm:py-32 px-5 sm:px-8 bg-stone-50 border-t border-b border-stone-200/50 relative">
       <div className="max-w-3xl mx-auto relative z-10">
         <ScrollReveal>
           <div className="text-center mb-12">
-            <span className="text-xs font-bold tracking-widest text-forest-600 uppercase mb-4 block">
-              Clinical Clarity
-            </span>
-            <h2 className="font-sans font-extrabold text-3xl sm:text-4xl text-stone-950 tracking-tight mb-4">
+            <h2 className="font-sans font-extrabold text-3xl sm:text-4xl text-stone-900 tracking-tight mb-4">
               Frequently Asked Questions
             </h2>
             <p className="text-sm sm:text-base text-stone-500 leading-relaxed">
@@ -663,7 +603,7 @@ function FAQSection() {
         <div className="space-y-3">
           {faqs.map((faq, index) => (
             <ScrollReveal key={index} delay={0.03 * index}>
-              <div className="bg-stone-50 rounded-2xl border border-stone-200/60 overflow-hidden hover:border-forest-600 transition-colors">
+              <div className="bg-white rounded-2xl border border-stone-200/60 overflow-hidden hover:border-forest-600 transition-colors">
                 <button
                   onClick={() => setOpenIndex(openIndex === index ? null : index)}
                   className="w-full px-6 py-4 text-left flex justify-between items-center gap-6 group focus:outline-none"
@@ -753,13 +693,10 @@ function ContactSection() {
   const inputClasses = "w-full px-4 py-3 bg-stone-50 border border-stone-200 focus:border-stone-400 focus:bg-white rounded-xl text-sm focus:outline-none transition-all text-stone-900 placeholder:text-stone-400";
 
   return (
-    <section id="contact" className="py-24 px-5 sm:px-8 bg-stone-50 border-t border-stone-200/50">
-      <div className="max-w-5xl mx-auto">
+    <section id="contact" className="py-24 sm:py-32 px-5 sm:px-8 bg-white relative">
+      <div className="max-w-5xl mx-auto relative z-10">
         <ScrollReveal>
           <div className="text-center mb-16 max-w-2xl mx-auto">
-            <span className="text-xs font-bold tracking-widest text-forest-600 uppercase mb-4 block">
-              Secure Communications
-            </span>
             <h2 className="font-sans font-extrabold text-4xl sm:text-5xl text-stone-950 tracking-tight mb-4">
               Get in Touch
             </h2>
@@ -769,19 +706,19 @@ function ContactSection() {
           </div>
         </ScrollReveal>
 
-        <div className="grid md:grid-cols-12 gap-12 items-start">
-          {/* Left Column (Direct Contact Details) */}
-          <div className="md:col-span-5">
+        <div className="grid md:grid-cols-12 gap-12 lg:gap-16 items-start">
+          {/* Left Column (Direct Contact Details - Flat, Apple-Grade) */}
+          <div className="md:col-span-5 text-left">
             <ScrollReveal delay={0.1}>
-              <div className="space-y-8 text-left">
+              <div className="space-y-8">
                 <div>
-                  <h3 className="font-sans font-bold text-stone-900 text-lg sm:text-xl mb-3">Direct Channels</h3>
-                  <p className="text-sm text-stone-500 font-sans leading-relaxed mb-6">
-                    If you prefer direct voice communication, feel free to call during standard business hours (8 AM - 6 PM CST).
+                  <h3 className="font-sans font-bold text-stone-900 text-xl mb-3">Direct Channels</h3>
+                  <p className="text-sm sm:text-base text-stone-500 font-sans leading-relaxed">
+                    If you prefer direct voice communication or email correspondence, feel free to reach out. All initial consultation coordination and fit assessments are complimentary and confidential.
                   </p>
                 </div>
 
-                <div className="space-y-4">
+                <div className="space-y-6 pt-4 border-t border-stone-200/80">
                   {[
                     {
                       label: 'Phone Contact',
@@ -790,37 +727,30 @@ function ContactSection() {
                       icon: <Phone className="w-4 h-4 text-forest-600" />
                     },
                     {
-                      label: 'Secure Email',
+                      label: 'Email',
                       value: 'Gina@wccounseling.net',
                       href: 'mailto:Gina@wccounseling.net',
                       icon: <Mail className="w-4 h-4 text-forest-600" />
                     }
                   ].map((item, i) => (
-                    <div key={i} className="bg-white border border-stone-200/60 rounded-2xl p-5 shadow-sm">
+                    <div key={i} className="text-left">
                       <span className="text-[10px] tracking-wider font-bold text-stone-400 uppercase block mb-1">{item.label}</span>
-                      <a href={item.href} className="inline-flex items-center gap-2.5 font-bold text-stone-850 hover:text-forest-600 transition-colors text-base">
+                      <a href={item.href} className="inline-flex items-center gap-2 font-semibold text-stone-800 hover:text-forest-600 transition-colors text-base sm:text-lg">
                         {item.icon}
                         {item.value}
                       </a>
                     </div>
                   ))}
                 </div>
-
-                <div className="border border-stone-200 bg-white p-6 rounded-2xl shadow-sm">
-                  <h4 className="text-xs tracking-wider font-bold text-stone-900 uppercase mb-2">Initial Consultations</h4>
-                  <p className="text-xs text-stone-500 leading-relaxed font-sans font-normal">
-                    All initial fit assessments are complimentary and confidential. We are here to support your transition every step of the way.
-                  </p>
-                </div>
               </div>
             </ScrollReveal>
           </div>
 
-          {/* Right Column (Priscilla Form Box) */}
+          {/* Right Column (Message Form - Flat, Clean) */}
           <div className="md:col-span-7">
             <ScrollReveal delay={0.2}>
-              <div className="border border-stone-200 bg-white p-8 sm:p-10 rounded-2xl shadow-lg relative">
-                <h3 className="font-sans font-bold text-stone-900 text-lg mb-6 text-left">Submit Secure Inquiry</h3>
+              <div className="border border-stone-200 bg-white p-8 sm:p-10 rounded-2xl shadow-sm relative">
+                <h3 className="font-sans font-bold text-stone-900 text-lg mb-6 text-left">Send a Message</h3>
 
                 {submitStatus === 'success' && (
                   <div className="mb-6 p-4 border border-forest-300 bg-forest-50 text-forest-800 text-xs font-bold rounded-xl uppercase tracking-wider">
@@ -875,7 +805,7 @@ function ContactSection() {
                       onChange={(e) => setFormState({ ...formState, subject: e.target.value })}
                       className="w-full px-4 py-3 bg-stone-50 border border-stone-200 focus:border-stone-400 focus:bg-white rounded-xl text-sm focus:outline-none transition-all text-stone-600"
                     >
-                      <option value="" disabled>Select Specialty Pathway... *</option>
+                      <option value="" disabled>Select Service Option... *</option>
                       <option value="individual">Individual Therapy</option>
                       <option value="couples">Couples Therapy</option>
                       <option value="family">Family & Team Support</option>
@@ -896,14 +826,14 @@ function ContactSection() {
                   <motion.button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full py-3.5 bg-forest-600 hover:bg-forest-700 disabled:bg-stone-300 text-white font-bold uppercase tracking-wider text-xs rounded-xl shadow-md transition-colors"
+                    className="w-full py-3 bg-forest-600 hover:bg-forest-700 disabled:bg-stone-300 text-white font-semibold rounded-xl text-xs uppercase tracking-widest transition-all cursor-pointer"
                     whileTap={{ scale: 0.98 }}
                   >
-                    {isSubmitting ? 'Sending Transmission...' : 'Submit Secure Inquiry'}
+                    {isSubmitting ? 'Sending...' : 'Send Message'}
                   </motion.button>
 
-                  <p className="text-[10px] tracking-wider text-stone-400 font-bold uppercase text-center mt-4">
-                    By submitting this secure portal inquiry, you authorize confidential correspondence.
+                  <p className="text-[10px] tracking-wider text-stone-400 font-medium text-center mt-4">
+                    Your inquiry is confidential and fully HIPAA compliant.
                   </p>
                 </form>
               </div>
@@ -965,10 +895,10 @@ export default function Home() {
       <Navigation />
       <main>
         <HeroSection />
-        <HealingJourney />
-        <InsuranceSection />
         <AboutSection />
         <ServicesSection />
+        <HealingJourney />
+        <InsuranceSection />
         <TestimonialsSection />
         <FAQSection />
         <ContactSection />

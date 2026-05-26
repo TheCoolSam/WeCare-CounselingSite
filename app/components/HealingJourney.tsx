@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { motion, useInView, useScroll, useSpring } from 'framer-motion';
 import Link from 'next/link';
 import { Check, ArrowRight } from 'lucide-react';
@@ -69,21 +69,30 @@ const stages: JourneyStage[] = [
   }
 ];
 
-function TimelineItem({ stage, index }: { stage: JourneyStage; index: number }) {
+function TimelineItem({ 
+  stage, 
+  index, 
+  nodeRef 
+}: { 
+  stage: JourneyStage; 
+  index: number;
+  nodeRef?: React.RefObject<HTMLDivElement | null>;
+}) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const isEven = index % 2 === 0;
 
   return (
-    <div ref={ref} className="relative md:grid md:grid-cols-12 md:gap-12 mb-20 md:mb-28 last:mb-0">
+    <div ref={ref} className="relative md:grid md:grid-cols-12 md:gap-12 mb-16 md:mb-24 last:mb-0">
       
-      {/* Central Circle Node (Animated Node) */}
-      <div className="absolute left-6 md:left-1/2 top-0 bottom-0 md:-translate-x-1/2 z-10 flex flex-col items-center">
+      {/* Central Circle Node (Unified mobile gutter centering) */}
+      <div className="absolute left-5 w-9 md:left-1/2 top-0 bottom-0 md:-translate-x-1/2 z-10 flex justify-center">
         <motion.div
-          initial={{ scale: 0, borderColor: '#e5e7eb' }}
-          animate={isInView ? { scale: 1, borderColor: '#2b3c32' } : { scale: 0, borderColor: '#e5e7eb' }}
+          ref={nodeRef}
+          initial={{ scale: 0, borderColor: '#e5e3df' }}
+          animate={isInView ? { scale: 1, borderColor: '#2b3c32' } : { scale: 0, borderColor: '#e5e3df' }}
           transition={{ duration: 0.5, delay: 0.1, type: 'spring' }}
-          className="w-10 h-10 border-2 bg-white text-stone-900 flex items-center justify-center rounded-full font-sans text-xs font-bold shadow-md flex-shrink-0"
+          className="w-9 h-9 border-2 bg-white text-stone-900 flex items-center justify-center rounded-full font-sans text-xs font-bold shadow-sm"
         >
           0{stage.number}
         </motion.div>
@@ -91,12 +100,15 @@ function TimelineItem({ stage, index }: { stage: JourneyStage; index: number }) 
 
       {/* Content Column */}
       <motion.div
-        initial={{ opacity: 0, x: isEven ? -30 : 30 }}
-        animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: isEven ? -30 : 30 }}
+        initial={{ opacity: 0, x: isEven ? -25 : 25 }}
+        animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: isEven ? -25 : 25 }}
         transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-        className={`pl-16 md:pl-0 md:col-span-5 ${isEven ? 'md:col-start-1 text-left md:text-right' : 'md:col-start-8'}`}
+        className={`pl-20 md:pl-0 md:col-span-5 ${isEven ? 'md:col-start-1 text-left md:text-right' : 'md:col-start-8'} mb-6 md:mb-0`}
       >
-        <h3 className="font-sans font-extrabold text-2xl sm:text-3xl text-stone-955 mb-4">
+        <span className="font-serif italic text-forest-700 text-sm sm:text-base block mb-1">
+          {stage.subtitle}
+        </span>
+        <h3 className="font-sans font-extrabold text-2xl sm:text-3xl text-stone-900 mb-4 tracking-tight">
           {stage.title}
         </h3>
         <p className="text-sm sm:text-base text-stone-500 leading-relaxed font-sans font-normal max-w-lg md:ml-auto md:mr-0 group-even:md:mr-auto">
@@ -106,27 +118,27 @@ function TimelineItem({ stage, index }: { stage: JourneyStage; index: number }) 
 
       {/* Detail Column (Approaches & Milestones) */}
       <motion.div
-        initial={{ opacity: 0, x: isEven ? 30 : -30 }}
-        animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: isEven ? 30 : -30 }}
+        initial={{ opacity: 0, x: isEven ? 25 : -25 }}
+        animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: isEven ? 25 : -25 }}
         transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-        className={`pl-16 md:pl-0 md:col-span-5 ${isEven ? 'md:col-start-8' : 'md:col-start-1'}`}
+        className={`pl-20 md:pl-0 md:col-span-5 ${isEven ? 'md:col-start-8' : 'md:col-start-1'}`}
       >
-        <div className="bg-white border border-stone-200/65 p-6 sm:p-8 rounded-2xl flex flex-col justify-between h-full relative">
+        <div className="flex flex-col justify-between h-full relative text-left">
           <div>
-            <h4 className="text-xs font-bold text-stone-400 uppercase tracking-wider mb-4 text-left">Focus Core Approaches</h4>
+            <h4 className="text-sm font-semibold text-stone-900 mb-3 text-left">Key approaches</h4>
             <ul className="space-y-3 mb-6">
               {stage.approaches.map((approach, i) => (
                 <li key={i} className="flex items-start gap-2.5 text-xs sm:text-sm text-stone-600 text-left">
-                  <Check className="w-4 h-4 text-forest-600 flex-shrink-0 mt-0.5" />
-                  <span className="font-sans font-medium text-stone-650">{approach}</span>
+                  <span className="text-forest-600 font-medium select-none mt-0.5">•</span>
+                  <span className="font-sans font-medium text-stone-600">{approach}</span>
                 </li>
               ))}
             </ul>
           </div>
 
-          <div className="border-t border-stone-100 pt-5 mt-auto text-left">
-            <span className="text-xs font-bold text-forest-750 uppercase tracking-wider block mb-2">Milestone Accomplished</span>
-            <p className="text-xs sm:text-sm text-forest-800 leading-relaxed font-sans font-medium">
+          <div className="border-t border-stone-200/60 pt-5 mt-auto text-left">
+            <span className="text-xs font-bold text-forest-700 block mb-2">Clinical milestone</span>
+            <p className="text-xs sm:text-sm text-stone-800 leading-relaxed font-sans font-normal">
               {stage.milestone}
             </p>
           </div>
@@ -137,7 +149,11 @@ function TimelineItem({ stage, index }: { stage: JourneyStage; index: number }) 
 }
 
 export default function HealingJourney() {
-  const containerRef = useRef(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const timelineRef = useRef<HTMLDivElement>(null);
+  const lastNodeRef = useRef<HTMLDivElement>(null);
+  
+  const [lineHeight, setLineHeight] = useState<number | string>('100%');
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -149,6 +165,27 @@ export default function HealingJourney() {
     damping: 30,
     restDelta: 0.001
   });
+
+  useEffect(() => {
+    const updateLineHeight = () => {
+      if (timelineRef.current && lastNodeRef.current) {
+        const timelineRect = timelineRef.current.getBoundingClientRect();
+        const nodeRect = lastNodeRef.current.getBoundingClientRect();
+        // Distance from top of timeline block to center of last node circle
+        const relativeTop = nodeRect.top - timelineRect.top + nodeRect.height / 2;
+        setLineHeight(relativeTop);
+      }
+    };
+
+    updateLineHeight();
+    const rafId = requestAnimationFrame(updateLineHeight);
+
+    window.addEventListener('resize', updateLineHeight);
+    return () => {
+      window.removeEventListener('resize', updateLineHeight);
+      cancelAnimationFrame(rafId);
+    };
+  }, []);
 
   return (
     <section id="journey" className="py-24 sm:py-32 px-5 sm:px-8 bg-white relative overflow-hidden">
@@ -162,10 +199,7 @@ export default function HealingJourney() {
           transition={{ duration: 0.6 }}
           className="text-center mb-20 max-w-2xl mx-auto"
         >
-          <span className="text-xs font-bold tracking-widest text-forest-600 uppercase mb-4 block">
-            The Therapeutic Process
-          </span>
-          <h2 className="font-sans font-extrabold text-4xl sm:text-5xl text-stone-950 tracking-tight mb-4">
+          <h2 className="font-sans font-extrabold text-4xl sm:text-5xl text-stone-900 tracking-tight mb-4">
             Your Healing Journey
           </h2>
           <p className="text-base sm:text-lg text-stone-500 leading-relaxed font-sans font-normal">
@@ -174,46 +208,58 @@ export default function HealingJourney() {
         </motion.div>
 
         {/* Timeline Container */}
-        <div className="relative">
-          {/* Background Hairline Track Line */}
-          <div className="absolute left-11 md:left-1/2 top-4 bottom-4 w-[2px] bg-stone-100 md:-translate-x-1/2 pointer-events-none rounded-full" />
+        <div className="relative" ref={timelineRef}>
+          {/* Background Hairline Track Line (Unified flex alignment) */}
+          <div 
+            style={{ height: lineHeight }}
+            className="absolute left-5 w-9 md:left-1/2 top-4 flex justify-center md:-translate-x-1/2 pointer-events-none" 
+          >
+            <div className="w-[2px] bg-stone-100 h-full rounded-full" />
+          </div>
 
-          {/* Active Growing Vine/Progress Line (Scroll-Linked) */}
+          {/* Active Growing Vine/Progress Line (Scroll-Linked flex alignment) */}
           <motion.div
-            style={{ scaleY }}
-            className="absolute left-11 md:left-1/2 top-4 bottom-4 w-[2px] bg-forest-600 md:-translate-x-1/2 origin-top pointer-events-none rounded-full"
-          />
+            style={{ scaleY, height: lineHeight }}
+            className="absolute left-5 w-9 md:left-1/2 top-4 flex justify-center md:-translate-x-1/2 origin-top pointer-events-none"
+          >
+            <div className="w-[2px] bg-forest-600 h-full rounded-full" />
+          </motion.div>
 
           {/* Staggered Alternating Timeline Items */}
-          <div className="space-y-16 md:space-y-0">
+          <div className="space-y-0">
             {stages.map((stage, index) => (
-              <TimelineItem key={stage.number} stage={stage} index={index} />
+              <TimelineItem 
+                key={stage.number} 
+                stage={stage} 
+                index={index} 
+                nodeRef={index === stages.length - 1 ? lastNodeRef : undefined}
+              />
             ))}
           </div>
         </div>
 
-        {/* Minimalist Catalog CTA Box */}
+        {/* Minimalist Catalog CTA Section (Flat, Borderless, Apple-Grade) */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="mt-24 border border-stone-200 bg-stone-50 p-8 sm:p-12 rounded-3xl text-center relative shadow-sm"
+          className="mt-28 text-center max-w-2xl mx-auto"
         >
-          <h3 className="font-sans font-extrabold text-2xl sm:text-3xl text-stone-950 mb-4">
+          <h3 className="font-sans font-extrabold text-3xl sm:text-4xl text-stone-900 mb-4 tracking-tight">
             Ready to Begin Restoration?
           </h3>
-          <p className="text-sm text-stone-500 mb-8 max-w-xl mx-auto leading-relaxed font-sans">
+          <p className="text-base sm:text-lg text-stone-500 mb-8 max-w-xl mx-auto leading-relaxed font-sans font-normal">
             Every transformative journey starts with a singular step of courage. Let's walk that pathway together in an environment of complete clinical excellence and safety.
           </p>
           <div className="flex justify-center">
             <Link href="/contact">
               <motion.span
-                className="inline-flex items-center gap-2 px-8 py-3.5 bg-forest-600 hover:bg-forest-700 text-white font-bold rounded-full text-xs uppercase tracking-widest transition-all cursor-pointer shadow-lg shadow-forest-600/10"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-forest-600 hover:bg-forest-700 text-white font-semibold rounded-full text-xs uppercase tracking-widest transition-all cursor-pointer"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
-                Schedule Consultation
+                Schedule a consultation
                 <ArrowRight className="w-3.5 h-3.5" />
               </motion.span>
             </Link>

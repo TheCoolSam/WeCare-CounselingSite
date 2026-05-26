@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { ArrowLeft, Phone, Mail } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 
 export default function PrivacyPolicy() {
   return (
@@ -30,10 +30,7 @@ export default function PrivacyPolicy() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <span className="text-xs font-bold tracking-widest text-forest-600 uppercase mb-4 block">
-              Clinical Compliance & Transparency
-            </span>
-            <h1 className="font-sans font-extrabold text-4xl sm:text-5xl text-stone-955 tracking-tight mb-4 text-balance">
+            <h1 className="font-sans font-extrabold text-4xl sm:text-5xl text-stone-900 tracking-tight mb-4 text-balance">
               Privacy Policy
             </h1>
             <p className="text-xs sm:text-sm text-stone-500 font-sans tracking-wide">
@@ -46,14 +43,14 @@ export default function PrivacyPolicy() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="space-y-10 text-stone-600 leading-relaxed font-sans text-sm sm:text-base text-left bg-white p-8 sm:p-12 rounded-3xl border border-stone-200 shadow-sm"
+            className="space-y-10 text-stone-650 leading-relaxed font-sans text-sm sm:text-base text-left bg-white p-8 sm:p-12 rounded-3xl border border-stone-250/30"
           >
             {/* Introduction */}
             <section>
               <h2 className="font-sans font-extrabold text-xl sm:text-2xl text-stone-900 mb-4">
                 Introduction
               </h2>
-              <p className="text-stone-550 leading-relaxed">
+              <p className="leading-relaxed">
                 WeCare Counseling (&ldquo;we,&rdquo; &ldquo;us,&rdquo; &ldquo;our,&rdquo; or &ldquo;Company&rdquo;) is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website, including any other media form, media channel, mobile website, or mobile application related or connected thereto (collectively, the &ldquo;Site&rdquo;).
               </p>
             </section>
@@ -66,11 +63,11 @@ export default function PrivacyPolicy() {
               <div className="space-y-4">
                 <div>
                   <h3 className="font-bold text-stone-850 mb-2">Contact Form Information</h3>
-                  <p className="text-stone-550 leading-relaxed">When you use our contact form, we collect your name, email address, phone number, and message. This information is processed through Formspree, a third-party service provider, and is used solely to respond to your inquiry.</p>
+                  <p className="leading-relaxed">When you use our contact form, we collect your name, email address, phone number, and message. This information is processed through Formspree, a third-party service provider, and is used solely to respond to your inquiry.</p>
                 </div>
                 <div>
                   <h3 className="font-bold text-stone-850 mb-2">Automatic Information</h3>
-                  <p className="text-stone-550 leading-relaxed">We may automatically collect certain information about your device, including browser type, operating system, and referring URLs. This data helps us improve our website and user experience.</p>
+                  <p className="leading-relaxed">We may automatically collect certain information about your device, including browser type, operating system, and referring URLs. This data helps us improve our website and user experience.</p>
                 </div>
               </div>
             </section>
@@ -88,8 +85,8 @@ export default function PrivacyPolicy() {
                   "To prevent fraudulent transactions and protect the security of our Site"
                 ].map((text, i) => (
                   <li key={i} className="flex items-start gap-2.5">
-                    <span className="text-forest-650 text-base leading-none mt-0.5">•</span>
-                    <span className="text-stone-550 leading-relaxed">{text}</span>
+                    <span className="text-forest-600 text-base leading-none mt-0.5">•</span>
+                    <span className="leading-relaxed">{text}</span>
                   </li>
                 ))}
               </ul>
@@ -102,10 +99,10 @@ export default function PrivacyPolicy() {
               <h2 className="font-sans font-extrabold text-xl sm:text-2xl text-stone-900 mb-4">
                 HIPAA Compliance
               </h2>
-              <p className="mb-4 text-stone-550 leading-relaxed">
+              <p className="mb-4 leading-relaxed">
                 As a licensed clinical social worker providing therapy services, Gina Botshtein is required to comply with the Health Insurance Portability and Accountability Act (HIPAA). When you become a therapy client, all clinical information is protected under HIPAA regulations.
               </p>
-              <p className="text-stone-500 leading-relaxed font-sans text-xs bg-white p-4 border border-stone-150 rounded-xl">
+              <p className="text-stone-500 leading-relaxed font-sans text-xs bg-white p-4 border border-stone-100 rounded-xl">
                 <strong className="text-stone-900">IMPORTANT NOTICE:</strong> This website and its general contact forms are not part of HIPAA-covered services. If you require HIPAA-protected communication, please call us directly at +1 (414) 617-2201 or email Gina@wccounseling.net to establish a confidential communication channel.
               </p>
             </section>
@@ -118,11 +115,11 @@ export default function PrivacyPolicy() {
               <div className="space-y-4">
                 <div>
                   <h3 className="font-bold text-stone-850 mb-2">Formspree</h3>
-                  <p className="text-stone-550 leading-relaxed">We use Formspree to process contact form submissions. Formspree acts as a data processor and may store your information temporarily to deliver your message to us. Their privacy practices are governed by their own privacy policy.</p>
+                  <p className="leading-relaxed">We use Formspree to process contact form submissions. Formspree acts as a data processor and may store your information temporarily to deliver your message to us. Their privacy practices are governed by their own privacy policy.</p>
                 </div>
                 <div>
                   <h3 className="font-bold text-stone-850 mb-2">Hosting</h3>
-                  <p className="text-stone-550 leading-relaxed">Our website is hosted on Namecheap&apos;s Stellar hosting. We may use analytics tools to understand how users interact with our Site. These are handled securely and in compliance with privacy regulations.</p>
+                  <p className="leading-relaxed">Our website is hosted on Namecheap&apos;s Stellar hosting. We may use analytics tools to understand how users interact with our Site. These are handled securely and in compliance with privacy regulations.</p>
                 </div>
               </div>
             </section>
@@ -132,10 +129,10 @@ export default function PrivacyPolicy() {
             {/* Your Privacy Rights */}
             <section>
               <h2 className="font-sans font-extrabold text-xl sm:text-2xl text-stone-900 mb-4">Your Privacy Rights</h2>
-              <p className="mb-6 text-stone-550 leading-relaxed">
+              <p className="mb-6 leading-relaxed">
                 You have the right to access, update, or delete the personal information we hold about you. If you would like to exercise any of these rights, please contact us at:
               </p>
-              <div className="border border-stone-150 rounded-2xl p-6 grid sm:grid-cols-2 gap-4 bg-stone-50">
+              <div className="border border-stone-200 rounded-2xl p-6 grid sm:grid-cols-2 gap-4 bg-stone-50">
                 <div>
                   <p className="font-bold text-stone-850 text-sm">WeCare Counseling</p>
                   <p className="text-xs text-stone-500 font-sans mt-1">Gina Botshtein, LCSW</p>
@@ -152,7 +149,7 @@ export default function PrivacyPolicy() {
             {/* Security */}
             <section>
               <h2 className="font-sans font-extrabold text-xl sm:text-2xl text-stone-900 mb-4">Security of Your Information</h2>
-              <p className="text-stone-550 leading-relaxed">
+              <p className="leading-relaxed">
                 We use administrative, technical, and physical security measures to protect your personal information. However, no method of transmission over the Internet is 100% secure. We cannot guarantee absolute security of your information.
               </p>
             </section>
@@ -167,13 +164,13 @@ export default function PrivacyPolicy() {
               </p>
               <div className="grid sm:grid-cols-2 gap-6 text-xs sm:text-sm pt-4 border-t border-forest-800">
                 <div>
-                  <p className="text-gold-400 font-bold uppercase tracking-wider mb-1">Secure Phone</p>
+                  <p className="text-gold-400 font-bold uppercase tracking-wider mb-1">Phone</p>
                   <a href="tel:+14146172201" className="font-bold text-white hover:text-gold-400 transition-colors text-base sm:text-lg">
                     +1 (414) 617-2201
                   </a>
                 </div>
                 <div>
-                  <p className="text-gold-400 font-bold uppercase tracking-wider mb-1">Clinical Email</p>
+                  <p className="text-gold-400 font-bold uppercase tracking-wider mb-1">Email</p>
                   <a href="mailto:Gina@wccounseling.net" className="font-bold text-white hover:text-gold-400 transition-colors text-base sm:text-lg break-all">
                     Gina@wccounseling.net
                   </a>
@@ -192,21 +189,20 @@ export default function PrivacyPolicy() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-forest-900 text-stone-255 py-16 px-5 sm:px-8 border-t border-forest-800 relative z-10 mt-auto">
+      <footer className="bg-forest-900 text-stone-200 py-16 px-5 sm:px-8 border-t border-forest-800 relative z-10 mt-auto">
         <div className="max-w-6xl mx-auto text-center">
           <h3 className="font-sans font-extrabold text-lg text-white mb-2 tracking-tight">WECARE COUNSELING</h3>
-          <p className="text-xs tracking-widest text-gold-400 font-bold uppercase mb-6">Gina Botshtein, LCSW</p>
+          <p className="text-xs tracking-widest text-gold-400 font-bold uppercase mb-4">Gina Botshtein, LCSW</p>
           
-          <div className="flex flex-wrap justify-center gap-6 text-xs font-sans mb-8">
-            <a href="tel:+14146172201" className="flex items-center gap-2.5 text-forest-200 hover:text-gold-400 transition-colors">
-              <Phone className="w-3.5 h-3.5 text-gold-400" /> +1 (414) 617-2201
+          <div className="flex flex-wrap justify-center gap-4 mb-6 text-sm text-forest-200">
+            <a href="tel:+14146172201" className="hover:text-gold-400 transition-colors">
+              +1 (414) 617-2201
             </a>
             <span className="text-forest-800">|</span>
-            <a href="mailto:Gina@wccounseling.net" className="flex items-center gap-2.5 text-forest-200 hover:text-gold-400 transition-colors break-all">
-              <Mail className="w-3.5 h-3.5 text-gold-400" /> Gina@wccounseling.net
+            <a href="mailto:Gina@wccounseling.net" className="hover:text-gold-400 transition-colors">
+              Gina@wccounseling.net
             </a>
           </div>
-
           <div className="border-t border-forest-800 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-[10px] tracking-wider font-bold text-forest-300 uppercase">
             <p>© {new Date().getFullYear()} WeCare Counseling. All rights reserved.</p>
             <p className="text-[9px] text-forest-400">Confidential & HIPAA Compliant Healthcare Space</p>
