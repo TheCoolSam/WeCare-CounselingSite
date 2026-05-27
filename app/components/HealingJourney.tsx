@@ -29,6 +29,29 @@ const stages: JourneyStage[] = [
   }
 ];
 
+function SproutingLeaf({ x, y, rotate, delay }: { x: number; y: number; rotate: number; delay: number }) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-180px" });
+
+  return (
+    <motion.g
+      ref={ref}
+      initial={{ scale: 0, opacity: 0 }}
+      animate={isInView ? { scale: 1, opacity: 1 } : { scale: 0, opacity: 0 }}
+      transition={{ type: "spring", stiffness: 180, damping: 12, delay }}
+      style={{ originX: `${x}px`, originY: `${y}px` }}
+    >
+      {/* Organic hand-crafted leaf shape path */}
+      <path
+        d={`M ${x} ${y} c 10 -15, 25 -10, 20 10 c -5 15, -15 10, -20 -10`}
+        fill="#3c5144" // forest-600 primary sage theme
+        className="opacity-90"
+        transform={`rotate(${rotate}, ${x}, ${y})`}
+      />
+    </motion.g>
+  );
+}
+
 function TimelineItem({ 
   stage, 
   index, 
@@ -36,19 +59,22 @@ function TimelineItem({
 }: { 
   stage: JourneyStage; 
   index: number;
-  nodeRef?: React.RefObject<HTMLDivElement | null>;
+  nodeRef?: (node: HTMLDivElement | null) => void;
 }) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  // High-precision viewport margin aligned with vine growth progress
+  const isInView = useInView(ref, { once: true, margin: "-180px" });
   const isEven = index % 2 === 0;
 
   return (
     <div ref={ref} className="relative md:grid md:grid-cols-12 md:gap-12 mb-16 md:mb-24 last:mb-0">
       
-      {/* Central Circle Node (Unified mobile gutter centering) */}
-      <div className="absolute left-5 top-0 w-9 h-9 z-10 flex items-center justify-center md:left-1/2 md:-translate-x-1/2">
+      {/* Central Circle Node container with callback ref */}
+      <div 
+        ref={nodeRef}
+        className="absolute left-5 top-0 w-9 h-9 z-10 flex items-center justify-center md:left-1/2 md:-translate-x-1/2"
+      >
         <motion.div
-          ref={nodeRef}
           initial={{ scale: 0, borderColor: '#e5e3df' }}
           animate={isInView ? { scale: 1, borderColor: '#2b3c32' } : { scale: 0, borderColor: '#e5e3df' }}
           transition={{ duration: 0.5, delay: 0.1, type: 'spring' }}
@@ -58,11 +84,11 @@ function TimelineItem({
         </motion.div>
       </div>
 
-      {/* Content Column */}
+      {/* Content Column (Fades in dynamically when the vine has grown to this point) */}
       <motion.div
         initial={{ opacity: 0, x: isEven ? -25 : 25 }}
         animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: isEven ? -25 : 25 }}
-        transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: 0.65, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
         className={`pl-20 md:pl-0 md:col-span-5 ${isEven ? 'md:col-start-1 text-left md:text-right md:pr-12 md:ml-auto md:mr-0' : 'md:col-start-8 text-left md:pl-12 md:mr-auto md:ml-0'} mb-0`}
       >
         <p className="text-sm sm:text-base text-stone-600 leading-relaxed font-sans font-light max-w-lg">
@@ -76,9 +102,10 @@ function TimelineItem({
 export default function HealingJourney() {
   const containerRef = useRef<HTMLDivElement>(null);
   const timelineRef = useRef<HTMLDivElement>(null);
-  const lastNodeRef = useRef<HTMLDivElement>(null);
+  const nodeRefs = useRef<(HTMLDivElement | null)[]>([]);
   
-  const [lineHeight, setLineHeight] = useState<number | string>('100%');
+  const [nodeYPositions, setNodeYPositions] = useState<number[]>([]);
+  const [containerWidth, setContainerWidth] = useState(1024);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -86,33 +113,82 @@ export default function HealingJourney() {
   });
 
   const scaleY = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
+    stiffness: 80,
+    damping: 25,
     restDelta: 0.001
   });
 
   useEffect(() => {
-    const updateLineHeight = () => {
-      if (timelineRef.current && lastNodeRef.current) {
+    const updateDimensions = () => {
+      if (timelineRef.current) {
+        setContainerWidth(timelineRef.current.clientWidth);
+        
         const timelineRect = timelineRef.current.getBoundingClientRect();
-        const nodeRect = lastNodeRef.current.getBoundingClientRect();
-        // Distance from top of timeline block to center of last node circle
-        const relativeTop = nodeRect.top - timelineRect.top + nodeRect.height / 2;
-        setLineHeight(relativeTop);
+        const positions = stages.map((_, index) => {
+          const node = nodeRefs.current[index];
+          if (node) {
+            const rect = node.getBoundingClientRect();
+            return rect.top - timelineRect.top + rect.height / 2;
+          }
+          return 18 + index * 180; // fallback calculation
+        });
+        setNodeYPositions(positions);
       }
     };
 
-    updateLineHeight();
-    const rafId = requestAnimationFrame(updateLineHeight);
+    updateDimensions();
+    const rafId = requestAnimationFrame(updateDimensions);
 
-    window.addEventListener('resize', updateLineHeight);
+    window.addEventListener('resize', updateDimensions);
     return () => {
-      window.removeEventListener('resize', updateLineHeight);
+      window.removeEventListener('resize', updateDimensions);
       cancelAnimationFrame(rafId);
     };
   }, []);
 
-  const adjustedHeight = typeof lineHeight === 'number' ? lineHeight - 18 : `calc(${lineHeight} - 18px)`;
+  const isDesktop = containerWidth >= 768;
+  const centerX = isDesktop ? containerWidth / 2 : 38;
+
+  // Generate the S-curved winding SVG vine path dynamically in pixels
+  let pathD = '';
+  const leaves: { x: number; y: number; rotate: number; delay: number }[] = [];
+
+  if (nodeYPositions.length > 0) {
+    pathD = `M ${centerX} ${nodeYPositions[0]}`;
+    
+    for (let i = 0; i < nodeYPositions.length - 1; i++) {
+      const y0 = nodeYPositions[i];
+      const y1 = nodeYPositions[i + 1];
+      const h = y1 - y0;
+      const dir = isDesktop ? (i % 2 === 0 ? -1 : 1) : 1;
+      const offset = isDesktop ? 64 : 24;
+      
+      const cp1x = centerX + dir * offset;
+      const cp1y = y0 + h * 0.35;
+      const cp2x = centerX + dir * offset;
+      const cp2y = y0 + h * 0.65;
+      
+      pathD += ` C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${centerX} ${y1}`;
+      
+      // Calculate curve peak for leaf placement
+      const midY = (y0 + y1) / 2;
+      const midX = centerX + dir * offset;
+      
+      // Sprout elegant leaf cluster at the peak of each curve
+      leaves.push({
+        x: midX,
+        y: midY,
+        rotate: dir === 1 ? 35 : -145,
+        delay: 0.15
+      });
+      leaves.push({
+        x: midX,
+        y: midY,
+        rotate: dir === 1 ? -15 : -195,
+        delay: 0.3
+      });
+    }
+  }
 
   return (
     <section id="journey" className="py-24 sm:py-32 px-5 sm:px-8 bg-white relative overflow-hidden">
@@ -136,26 +212,52 @@ export default function HealingJourney() {
 
         {/* Timeline Container */}
         <div className="relative" ref={timelineRef}>
-          {/* Background Hairline Track Line (Unified absolute coordinate alignment) */}
-          <div 
-            style={{ height: adjustedHeight }}
-            className="absolute left-[38px] top-[18px] w-[2px] -translate-x-1/2 md:left-1/2 pointer-events-none bg-stone-100 rounded-full" 
-          />
+          
+          {/* Organic Winding SVG Vine */}
+          {nodeYPositions.length > 0 && (
+            <svg className="absolute inset-0 w-full h-full pointer-events-none z-0">
+              {/* Background Hairline Winding Vine */}
+              <path
+                d={pathD}
+                fill="none"
+                stroke="#e5e3df" // stone-200 theme grey
+                strokeWidth="2"
+                strokeLinecap="round"
+              />
 
-          {/* Active Growing Vine/Progress Line (Scroll-Linked absolute coordinate alignment) */}
-          <motion.div
-            style={{ scaleY, height: adjustedHeight }}
-            className="absolute left-[38px] top-[18px] w-[2px] -translate-x-1/2 md:left-1/2 origin-top pointer-events-none bg-forest-600 rounded-full"
-          />
+              {/* Active Growing Winding Vine */}
+              <motion.path
+                d={pathD}
+                fill="none"
+                stroke="#3c5144" // forest-600 theme sage green
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                style={{ pathLength: scaleY }}
+              />
+
+              {/* Sprouting Organic Leaves */}
+              {leaves.map((leaf, index) => (
+                <SproutingLeaf
+                  key={index}
+                  x={leaf.x}
+                  y={leaf.y}
+                  rotate={leaf.rotate}
+                  delay={leaf.delay}
+                />
+              ))}
+            </svg>
+          )}
 
           {/* Staggered Alternating Timeline Items */}
-          <div className="space-y-0">
+          <div className="space-y-0 relative z-10">
             {stages.map((stage, index) => (
               <TimelineItem 
                 key={stage.number} 
                 stage={stage} 
                 index={index} 
-                nodeRef={index === stages.length - 1 ? lastNodeRef : undefined}
+                nodeRef={(el) => {
+                  nodeRefs.current[index] = el;
+                }}
               />
             ))}
           </div>
