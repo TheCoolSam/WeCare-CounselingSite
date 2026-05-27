@@ -123,7 +123,7 @@ export default function ContactPage() {
                 )}
 
                 {submitStatus === 'error' && (
-                  <div className="mb-6 p-4 border border-red-300 bg-red-50 text-red-800 text-xs font-bold rounded-xl uppercase tracking-wider">
+                  <div className="mb-6 p-4 border border-gold-300 bg-gold-50/20 text-gold-900 text-xs font-bold rounded-xl uppercase tracking-wider">
                     Submission issue. Please try calling or emailing directly.
                   </div>
                 )}
@@ -131,8 +131,10 @@ export default function ContactPage() {
                 <form onSubmit={handleSubmit} className="space-y-5 text-left">
                   <div>
                     <input
+                      id="contact-name"
                       type="text"
                       required
+                      aria-label="Full Name"
                       value={formState.name}
                       onChange={(e) => setFormState({ ...formState, name: e.target.value })}
                       className={inputClasses}
@@ -143,8 +145,10 @@ export default function ContactPage() {
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div>
                       <input
+                        id="contact-email"
                         type="email"
                         required
+                        aria-label="Email Address"
                         value={formState.email}
                         onChange={(e) => setFormState({ ...formState, email: e.target.value })}
                         className={inputClasses}
@@ -153,7 +157,9 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <input
+                        id="contact-phone"
                         type="tel"
+                        aria-label="Phone Number"
                         value={formState.phone}
                         onChange={(e) => setFormState({ ...formState, phone: e.target.value })}
                         className={inputClasses}
@@ -164,7 +170,9 @@ export default function ContactPage() {
 
                   <div>
                     <select
+                      id="contact-subject"
                       required
+                      aria-label="Select Service Option"
                       value={formState.subject}
                       onChange={(e) => setFormState({ ...formState, subject: e.target.value })}
                       className="w-full px-4 py-3 bg-stone-50 border border-stone-200 focus:border-stone-400 focus:bg-white rounded-xl text-sm focus:outline-none transition-all text-stone-600"
@@ -179,7 +187,9 @@ export default function ContactPage() {
 
                   <div>
                     <textarea
+                      id="contact-message"
                       rows={5}
+                      aria-label="How can I best support you?"
                       value={formState.message}
                       onChange={(e) => setFormState({ ...formState, message: e.target.value })}
                       className="w-full px-4 py-3 bg-stone-50 border border-stone-200 focus:border-stone-400 focus:bg-white rounded-xl text-sm focus:outline-none transition-all text-stone-900 placeholder:text-stone-400 resize-none"

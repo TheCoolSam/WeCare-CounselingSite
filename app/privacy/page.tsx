@@ -43,7 +43,7 @@ export default function PrivacyPolicy() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="space-y-10 text-stone-650 leading-relaxed font-sans text-sm sm:text-base text-left bg-white p-8 sm:p-12 rounded-3xl border border-stone-250/30"
+            className="space-y-10 text-stone-600 leading-relaxed font-sans text-sm sm:text-base text-left bg-white p-8 sm:p-12 rounded-3xl border border-stone-200"
           >
             {/* Introduction */}
             <section>
@@ -51,7 +51,7 @@ export default function PrivacyPolicy() {
                 Introduction
               </h2>
               <p className="leading-relaxed">
-                WeCare Counseling (&ldquo;we,&rdquo; &ldquo;us,&rdquo; &ldquo;our,&rdquo; or &ldquo;Company&rdquo;) is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website, including any other media form, media channel, mobile website, or mobile application related or connected thereto (collectively, the &ldquo;Site&rdquo;).
+                WeCare Counseling (&ldquo;we,&rdquo; &ldquo;us,&rdquo; &ldquo;our,&rdquo; or &ldquo;Practice&rdquo;) is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website and contact portal (collectively, the &ldquo;Site&rdquo;).
               </p>
             </section>
 
@@ -62,11 +62,11 @@ export default function PrivacyPolicy() {
               <h2 className="font-sans font-extrabold text-xl sm:text-2xl text-stone-900 mb-4">Information We Collect</h2>
               <div className="space-y-4">
                 <div>
-                  <h3 className="font-bold text-stone-850 mb-2">Contact Form Information</h3>
+                  <h3 className="font-bold text-stone-800 mb-2">Contact Form Information</h3>
                   <p className="leading-relaxed">When you use our contact form, we collect your name, email address, phone number, and message. This information is processed through Formspree, a third-party service provider, and is used solely to respond to your inquiry.</p>
                 </div>
                 <div>
-                  <h3 className="font-bold text-stone-850 mb-2">Automatic Information</h3>
+                  <h3 className="font-bold text-stone-800 mb-2">Automatic Information</h3>
                   <p className="leading-relaxed">We may automatically collect certain information about your device, including browser type, operating system, and referring URLs. This data helps us improve our website and user experience.</p>
                 </div>
               </div>
@@ -114,11 +114,11 @@ export default function PrivacyPolicy() {
               <h2 className="font-sans font-extrabold text-xl sm:text-2xl text-stone-900 mb-4">Third-Party Services</h2>
               <div className="space-y-4">
                 <div>
-                  <h3 className="font-bold text-stone-850 mb-2">Formspree</h3>
+                  <h3 className="font-bold text-stone-800 mb-2">Formspree</h3>
                   <p className="leading-relaxed">We use Formspree to process contact form submissions. Formspree acts as a data processor and may store your information temporarily to deliver your message to us. Their privacy practices are governed by their own privacy policy.</p>
                 </div>
                 <div>
-                  <h3 className="font-bold text-stone-850 mb-2">Hosting</h3>
+                  <h3 className="font-bold text-stone-800 mb-2">Hosting</h3>
                   <p className="leading-relaxed">Our website is hosted on Namecheap&apos;s Stellar hosting. We may use analytics tools to understand how users interact with our Site. These are handled securely and in compliance with privacy regulations.</p>
                 </div>
               </div>
@@ -134,7 +134,7 @@ export default function PrivacyPolicy() {
               </p>
               <div className="border border-stone-200 rounded-2xl p-6 grid sm:grid-cols-2 gap-4 bg-stone-50">
                 <div>
-                  <p className="font-bold text-stone-850 text-sm">WeCare Counseling</p>
+                  <p className="font-bold text-stone-800 text-sm">WeCare Counseling</p>
                   <p className="text-xs text-stone-500 font-sans mt-1">Gina Botshtein, LCSW</p>
                 </div>
                 <div className="space-y-1 text-xs sm:text-sm font-sans font-medium text-stone-600">
@@ -212,3 +212,4 @@ export default function PrivacyPolicy() {
     </div>
   );
 }
+

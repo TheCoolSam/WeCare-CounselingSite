@@ -55,9 +55,13 @@ export default function FAQPage() {
           <Link href="/" className="font-sans font-extrabold text-lg sm:text-xl tracking-tight text-stone-900">
             WeCare <span className="text-forest-600 font-light">Counseling</span>
           </Link>
-          <div className="flex items-center gap-6 text-xs uppercase tracking-widest font-bold text-stone-600">
+          <div className="flex items-center gap-4 sm:gap-6 text-[10px] sm:text-xs uppercase tracking-widest font-bold text-stone-600">
+            <Link href="/" className="hover:text-forest-600 transition-colors">Home</Link>
             <Link href="/#about" className="hidden md:inline hover:text-forest-600 transition-colors">About</Link>
             <Link href="/#services" className="hidden md:inline hover:text-forest-600 transition-colors">Services</Link>
+            <Link href="/#journey" className="hidden md:inline hover:text-forest-600 transition-colors">Journey</Link>
+            <Link href="/#insurance" className="hidden md:inline hover:text-forest-600 transition-colors">Insurance</Link>
+            <Link href="/faq" className="hover:text-forest-600 transition-colors">FAQ</Link>
             <Link href="/contact" className="text-forest-600 hover:text-forest-700 transition-colors">Contact</Link>
           </div>
         </div>

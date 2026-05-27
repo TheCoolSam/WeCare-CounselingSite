@@ -8,17 +8,17 @@ import { Phone, Mail, ArrowRight, Menu, X, ChevronDown } from 'lucide-react';
 import HealingJourney from './components/HealingJourney';
 import ginaPhoto from './components/gina.jpg';
 
-// Scroll animation wrapper component
+// Premium Scroll animation wrapper with Apple-grade ease and breathing scale
 function ScrollReveal({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-60px' });
+  const isInView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 20 }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-      transition={{ duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] }}
+      initial={{ opacity: 0, y: 30, scale: 0.98 }}
+      animate={isInView ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 30, scale: 0.98 }}
+      transition={{ duration: 0.8, delay, ease: [0.16, 1, 0.3, 1] }}
     >
       {children}
     </motion.div>
@@ -58,7 +58,7 @@ function Navigation() {
     <>
       <motion.nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled
-          ? 'bg-white/95 backdrop-blur-md shadow-sm border-b border-stone-100 py-3'
+          ? 'bg-white/70 backdrop-blur-xl shadow-sm border-b border-stone-200/30 py-3'
           : 'bg-transparent py-5'
           }`}
         initial={{ y: -100 }}
@@ -119,7 +119,7 @@ function Navigation() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setMobileOpen(false)}
-              className="fixed inset-0 bg-stone-950/40 backdrop-blur-sm z-40 md:hidden"
+              className="fixed inset-0 bg-stone-900/40 backdrop-blur-sm z-40 md:hidden"
             />
             <motion.div
               initial={{ x: '100%' }}
@@ -193,10 +193,14 @@ function Navigation() {
   );
 }
 
-// Hero Section (Pristine background, no generic blobs)
+// Hero Section (Pristine background, slow pulsing organic ambient glows)
 function HeroSection() {
   return (
     <section id="hero" className="relative min-h-screen flex items-center px-5 sm:px-8 pt-28 pb-20 bg-stone-50 overflow-hidden">
+      {/* Ambient Pulsing Glow Spots */}
+      <div className="absolute top-1/4 left-10 w-[45rem] h-[45rem] rounded-full bg-forest-100/10 blur-[130px] mix-blend-multiply pointer-events-none animate-pulse" style={{ animationDuration: '12s' }} />
+      <div className="absolute bottom-1/3 right-10 w-[40rem] h-[40rem] rounded-full bg-gold-100/10 blur-[110px] mix-blend-multiply pointer-events-none animate-pulse" style={{ animationDuration: '16s' }} />
+
       <div className="max-w-7xl mx-auto w-full relative z-10">
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           
@@ -276,16 +280,18 @@ function AboutSection() {
       <div className="max-w-6xl mx-auto">
         <div className="grid md:grid-cols-12 gap-12 lg:gap-20 items-center">
           
-          {/* Left Column */}
+          {/* Left Column (Asymmetric layered offsets & hover reveals) */}
           <div className="md:col-span-5">
             <ScrollReveal>
-              <div className="relative max-w-sm mx-auto">
-                <div className="aspect-[4/5] rounded-3xl overflow-hidden border border-stone-200 shadow-md relative">
+              <div className="relative max-w-sm mx-auto group">
+                {/* Asymmetric Background Layer Plate */}
+                <div className="absolute inset-0 bg-stone-100 rounded-3xl translate-x-4 translate-y-4 -z-10 group-hover:translate-x-3 group-hover:translate-y-3 transition-transform duration-500" />
+                <div className="aspect-[4/5] rounded-3xl overflow-hidden border border-stone-200 bg-stone-100 shadow-md relative group-hover:-translate-y-1 transition-transform duration-500">
                   <Image
                     src={ginaPhoto}
                     alt="Gina Botshtein, LCSW"
                     fill
-                    className="object-cover"
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
                     priority
                   />
                 </div>
@@ -343,8 +349,10 @@ function AboutSection() {
   );
 }
 
-// Services Section (Flat, Editorial, Apple-Grade)
+// Services Section (Flat, Editorial, Apple-Grade Accordion)
 function ServicesSection() {
+  const [activeIndex, setActiveIndex] = useState<number | null>(0);
+
   const services = [
     {
       num: '01',
@@ -367,44 +375,77 @@ function ServicesSection() {
   ];
 
   return (
-    <section id="services" className="py-24 sm:py-32 px-5 sm:px-8 bg-stone-50 border-t border-b border-stone-200/50">
+    <section id="services" className="py-24 sm:py-32 px-5 sm:px-8 bg-stone-50 border-t border-b border-stone-200/50 relative overflow-hidden">
+      {/* Dynamic Ambient Glow Spot behind accordion */}
+      <div className="absolute top-1/4 right-0 w-[30rem] h-[30rem] rounded-full bg-forest-100/10 blur-[100px] pointer-events-none" />
+
       <div className="max-w-6xl mx-auto">
-        <ScrollReveal>
-          <div className="text-center mb-20 max-w-2xl mx-auto">
-            <h2 className="font-sans font-extrabold text-4xl sm:text-5xl text-stone-900 tracking-tight mb-4">
-              How I Can Help
-            </h2>
-            <p className="text-base sm:text-lg text-stone-500 leading-relaxed font-normal">
-              Thoughtful, personalized approaches designed around your unique story.
-            </p>
-          </div>
-        </ScrollReveal>
-
-        <div className="grid md:grid-cols-3 gap-12 lg:gap-16">
-          {services.map((service, index) => (
-            <ScrollReveal key={index} delay={0.08 * index}>
-              <div className="flex flex-col justify-between h-full text-left">
-                <div>
-                  <div className="font-serif italic text-4xl sm:text-5xl text-stone-300 mb-6 font-light select-none">
-                    {service.num}
-                  </div>
-                  <h3 className="text-2xl font-bold font-sans text-stone-900 mb-4">
-                    {service.title}
-                  </h3>
-                  <p className="text-sm sm:text-base text-stone-500 mb-8 leading-relaxed">
-                    {service.description}
-                  </p>
-                </div>
-
-                <div className="border-t border-stone-200/60 pt-6 mt-auto">
-                  <p className="text-[10px] tracking-wider font-bold text-stone-400 uppercase mb-2">Focus Areas</p>
-                  <p className="text-xs sm:text-sm text-stone-600 leading-relaxed font-sans font-medium">
-                    {service.focus}
-                  </p>
-                </div>
-              </div>
+        <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+          
+          {/* Left Sticky Panel */}
+          <div className="lg:col-span-5 lg:sticky lg:top-32 text-left">
+            <ScrollReveal>
+              <h2 className="font-serif italic text-4xl sm:text-5xl text-stone-900 tracking-tight mb-6 font-light">
+                How I Can Help
+              </h2>
+              <p className="text-base sm:text-lg text-stone-500 leading-relaxed font-sans font-light max-w-md">
+                Thoughtful, personalized approaches designed around your unique story and tailored for a trusting partnership.
+              </p>
             </ScrollReveal>
-          ))}
+          </div>
+
+          {/* Right Accordion Panel */}
+          <div className="lg:col-span-7 space-y-4">
+            {services.map((service, index) => {
+              const isOpen = activeIndex === index;
+              return (
+                <ScrollReveal key={index} delay={0.05 * index}>
+                  <div
+                    onClick={() => setActiveIndex(isOpen ? null : index)}
+                    className={`group border-b border-stone-200/80 py-8 transition-all duration-500 cursor-pointer ${
+                      activeIndex !== null && !isOpen ? 'opacity-40 hover:opacity-85' : 'opacity-100'
+                    }`}
+                  >
+                    {/* Accordion Header */}
+                    <div className="flex justify-between items-start gap-4">
+                      <div className="flex gap-6 items-baseline text-left">
+                        <span className="font-serif italic text-xl sm:text-2xl text-stone-400 select-none font-light">
+                          {service.num}
+                        </span>
+                        <h3 className="text-2xl font-bold font-sans text-stone-900 tracking-tight group-hover:text-forest-700 transition-colors">
+                          {service.title}
+                        </h3>
+                      </div>
+                      <span className="text-stone-400 text-xl font-light group-hover:text-forest-700 transition-colors select-none">
+                        {isOpen ? '—' : '+'}
+                      </span>
+                    </div>
+
+                    {/* Accordion Body (Fluid Framer Motion Height Reveal) */}
+                    <motion.div
+                      initial={false}
+                      animate={{ height: isOpen ? 'auto' : 0, opacity: isOpen ? 1 : 0 }}
+                      transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+                      className="overflow-hidden"
+                    >
+                      <div className="pt-6 pl-12 text-left">
+                        <p className="text-sm sm:text-base text-stone-600 mb-6 font-sans font-light leading-relaxed max-w-2xl">
+                          {service.description}
+                        </p>
+                        
+                        <div className="border-t border-stone-200/50 pt-5">
+                          <p className="text-[10px] tracking-wider font-bold text-stone-400 uppercase mb-2">Focus Areas</p>
+                          <p className="text-xs sm:text-sm text-stone-600 font-sans font-medium leading-relaxed">
+                            {service.focus}
+                          </p>
+                        </div>
+                      </div>
+                    </motion.div>
+                  </div>
+                </ScrollReveal>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>
@@ -437,10 +478,11 @@ function InsuranceSection() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
           {insurancePlans.map((plan, index) => (
-            <ScrollReveal key={index} delay={0.08 * index}>
+            <ScrollReveal key={index} delay={0.05 * index}>
               <motion.div
-                className="px-6 py-8 rounded-2xl border text-center bg-white border-stone-200 hover:border-forest-600 shadow-sm transition-all duration-300 flex items-center justify-center min-h-[96px]"
-                whileHover={{ y: -3 }}
+                className="px-6 py-8 rounded-2xl border text-center bg-white border-stone-200 shadow-sm flex items-center justify-center min-h-[96px] cursor-default"
+                whileHover={{ y: -5, borderColor: '#3c5144' }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
               >
                 <h3 className="text-lg font-bold font-sans text-stone-900">
                   {plan.name}
@@ -503,8 +545,12 @@ function TestimonialsSection() {
 
         <div className="grid md:grid-cols-2 gap-8">
           {testimonials.map((testimonial, index) => (
-            <ScrollReveal key={index} delay={0.08 * index}>
-              <div className="bg-stone-50 p-8 sm:p-10 rounded-2xl border border-stone-200 flex flex-col justify-between h-full">
+            <ScrollReveal key={index} delay={0.05 * index}>
+              <motion.div 
+                whileHover={{ y: -6, borderColor: '#3c5144' }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                className="bg-stone-50 p-8 sm:p-10 rounded-2xl border border-stone-200 flex flex-col justify-between h-full cursor-default transition-colors duration-300"
+              >
                 <blockquote className="text-stone-800 leading-relaxed mb-6 text-base font-serif italic text-left">
                   “{testimonial.quote}”
                 </blockquote>
@@ -515,7 +561,7 @@ function TestimonialsSection() {
                     <p className="text-xs text-stone-400 font-semibold uppercase mt-0.5">{testimonial.type}</p>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             </ScrollReveal>
           ))}
         </div>
@@ -727,7 +773,7 @@ function ContactSection() {
                 )}
 
                 {submitStatus === 'error' && (
-                  <div className="mb-6 p-4 border border-red-300 bg-red-50 text-red-800 text-xs font-bold rounded-xl uppercase tracking-wider">
+                  <div className="mb-6 p-4 border border-gold-300 bg-gold-50/20 text-gold-900 text-xs font-bold rounded-xl uppercase tracking-wider">
                     Submission issue. Please try calling or emailing directly.
                   </div>
                 )}
@@ -735,8 +781,10 @@ function ContactSection() {
                 <form onSubmit={handleSubmit} className="space-y-5 text-left">
                   <div>
                     <input
+                      id="home-contact-name"
                       type="text"
                       required
+                      aria-label="Full Name"
                       value={formState.name}
                       onChange={(e) => setFormState({ ...formState, name: e.target.value })}
                       className={inputClasses}
@@ -747,8 +795,10 @@ function ContactSection() {
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div>
                       <input
+                        id="home-contact-email"
                         type="email"
                         required
+                        aria-label="Email Address"
                         value={formState.email}
                         onChange={(e) => setFormState({ ...formState, email: e.target.value })}
                         className={inputClasses}
@@ -757,7 +807,9 @@ function ContactSection() {
                     </div>
                     <div>
                       <input
+                        id="home-contact-phone"
                         type="tel"
+                        aria-label="Phone Number"
                         value={formState.phone}
                         onChange={(e) => setFormState({ ...formState, phone: e.target.value })}
                         className={inputClasses}
@@ -768,7 +820,9 @@ function ContactSection() {
 
                   <div>
                     <select
+                      id="home-contact-subject"
                       required
+                      aria-label="Select Service Option"
                       value={formState.subject}
                       onChange={(e) => setFormState({ ...formState, subject: e.target.value })}
                       className="w-full px-4 py-3 bg-stone-50 border border-stone-200 focus:border-stone-400 focus:bg-white rounded-xl text-sm focus:outline-none transition-all text-stone-600"
@@ -783,7 +837,9 @@ function ContactSection() {
 
                   <div>
                     <textarea
+                      id="home-contact-message"
                       rows={5}
+                      aria-label="How can I best support you?"
                       value={formState.message}
                       onChange={(e) => setFormState({ ...formState, message: e.target.value })}
                       className="w-full px-4 py-3 bg-stone-50 border border-stone-200 focus:border-stone-400 focus:bg-white rounded-xl text-sm focus:outline-none transition-all text-stone-900 placeholder:text-stone-400 resize-none"
