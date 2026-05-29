@@ -41,11 +41,29 @@ function SproutingLeaf({ x, y, rotate, delay }: { x: number; y: number; rotate: 
       transition={{ type: "spring", stiffness: 180, damping: 12, delay }}
       style={{ originX: `${x}px`, originY: `${y}px` }}
     >
-      {/* Organic hand-crafted leaf shape path */}
+      {/* Organic leaf body with natural curves and asymmetry */}
       <path
-        d={`M ${x} ${y} c 10 -15, 25 -10, 20 10 c -5 15, -15 10, -20 -10`}
-        fill="#3c5144" // forest-600 primary sage theme
-        className="opacity-90"
+        d={`M ${x} ${y} c 6 -18, 28 -14, 26 0 c 2 8, 8 16, 2 22 c -8 8, -20 6, -26 -4 c -4 -8, -6 -16, -2 -18`}
+        fill="#3c5144"
+        className="opacity-85"
+        transform={`rotate(${rotate}, ${x}, ${y})`}
+      />
+      {/* Center vein with slight curve */}
+      <path
+        d={`M ${x} ${y} q 6 8, 4 20`}
+        stroke="#2b3c32"
+        strokeWidth="0.8"
+        fill="none"
+        className="opacity-60"
+        transform={`rotate(${rotate}, ${x}, ${y})`}
+      />
+      {/* Secondary vein branch */}
+      <path
+        d={`M ${x + 8} ${y + 6} q 4 6, 2 14`}
+        stroke="#2b3c32"
+        strokeWidth="0.5"
+        fill="none"
+        className="opacity-40"
         transform={`rotate(${rotate}, ${x}, ${y})`}
       />
     </motion.g>
@@ -70,9 +88,9 @@ function TimelineItem({
     <div ref={ref} className="relative md:grid md:grid-cols-12 md:gap-12 mb-16 md:mb-24 last:mb-0">
       
       {/* Central Circle Node container with callback ref */}
-      <div 
+      <div
         ref={nodeRef}
-        className="absolute left-5 top-0 w-9 h-9 z-10 flex items-center justify-center md:left-1/2 md:-translate-x-1/2"
+        className="absolute left-6 top-0 w-9 h-9 z-10 flex items-center justify-center md:left-1/2 md:-translate-x-1/2"
       >
         <motion.div
           initial={{ scale: 0, borderColor: '#e5e3df' }}
@@ -89,7 +107,7 @@ function TimelineItem({
         initial={{ opacity: 0, x: isEven ? -25 : 25 }}
         animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: isEven ? -25 : 25 }}
         transition={{ duration: 0.65, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-        className={`pl-20 md:pl-0 md:col-span-5 ${isEven ? 'md:col-start-1 text-left md:text-right md:pr-12 md:ml-auto md:mr-0' : 'md:col-start-8 text-left md:pl-12 md:mr-auto md:ml-0'} mb-0`}
+        className={`pl-24 md:pl-0 md:col-span-5 ${isEven ? 'md:col-start-1 text-left md:text-right md:pr-12 md:ml-auto md:mr-0' : 'md:col-start-8 text-left md:pl-12 md:mr-auto md:ml-0'} mb-0`}
       >
         <p className="text-sm sm:text-base text-stone-600 leading-relaxed font-sans font-light max-w-lg">
           {stage.description}
@@ -147,7 +165,7 @@ export default function HealingJourney() {
   }, []);
 
   const isDesktop = containerWidth >= 768;
-  const centerX = isDesktop ? containerWidth / 2 : 38;
+  const centerX = isDesktop ? containerWidth / 2 : 48;
 
   // Generate the S-curved winding SVG vine path dynamically in pixels
   let pathD = '';
@@ -155,37 +173,37 @@ export default function HealingJourney() {
 
   if (nodeYPositions.length > 0) {
     pathD = `M ${centerX} ${nodeYPositions[0]}`;
-    
+
     for (let i = 0; i < nodeYPositions.length - 1; i++) {
       const y0 = nodeYPositions[i];
       const y1 = nodeYPositions[i + 1];
       const h = y1 - y0;
       const dir = isDesktop ? (i % 2 === 0 ? -1 : 1) : 1;
       const offset = isDesktop ? 64 : 24;
-      
+
       const cp1x = centerX + dir * offset;
       const cp1y = y0 + h * 0.35;
       const cp2x = centerX + dir * offset;
       const cp2y = y0 + h * 0.65;
-      
+
       pathD += ` C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${centerX} ${y1}`;
-      
+
       // Calculate curve peak for leaf placement
       const midY = (y0 + y1) / 2;
       const midX = centerX + dir * offset;
-      
-      // Sprout elegant leaf cluster at the peak of each curve
+
+      // Sprout elegant leaf cluster at the peak of each curve with staggered timing
       leaves.push({
         x: midX,
         y: midY,
         rotate: dir === 1 ? 35 : -145,
-        delay: 0.15
+        delay: i * 0.2 + 0.15
       });
       leaves.push({
         x: midX,
         y: midY,
         rotate: dir === 1 ? -15 : -195,
-        delay: 0.3
+        delay: i * 0.2 + 0.3
       });
     }
   }
@@ -269,8 +287,45 @@ export default function HealingJourney() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="mt-28 text-center max-w-2xl mx-auto"
+          className="mt-28 text-center max-w-2xl mx-auto relative"
         >
+          {/* Decorative vine flourish connecting to CTA */}
+          <svg className="absolute -top-16 left-1/2 -translate-x-1/2 w-32 h-20 pointer-events-none opacity-75">
+            <path
+              d={`M 64 0 Q 64 40, 50 60 Q 45 65, 40 68`}
+              stroke="#3c5144"
+              strokeWidth="1.5"
+              fill="none"
+              strokeLinecap="round"
+            />
+            <path
+              d={`M 64 0 Q 64 40, 78 60 Q 83 65, 88 68`}
+              stroke="#3c5144"
+              strokeWidth="1.5"
+              fill="none"
+              strokeLinecap="round"
+            />
+            {/* Leaf flourishes */}
+            <motion.path
+              initial={{ scale: 0, opacity: 0 }}
+              whileInView={{ scale: 1, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4, duration: 0.5 }}
+              d="M 40 68 c 3 -8, 12 -6, 10 2 c -2 7, -8 5, -10 -2"
+              fill="#3c5144"
+              opacity="0.85"
+            />
+            <motion.path
+              initial={{ scale: 0, opacity: 0 }}
+              whileInView={{ scale: 1, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.5, duration: 0.5 }}
+              d="M 88 68 c -3 -8, -12 -6, -10 2 c 2 7, 8 5, 10 -2"
+              fill="#3c5144"
+              opacity="0.85"
+            />
+          </svg>
+
           <h3 className="font-sans font-extrabold text-3xl sm:text-4xl text-stone-900 mb-4 tracking-tight">
             Ready to Start?
           </h3>
