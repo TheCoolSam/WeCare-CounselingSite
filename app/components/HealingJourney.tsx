@@ -306,20 +306,12 @@ export default function HealingJourney() {
               strokeLinecap="round"
             />
             {/* Leaf flourishes */}
-            <motion.path
-              initial={{ scale: 0, opacity: 0 }}
-              whileInView={{ scale: 1, opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.4, duration: 0.5 }}
+            <path
               d="M 40 68 c 3 -8, 12 -6, 10 2 c -2 7, -8 5, -10 -2"
               fill="#3c5144"
               opacity="0.85"
             />
-            <motion.path
-              initial={{ scale: 0, opacity: 0 }}
-              whileInView={{ scale: 1, opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.5, duration: 0.5 }}
+            <path
               d="M 88 68 c -3 -8, -12 -6, -10 2 c 2 7, 8 5, 10 -2"
               fill="#3c5144"
               opacity="0.85"
