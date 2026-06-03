@@ -97,8 +97,10 @@ export default function FAQPage() {
               >
                 <button
                   onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                  className="w-full py-6 text-left flex justify-between items-center gap-6 group transition-colors focus:outline-none"
+                  className="w-full py-6 text-left flex justify-between items-center gap-6 group transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-forest-600"
                   aria-expanded={openIndex === index}
+                  aria-controls={`faq-page-content-${index}`}
+                  id={`faq-page-header-${index}`}
                 >
                   <span className="font-sans text-sm sm:text-base font-bold text-stone-900 group-hover:text-forest-700 transition-colors">
                     {faq.question}
@@ -112,6 +114,9 @@ export default function FAQPage() {
                   </motion.div>
                 </button>
                 <motion.div
+                  id={`faq-page-content-${index}`}
+                  role="region"
+                  aria-labelledby={`faq-page-header-${index}`}
                   initial={false}
                   animate={{
                     height: openIndex === index ? 'auto' : 0,

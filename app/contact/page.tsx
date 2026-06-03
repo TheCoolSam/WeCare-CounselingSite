@@ -13,11 +13,50 @@ export default function ContactPage() {
     subject: '',
     message: '',
   });
+  const [touched, setTouched] = useState({
+    name: false,
+    email: false,
+    phone: false,
+  });
+  const [hipaaChecked, setHipaaChecked] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
+  const validateEmail = (email: string) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
+
+  const formatPhoneNumber = (value: string) => {
+    if (!value) return value;
+    const phoneNumber = value.replace(/[^\d]/g, '');
+    const phoneNumberLength = phoneNumber.length;
+    if (phoneNumberLength < 4) return phoneNumber;
+    if (phoneNumberLength < 7) {
+      return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3)}`;
+    }
+    return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3, 6)}-${phoneNumber.slice(6, 10)}`;
+  };
+
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const formatted = formatPhoneNumber(e.target.value);
+    setFormState({ ...formState, phone: formatted });
+  };
+
+  const handleBlur = (field: 'name' | 'email' | 'phone') => {
+    setTouched({ ...touched, [field]: true });
+  };
+
+  const errors = {
+    name: touched.name && !formState.name.trim() ? 'Name is required' : '',
+    email: touched.email && (!formState.email ? 'Email is required' : !validateEmail(formState.email) ? 'Please enter a valid email address' : ''),
+    phone: touched.phone && formState.phone && formState.phone.replace(/[^\d]/g, '').length < 10 ? 'Phone number must be 10 digits' : '',
+  };
+
+  const isFormValid = formState.name.trim() && formState.email && validateEmail(formState.email) && (!formState.phone || formState.phone.replace(/[^\d]/g, '').length === 10);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!isFormValid || !hipaaChecked) return;
     setIsSubmitting(true);
 
     try {
@@ -31,6 +70,8 @@ export default function ContactPage() {
       if (response.ok) {
         setSubmitStatus('success');
         setFormState({ name: '', email: '', phone: '', subject: '', message: '' });
+        setTouched({ name: false, email: false, phone: false });
+        setHipaaChecked(false);
       } else {
         setSubmitStatus('error');
       }
@@ -40,7 +81,16 @@ export default function ContactPage() {
     setIsSubmitting(false);
   };
 
-  const inputClasses = "w-full px-4 py-3 bg-stone-50 border border-stone-200 focus:border-stone-400 focus:bg-white rounded-xl text-sm focus:outline-none transition-all text-stone-900 placeholder:text-stone-400";
+  const getInputClass = (fieldName: 'name' | 'email' | 'phone') => {
+    const base = "w-full px-4 py-3 bg-stone-50 border rounded-xl text-sm focus:outline-none transition-all text-stone-900 placeholder:text-stone-400";
+    if (!touched[fieldName]) {
+      return `${base} border-stone-200 focus:border-stone-400 focus:bg-white`;
+    }
+    if (errors[fieldName]) {
+      return `${base} border-red-300 focus:border-red-400 focus:bg-white ring-1 ring-red-300/30 bg-red-50/10`;
+    }
+    return `${base} border-emerald-200 focus:border-emerald-400 focus:bg-white ring-1 ring-emerald-100/30 bg-emerald-50/5`;
+  };
 
   return (
     <div className="min-h-screen bg-stone-50 relative flex flex-col justify-between">
@@ -137,9 +187,13 @@ export default function ContactPage() {
                       aria-label="Full Name"
                       value={formState.name}
                       onChange={(e) => setFormState({ ...formState, name: e.target.value })}
-                      className={inputClasses}
+                      onBlur={() => handleBlur('name')}
+                      className={getInputClass('name')}
                       placeholder="Full Name *"
                     />
+                    {errors.name && (
+                      <p className="text-[11px] text-red-500 mt-1 pl-1 font-medium">{errors.name}</p>
+                    )}
                   </div>
 
                   <div className="grid sm:grid-cols-2 gap-4">
@@ -151,9 +205,13 @@ export default function ContactPage() {
                         aria-label="Email Address"
                         value={formState.email}
                         onChange={(e) => setFormState({ ...formState, email: e.target.value })}
-                        className={inputClasses}
+                        onBlur={() => handleBlur('email')}
+                        className={getInputClass('email')}
                         placeholder="Email Address *"
                       />
+                      {errors.email && (
+                        <p className="text-[11px] text-red-500 mt-1 pl-1 font-medium">{errors.email}</p>
+                      )}
                     </div>
                     <div>
                       <input
@@ -161,10 +219,14 @@ export default function ContactPage() {
                         type="tel"
                         aria-label="Phone Number"
                         value={formState.phone}
-                        onChange={(e) => setFormState({ ...formState, phone: e.target.value })}
-                        className={inputClasses}
+                        onChange={handlePhoneChange}
+                        onBlur={() => handleBlur('phone')}
+                        className={getInputClass('phone')}
                         placeholder="Phone Number"
                       />
+                      {errors.phone && (
+                        <p className="text-[11px] text-red-500 mt-1 pl-1 font-medium">{errors.phone}</p>
+                      )}
                     </div>
                   </div>
 
@@ -197,9 +259,23 @@ export default function ContactPage() {
                     />
                   </div>
 
+                  <div className="flex items-start gap-3 mt-4 mb-2">
+                    <input
+                      id="hipaa-consent"
+                      type="checkbox"
+                      required
+                      checked={hipaaChecked}
+                      onChange={(e) => setHipaaChecked(e.target.checked)}
+                      className="w-4 h-4 mt-1 rounded border-stone-300 text-forest-600 focus:ring-forest-500 cursor-pointer"
+                    />
+                    <label htmlFor="hipaa-consent" className="text-xs text-stone-500 leading-relaxed select-none cursor-pointer">
+                      I understand this form is for general inquiries and is not intended to transmit confidential medical or clinical information protected under HIPAA. *
+                    </label>
+                  </div>
+
                   <motion.button
                     type="submit"
-                    disabled={isSubmitting}
+                    disabled={isSubmitting || !hipaaChecked || !isFormValid}
                     className="w-full py-3 bg-forest-600 hover:bg-forest-700 disabled:bg-stone-300 text-white font-semibold rounded-xl text-xs uppercase tracking-widest transition-all cursor-pointer flex justify-center items-center gap-2"
                     whileTap={{ scale: 0.98 }}
                   >

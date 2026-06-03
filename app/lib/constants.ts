@@ -114,6 +114,7 @@ export const CONTACT_INFO = {
 };
 
 export const INSURANCE_PLANS = [
+  "Aetna",
   "Medicaid",
   "Badger Care",
   "United Healthcare",

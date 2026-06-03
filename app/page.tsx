@@ -4,7 +4,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Phone, Mail, ArrowRight, Menu, X, ChevronDown } from 'lucide-react';
+import { Phone, Mail, ArrowRight, Menu, X, ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react';
 import HealingJourney from './components/HealingJourney';
 import ginaPhoto from './components/gina.jpg';
 
@@ -207,9 +207,9 @@ function HeroSection() {
           {/* Left Column */}
           <div className="lg:col-span-7">
             <ScrollReveal delay={0.15}>
-              <h1 className="font-sans font-extrabold text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-stone-900 tracking-tight leading-[1.05] mb-6">
+              <h1 className="font-sans font-extrabold text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-forest-600 tracking-tight leading-[1.05] mb-6">
                 Gina <br />
-                <span className="text-forest-600">Botshtein</span>
+                <span>Botshtein</span>
               </h1>
             </ScrollReveal>
 
@@ -349,6 +349,64 @@ function AboutSection() {
   );
 }
 
+// Custom nature-themed animated SVG icons
+const SproutIcon = ({ animate }: { animate: boolean }) => (
+  <svg className="w-5 h-5 text-forest-600 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <motion.path
+      d="M12 22C12 22 12 17 12 10C12 6.5 14.5 4 18 4C18 4 19 6.5 17 8.5C15 10.5 12 10.9 12 10.9"
+      initial={{ pathLength: 0 }}
+      animate={animate ? { pathLength: 1 } : { pathLength: 0 }}
+      transition={{ duration: 0.8, ease: "easeInOut", delay: 0.1 }}
+    />
+    <motion.path
+      d="M12 14C12 14 9.5 12.5 7.5 13C5.5 13.5 5 15.5 5 15.5C5 15.5 7 16 9 15C11 14 12 14 12 14"
+      initial={{ pathLength: 0 }}
+      animate={animate ? { pathLength: 1 } : { pathLength: 0 }}
+      transition={{ duration: 0.8, ease: "easeInOut", delay: 0.3 }}
+    />
+  </svg>
+);
+
+const CouplesIcon = ({ animate }: { animate: boolean }) => (
+  <svg className="w-5 h-5 text-forest-600 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <motion.path
+      d="M11 20C11 16 9 12 5 12C5 12 4.5 7.5 8 6C11.5 4.5 11 10 11 10"
+      initial={{ pathLength: 0 }}
+      animate={animate ? { pathLength: 1 } : { pathLength: 0 }}
+      transition={{ duration: 0.8, ease: "easeInOut", delay: 0.1 }}
+    />
+    <motion.path
+      d="M11 20C11 16 13 12 17 12C17 12 17.5 7.5 14 6C10.5 4.5 11 10 11 10"
+      initial={{ pathLength: 0 }}
+      animate={animate ? { pathLength: 1 } : { pathLength: 0 }}
+      transition={{ duration: 0.8, ease: "easeInOut", delay: 0.3 }}
+    />
+  </svg>
+);
+
+const BranchIcon = ({ animate }: { animate: boolean }) => (
+  <svg className="w-5 h-5 text-forest-600 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <motion.path
+      d="M5 20c4-2 7-6 8-11"
+      initial={{ pathLength: 0 }}
+      animate={animate ? { pathLength: 1 } : { pathLength: 0 }}
+      transition={{ duration: 0.8, ease: "easeInOut", delay: 0.1 }}
+    />
+    <motion.path
+      d="M9 13c1-2.5 3-3.5 5.5-3c1.5.5 2 2.5 0 3.5s-4.5 0-5.5-.5z"
+      initial={{ pathLength: 0 }}
+      animate={animate ? { pathLength: 1 } : { pathLength: 0 }}
+      transition={{ duration: 0.8, ease: "easeInOut", delay: 0.3 }}
+    />
+    <motion.path
+      d="M13 9c.5-2.5 2-3.5 4.5-3.5s2.5 2 1.5 3.5-5 .5-6 0z"
+      initial={{ pathLength: 0 }}
+      animate={animate ? { pathLength: 1 } : { pathLength: 0 }}
+      transition={{ duration: 0.8, ease: "easeInOut", delay: 0.5 }}
+    />
+  </svg>
+);
+
 // Services Section (Flat, Editorial, Apple-Grade Accordion)
 function ServicesSection() {
   const [activeIndex, setActiveIndex] = useState<number | null>(0);
@@ -402,7 +460,18 @@ function ServicesSection() {
                 <ScrollReveal key={index} delay={0.05 * index}>
                   <div
                     onClick={() => setActiveIndex(isOpen ? null : index)}
-                    className={`group border-b border-stone-200/80 py-8 transition-all duration-500 cursor-pointer ${
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        setActiveIndex(isOpen ? null : index);
+                      }
+                    }}
+                    role="button"
+                    tabIndex={0}
+                    aria-expanded={isOpen}
+                    aria-controls={`service-content-${index}`}
+                    id={`service-header-${index}`}
+                    className={`group border-b border-stone-200/80 py-8 transition-all duration-500 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-forest-600 focus-visible:ring-offset-2 ${
                       activeIndex !== null && !isOpen ? 'opacity-40 hover:opacity-85' : 'opacity-100'
                     }`}
                   >
@@ -423,6 +492,9 @@ function ServicesSection() {
 
                     {/* Accordion Body (Fluid Framer Motion Height Reveal) */}
                     <motion.div
+                      id={`service-content-${index}`}
+                      role="region"
+                      aria-labelledby={`service-header-${index}`}
                       initial={false}
                       animate={{ height: isOpen ? 'auto' : 0, opacity: isOpen ? 1 : 0 }}
                       transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
@@ -434,10 +506,17 @@ function ServicesSection() {
                         </p>
                         
                         <div className="border-t border-stone-200/50 pt-5">
-                          <p className="text-[10px] tracking-wider font-bold text-stone-400 uppercase mb-2">Focus Areas</p>
-                          <p className="text-xs sm:text-sm text-stone-600 font-sans font-medium leading-relaxed">
-                            {service.focus}
-                          </p>
+                          <p className="text-[10px] tracking-wider font-bold text-stone-400 uppercase mb-3">Focus Areas</p>
+                          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3">
+                            {service.focus.split(' • ').map((item, idx) => (
+                              <li key={idx} className="flex items-center gap-2.5 text-xs sm:text-sm text-stone-600 font-sans font-medium leading-relaxed">
+                                {index === 0 && <SproutIcon animate={isOpen} />}
+                                {index === 1 && <CouplesIcon animate={isOpen} />}
+                                {index === 2 && <BranchIcon animate={isOpen} />}
+                                <span>{item}</span>
+                              </li>
+                            ))}
+                          </ul>
                         </div>
                       </div>
                     </motion.div>
@@ -455,6 +534,7 @@ function ServicesSection() {
 // Insurance Section
 function InsuranceSection() {
   const insurancePlans = [
+    { name: 'Aetna' },
     { name: 'Medicaid' },
     { name: 'Badger Care' },
     { name: 'United Healthcare' },
@@ -476,7 +556,7 @@ function InsuranceSection() {
           </div>
         </ScrollReveal>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
           {insurancePlans.map((plan, index) => (
             <ScrollReveal key={index} delay={0.05 * index}>
               <motion.div
@@ -529,9 +609,26 @@ function TestimonialsSection() {
     },
   ];
 
+  const [[page, direction], setPage] = useState([0, 0]);
+  const [isHovered, setIsHovered] = useState(false);
+
+  const activeIndex = Math.abs(page % testimonials.length);
+
+  const paginate = (newDirection: number) => {
+    setPage([page + newDirection, newDirection]);
+  };
+
+  useEffect(() => {
+    if (isHovered) return;
+    const interval = setInterval(() => {
+      paginate(1);
+    }, 6000);
+    return () => clearInterval(interval);
+  }, [page, isHovered]);
+
   return (
     <section id="testimonials" className="py-24 sm:py-32 px-5 sm:px-8 bg-white relative">
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-4xl mx-auto">
         <ScrollReveal>
           <div className="text-center mb-16 max-w-2xl mx-auto">
             <h2 className="font-sans font-extrabold text-4xl sm:text-5xl text-stone-900 tracking-tight mb-4">
@@ -543,30 +640,79 @@ function TestimonialsSection() {
           </div>
         </ScrollReveal>
 
-        <div className="grid md:grid-cols-2 gap-8">
-          {testimonials.map((testimonial, index) => (
-            <ScrollReveal key={index} delay={0.05 * index}>
-              <motion.div 
-                whileHover={{ y: -6, borderColor: '#3c5144' }}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                className="bg-stone-50 p-8 sm:p-10 rounded-2xl border border-stone-200 flex flex-col justify-between h-full cursor-default transition-colors duration-300"
+        <ScrollReveal delay={0.1}>
+          <div
+            className="relative min-h-[380px] sm:min-h-[320px] md:min-h-[260px] bg-stone-50 p-8 sm:p-12 md:p-14 rounded-3xl border border-stone-200 flex flex-col justify-between overflow-hidden shadow-sm select-none"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
+            <span className="absolute right-8 top-4 text-9xl font-serif text-stone-200/50 pointer-events-none select-none select-none">“</span>
+
+            <AnimatePresence initial={false} custom={direction} mode="wait">
+              <motion.div
+                key={page}
+                custom={direction}
+                variants={{
+                  enter: (dir: number) => ({ x: dir > 0 ? 30 : -30, opacity: 0 }),
+                  center: { x: 0, opacity: 1 },
+                  exit: (dir: number) => ({ x: dir < 0 ? 30 : -30, opacity: 0 })
+                }}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                className="flex flex-col justify-between h-full relative z-10 flex-grow"
               >
-                <blockquote className="text-stone-800 leading-relaxed mb-6 text-base font-serif italic text-left">
-                  “{testimonial.quote}”
+                <blockquote className="text-stone-800 leading-relaxed mb-8 text-base sm:text-lg md:text-xl font-serif italic text-left pr-4">
+                  “{testimonials[activeIndex].quote}”
                 </blockquote>
 
-                <div className="border-t border-stone-200 pt-4 flex items-center mt-auto text-left">
+                <div className="border-t border-stone-200/80 pt-6 flex items-center text-left">
                   <div>
-                    <p className="font-sans font-bold text-stone-900 text-xs sm:text-sm uppercase">{testimonial.author}</p>
-                    <p className="text-xs text-stone-400 font-semibold uppercase mt-0.5">{testimonial.type}</p>
+                    <p className="font-sans font-bold text-stone-900 text-xs sm:text-sm uppercase tracking-wider">{testimonials[activeIndex].author}</p>
+                    <p className="text-[10px] text-stone-400 font-bold uppercase tracking-wider mt-1">{testimonials[activeIndex].type}</p>
                   </div>
                 </div>
               </motion.div>
-            </ScrollReveal>
-          ))}
-        </div>
+            </AnimatePresence>
 
-        <ScrollReveal delay={0.4}>
+            <div className="absolute bottom-8 right-8 flex items-center gap-4 z-20">
+              <div className="flex gap-1.5 mr-2">
+                {testimonials.map((_, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => {
+                      const dir = idx > activeIndex ? 1 : -1;
+                      setPage([idx, dir]);
+                    }}
+                    className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
+                      idx === activeIndex ? 'bg-forest-600 w-4' : 'bg-stone-300 hover:bg-stone-400'
+                    }`}
+                    aria-label={`Go to testimonial ${idx + 1}`}
+                  />
+                ))}
+              </div>
+              <div className="flex gap-1.5">
+                <button
+                  onClick={() => paginate(-1)}
+                  className="w-7 h-7 rounded-full border border-stone-200 hover:border-forest-600 bg-white flex items-center justify-center text-stone-500 hover:text-forest-600 transition-colors shadow-sm focus:outline-none"
+                  aria-label="Previous testimonial"
+                >
+                  <ChevronLeft className="w-3.5 h-3.5" />
+                </button>
+                <button
+                  onClick={() => paginate(1)}
+                  className="w-7 h-7 rounded-full border border-stone-200 hover:border-forest-600 bg-white flex items-center justify-center text-stone-500 hover:text-forest-600 transition-colors shadow-sm focus:outline-none"
+                  aria-label="Next testimonial"
+                >
+                  <ChevronRight className="w-3.5 h-3.5" />
+                </button>
+              </div>
+            </div>
+          </div>
+        </ScrollReveal>
+
+        <ScrollReveal delay={0.3}>
           <p className="text-center text-[10px] tracking-wider uppercase font-bold text-stone-400 mt-12">
             * Client initials are utilized to preserve absolute clinical confidentiality in strict compliance with HIPAA frameworks.
           </p>
@@ -631,8 +777,10 @@ function FAQSection() {
               <div className="bg-white rounded-2xl border border-stone-200/60 overflow-hidden hover:border-forest-600 transition-colors">
                 <button
                   onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                  className="w-full px-6 py-4 text-left flex justify-between items-center gap-6 group focus:outline-none"
+                  className="w-full px-6 py-4 text-left flex justify-between items-center gap-6 group focus:outline-none focus-visible:ring-2 focus-visible:ring-forest-600"
                   aria-expanded={openIndex === index}
+                  aria-controls={`faq-content-${index}`}
+                  id={`faq-header-${index}`}
                 >
                   <span className="font-sans font-semibold text-stone-900 text-sm sm:text-base">{faq.question}</span>
                   <motion.div
@@ -644,6 +792,9 @@ function FAQSection() {
                   </motion.div>
                 </button>
                 <motion.div
+                  id={`faq-content-${index}`}
+                  role="region"
+                  aria-labelledby={`faq-header-${index}`}
                   initial={false}
                   animate={{
                     height: openIndex === index ? 'auto' : 0,
@@ -688,11 +839,50 @@ function ContactSection() {
     subject: '',
     message: '',
   });
+  const [touched, setTouched] = useState({
+    name: false,
+    email: false,
+    phone: false,
+  });
+  const [hipaaChecked, setHipaaChecked] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
+  const validateEmail = (email: string) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
+
+  const formatPhoneNumber = (value: string) => {
+    if (!value) return value;
+    const phoneNumber = value.replace(/[^\d]/g, '');
+    const phoneNumberLength = phoneNumber.length;
+    if (phoneNumberLength < 4) return phoneNumber;
+    if (phoneNumberLength < 7) {
+      return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3)}`;
+    }
+    return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3, 6)}-${phoneNumber.slice(6, 10)}`;
+  };
+
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const formatted = formatPhoneNumber(e.target.value);
+    setFormState({ ...formState, phone: formatted });
+  };
+
+  const handleBlur = (field: 'name' | 'email' | 'phone') => {
+    setTouched({ ...touched, [field]: true });
+  };
+
+  const errors = {
+    name: touched.name && !formState.name.trim() ? 'Name is required' : '',
+    email: touched.email && (!formState.email ? 'Email is required' : !validateEmail(formState.email) ? 'Please enter a valid email address' : ''),
+    phone: touched.phone && formState.phone && formState.phone.replace(/[^\d]/g, '').length < 10 ? 'Phone number must be 10 digits' : '',
+  };
+
+  const isFormValid = formState.name.trim() && formState.email && validateEmail(formState.email) && (!formState.phone || formState.phone.replace(/[^\d]/g, '').length === 10);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!isFormValid || !hipaaChecked) return;
     setIsSubmitting(true);
 
     try {
@@ -706,6 +896,8 @@ function ContactSection() {
       if (response.ok) {
         setSubmitStatus('success');
         setFormState({ name: '', email: '', phone: '', subject: '', message: '' });
+        setTouched({ name: false, email: false, phone: false });
+        setHipaaChecked(false);
       } else {
         setSubmitStatus('error');
       }
@@ -715,7 +907,16 @@ function ContactSection() {
     setIsSubmitting(false);
   };
 
-  const inputClasses = "w-full px-4 py-3 bg-stone-50 border border-stone-200 focus:border-stone-400 focus:bg-white rounded-xl text-sm focus:outline-none transition-all text-stone-900 placeholder:text-stone-400";
+  const getInputClass = (fieldName: 'name' | 'email' | 'phone') => {
+    const base = "w-full px-4 py-3 bg-stone-50 border rounded-xl text-sm focus:outline-none transition-all text-stone-900 placeholder:text-stone-400";
+    if (!touched[fieldName]) {
+      return `${base} border-stone-200 focus:border-stone-400 focus:bg-white`;
+    }
+    if (errors[fieldName]) {
+      return `${base} border-red-300 focus:border-red-400 focus:bg-white ring-1 ring-red-300/30 bg-red-50/10`;
+    }
+    return `${base} border-emerald-200 focus:border-emerald-400 focus:bg-white ring-1 ring-emerald-100/30 bg-emerald-50/5`;
+  };
 
   return (
     <section id="contact" className="py-24 sm:py-32 px-5 sm:px-8 bg-white relative">
@@ -787,9 +988,13 @@ function ContactSection() {
                       aria-label="Full Name"
                       value={formState.name}
                       onChange={(e) => setFormState({ ...formState, name: e.target.value })}
-                      className={inputClasses}
+                      onBlur={() => handleBlur('name')}
+                      className={getInputClass('name')}
                       placeholder="Full Name *"
                     />
+                    {errors.name && (
+                      <p className="text-[11px] text-red-500 mt-1 pl-1 font-medium">{errors.name}</p>
+                    )}
                   </div>
 
                   <div className="grid sm:grid-cols-2 gap-4">
@@ -801,9 +1006,13 @@ function ContactSection() {
                         aria-label="Email Address"
                         value={formState.email}
                         onChange={(e) => setFormState({ ...formState, email: e.target.value })}
-                        className={inputClasses}
+                        onBlur={() => handleBlur('email')}
+                        className={getInputClass('email')}
                         placeholder="Email Address *"
                       />
+                      {errors.email && (
+                        <p className="text-[11px] text-red-500 mt-1 pl-1 font-medium">{errors.email}</p>
+                      )}
                     </div>
                     <div>
                       <input
@@ -811,10 +1020,14 @@ function ContactSection() {
                         type="tel"
                         aria-label="Phone Number"
                         value={formState.phone}
-                        onChange={(e) => setFormState({ ...formState, phone: e.target.value })}
-                        className={inputClasses}
+                        onChange={handlePhoneChange}
+                        onBlur={() => handleBlur('phone')}
+                        className={getInputClass('phone')}
                         placeholder="Phone Number"
                       />
+                      {errors.phone && (
+                        <p className="text-[11px] text-red-500 mt-1 pl-1 font-medium">{errors.phone}</p>
+                      )}
                     </div>
                   </div>
 
@@ -847,9 +1060,23 @@ function ContactSection() {
                     />
                   </div>
 
+                  <div className="flex items-start gap-3 mt-4 mb-2">
+                    <input
+                      id="home-hipaa-consent"
+                      type="checkbox"
+                      required
+                      checked={hipaaChecked}
+                      onChange={(e) => setHipaaChecked(e.target.checked)}
+                      className="w-4 h-4 mt-1 rounded border-stone-300 text-forest-600 focus:ring-forest-500 cursor-pointer"
+                    />
+                    <label htmlFor="home-hipaa-consent" className="text-xs text-stone-500 leading-relaxed select-none cursor-pointer">
+                      I understand this form is for general inquiries and is not intended to transmit confidential medical or clinical information protected under HIPAA. *
+                    </label>
+                  </div>
+
                   <motion.button
                     type="submit"
-                    disabled={isSubmitting}
+                    disabled={isSubmitting || !hipaaChecked || !isFormValid}
                     className="w-full py-3 bg-forest-600 hover:bg-forest-700 disabled:bg-stone-300 text-white font-semibold rounded-xl text-xs uppercase tracking-widest transition-all cursor-pointer"
                     whileTap={{ scale: 0.98 }}
                   >
