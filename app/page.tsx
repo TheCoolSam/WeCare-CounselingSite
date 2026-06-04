@@ -533,16 +533,6 @@ function ServicesSection() {
 
 // Insurance Section
 function InsuranceSection() {
-  const insurancePlans = [
-    { name: 'Aetna' },
-    { name: 'United Healthcare' },
-    { name: 'United Medicare Advantage' },
-    { name: 'Medicare' },
-    { name: 'Medicaid' },
-    { name: 'Badger Care' },
-    { name: 'WPS' }
-  ];
-
   return (
     <section id="insurance" className="py-24 sm:py-32 px-5 sm:px-8 bg-stone-50 relative border-t border-b border-stone-200/50">
       <div className="max-w-6xl mx-auto relative z-10">
@@ -558,20 +548,22 @@ function InsuranceSection() {
         </ScrollReveal>
 
         <ScrollReveal delay={0.1}>
-          <div className="max-w-4xl mx-auto bg-white border border-stone-200/80 p-8 sm:p-12 rounded-3xl shadow-sm relative overflow-hidden">
-            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-forest-500/10 via-forest-600/30 to-forest-500/10" />
-            
-            <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-4">
-              {insurancePlans.map((plan, index) => (
-                <motion.span
-                  key={index}
-                  whileHover={{ y: -2, backgroundColor: '#f5f7f6', borderColor: '#3c5144', color: '#3c5144' }}
-                  className="px-5 py-3 rounded-full border border-stone-200/80 bg-stone-50 text-stone-700 font-sans text-sm sm:text-base font-bold shadow-xs cursor-default transition-all duration-300"
-                >
-                  {plan.name}
-                </motion.span>
-              ))}
-            </div>
+          <div className="max-w-4xl mx-auto text-center py-6 px-4">
+            <p className="font-serif italic text-2xl sm:text-3xl md:text-4xl text-forest-800 leading-normal tracking-wide max-w-3xl mx-auto text-balance">
+              Aetna 
+              <span className="text-gold-400 font-sans font-light mx-4 select-none sm:mx-6">•</span>
+              United Healthcare 
+              <span className="text-gold-400 font-sans font-light mx-4 select-none sm:mx-6">•</span>
+              United Medicare Advantage 
+              <span className="text-gold-400 font-sans font-light mx-4 select-none sm:mx-6">•</span>
+              Medicare 
+              <span className="text-gold-400 font-sans font-light mx-4 select-none sm:mx-6">•</span>
+              Medicaid 
+              <span className="text-gold-400 font-sans font-light mx-4 select-none sm:mx-6">•</span>
+              Badger Care 
+              <span className="text-gold-400 font-sans font-light mx-4 select-none sm:mx-6">•</span>
+              WPS
+            </p>
           </div>
         </ScrollReveal>
 
