@@ -532,10 +532,28 @@ function ServicesSection() {
 }
 
 // Insurance Section
-function InsuranceSection() {
+function LeafSeparator() {
   return (
-    <section id="insurance" className="py-24 sm:py-32 px-5 sm:px-8 bg-stone-50 relative border-t border-b border-stone-200/50">
-      <div className="max-w-6xl mx-auto relative z-10">
+    <svg className="w-5 h-5 text-gold-400/80 select-none flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M17 8C14.2 8 12 10.2 12 13C12 14.1 12.4 15.1 13 15.9C11.2 17.5 8 19 5 20C8 17 11.2 13.8 12.8 12C12 11.4 11 11 10 11C7.2 11 5 13.2 5 16C5 18.8 10 21 12 21C16.8 21 19 13.8 19 10C19 9 18 8 17 8Z" />
+    </svg>
+  );
+}
+
+function InsuranceSection() {
+  const insurancePlans = [
+    'Aetna',
+    'United Healthcare',
+    'United Medicare Advantage',
+    'Medicare',
+    'Medicaid',
+    'Badger Care',
+    'WPS'
+  ];
+
+  return (
+    <section id="insurance" className="py-24 sm:py-32 bg-stone-50 relative border-t border-b border-stone-200/50 overflow-hidden">
+      <div className="max-w-6xl mx-auto relative z-10 px-5 sm:px-8">
         <ScrollReveal>
           <div className="text-center mb-16 max-w-2xl mx-auto">
             <h2 className="font-sans font-extrabold text-4xl sm:text-5xl text-stone-900 tracking-tight mb-4">
@@ -546,27 +564,50 @@ function InsuranceSection() {
             </p>
           </div>
         </ScrollReveal>
+      </div>
 
-        <ScrollReveal delay={0.1}>
-          <div className="max-w-4xl mx-auto text-center py-6 px-4">
-            <p className="font-serif italic text-2xl sm:text-3xl md:text-4xl text-forest-800 leading-normal tracking-wide max-w-3xl mx-auto text-balance">
-              Aetna 
-              <span className="text-gold-400 font-sans font-light mx-4 select-none sm:mx-6">•</span>
-              United Healthcare 
-              <span className="text-gold-400 font-sans font-light mx-4 select-none sm:mx-6">•</span>
-              United Medicare Advantage 
-              <span className="text-gold-400 font-sans font-light mx-4 select-none sm:mx-6">•</span>
-              Medicare 
-              <span className="text-gold-400 font-sans font-light mx-4 select-none sm:mx-6">•</span>
-              Medicaid 
-              <span className="text-gold-400 font-sans font-light mx-4 select-none sm:mx-6">•</span>
-              Badger Care 
-              <span className="text-gold-400 font-sans font-light mx-4 select-none sm:mx-6">•</span>
-              WPS
-            </p>
-          </div>
-        </ScrollReveal>
+      {/* Infinite scrolling ticker */}
+      <div className="relative w-full overflow-hidden border-t border-b border-stone-200/50 bg-stone-50/50 py-8 select-none my-4">
+        {/* Soft editorial gradient masks at edges */}
+        <div className="absolute inset-y-0 left-0 w-16 sm:w-36 bg-gradient-to-r from-stone-50 to-transparent z-10 pointer-events-none" />
+        <div className="absolute inset-y-0 right-0 w-16 sm:w-36 bg-gradient-to-l from-stone-50 to-transparent z-10 pointer-events-none" />
 
+        <div className="flex w-max">
+          <motion.div
+            className="flex items-center gap-12 sm:gap-16 pr-12 sm:pr-16"
+            animate={{ x: [0, "-50%"] }}
+            transition={{
+              x: {
+                repeat: Infinity,
+                repeatType: "loop",
+                duration: 35, // Premium slow speed
+                ease: "linear",
+              },
+            }}
+          >
+            {/* Set 1 */}
+            {insurancePlans.map((plan, index) => (
+              <React.Fragment key={`set1-${index}`}>
+                <span className="font-serif italic text-2xl sm:text-3xl md:text-4xl text-forest-800 tracking-wide whitespace-nowrap">
+                  {plan}
+                </span>
+                <LeafSeparator />
+              </React.Fragment>
+            ))}
+            {/* Set 2 */}
+            {insurancePlans.map((plan, index) => (
+              <React.Fragment key={`set2-${index}`}>
+                <span className="font-serif italic text-2xl sm:text-3xl md:text-4xl text-forest-800 tracking-wide whitespace-nowrap">
+                  {plan}
+                </span>
+                <LeafSeparator />
+              </React.Fragment>
+            ))}
+          </motion.div>
+        </div>
+      </div>
+
+      <div className="max-w-6xl mx-auto relative z-10 px-5 sm:px-8">
         <ScrollReveal delay={0.3}>
           <div className="mt-12 text-center max-w-2xl mx-auto">
             <p className="text-stone-400 text-xs italic leading-relaxed">
@@ -578,6 +619,7 @@ function InsuranceSection() {
     </section>
   );
 }
+
 
 // Testimonials Section
 function TestimonialsSection() {
