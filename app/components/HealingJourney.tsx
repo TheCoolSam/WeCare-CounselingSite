@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useRef, useState, useEffect } from 'react';
-import { motion, useInView, useScroll, useSpring } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 
@@ -29,16 +29,12 @@ const stages: JourneyStage[] = [
   }
 ];
 
-function SproutingLeaf({ x, y, rotate, delay }: { x: number; y: number; rotate: number; delay: number }) {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-180px" });
-
+function SproutingLeaf({ x, y, rotate, delay, animate }: { x: number; y: number; rotate: number; delay: number; animate: boolean }) {
   return (
     <motion.g
-      ref={ref}
       initial={{ scale: 0, opacity: 0 }}
-      animate={isInView ? { scale: 1, opacity: 1 } : { scale: 0, opacity: 0 }}
-      transition={{ type: "spring", stiffness: 180, damping: 12, delay }}
+      animate={animate ? { scale: 1, opacity: 1 } : { scale: 0, opacity: 0 }}
+      transition={{ type: "spring", stiffness: 100, damping: 14, delay }}
       style={{ originX: `${x}px`, originY: `${y}px` }}
     >
       {/* Organic leaf body with natural curves and asymmetry */}
@@ -73,19 +69,19 @@ function SproutingLeaf({ x, y, rotate, delay }: { x: number; y: number; rotate: 
 function TimelineItem({ 
   stage, 
   index, 
-  nodeRef 
+  nodeRef,
+  animate
 }: { 
   stage: JourneyStage; 
   index: number;
   nodeRef?: (node: HTMLDivElement | null) => void;
+  animate: boolean;
 }) {
-  const ref = useRef(null);
-  // High-precision viewport margin aligned with vine growth progress
-  const isInView = useInView(ref, { once: true, margin: "-180px" });
   const isEven = index % 2 === 0;
+  const baseDelay = index * 0.4;
 
   return (
-    <div ref={ref} className="relative md:grid md:grid-cols-12 md:gap-12 mb-16 md:mb-24 last:mb-0">
+    <div className="relative md:grid md:grid-cols-12 md:gap-12 mb-16 md:mb-24 last:mb-0">
       
       {/* Central Circle Node container with callback ref */}
       <div
@@ -94,8 +90,8 @@ function TimelineItem({
       >
         <motion.div
           initial={{ scale: 0, borderColor: '#e5e3df' }}
-          animate={isInView ? { scale: 1, borderColor: '#2b3c32' } : { scale: 0, borderColor: '#e5e3df' }}
-          transition={{ duration: 0.5, delay: 0.1, type: 'spring' }}
+          animate={animate ? { scale: 1, borderColor: '#2b3c32' } : { scale: 0, borderColor: '#e5e3df' }}
+          transition={{ duration: 0.5, delay: baseDelay, type: 'spring' }}
           className="w-9 h-9 border-2 bg-white text-stone-900 flex items-center justify-center rounded-full font-sans text-xs font-bold shadow-sm"
         >
           0{stage.number}
@@ -104,9 +100,9 @@ function TimelineItem({
 
       {/* Content Column (Fades in dynamically when the vine has grown to this point) */}
       <motion.div
-        initial={{ opacity: 0, x: isEven ? -25 : 25 }}
-        animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: isEven ? -25 : 25 }}
-        transition={{ duration: 0.65, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+        initial={{ opacity: 0, x: isEven ? -15 : 15 }}
+        animate={animate ? { opacity: 1, x: 0 } : { opacity: 0, x: isEven ? -15 : 15 }}
+        transition={{ duration: 0.6, delay: baseDelay + 0.15, ease: [0.22, 1, 0.36, 1] }}
         className={`pl-24 md:pl-0 md:col-span-5 ${isEven ? 'md:col-start-1 text-left md:text-right md:pr-12 md:ml-auto md:mr-0' : 'md:col-start-8 text-left md:pl-12 md:mr-auto md:ml-0'} mb-0`}
       >
         <p className="text-sm sm:text-base text-stone-600 leading-relaxed font-sans font-light max-w-lg">
@@ -125,16 +121,7 @@ export default function HealingJourney() {
   const [nodeYPositions, setNodeYPositions] = useState<number[]>([]);
   const [containerWidth, setContainerWidth] = useState(1024);
 
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start center", "end center"]
-  });
-
-  const scaleY = useSpring(scrollYProgress, {
-    stiffness: 80,
-    damping: 25,
-    restDelta: 0.001
-  });
+  const isTimelineInView = useInView(timelineRef, { once: true, margin: "-120px" });
 
   useEffect(() => {
     const updateDimensions = () => {
@@ -192,18 +179,18 @@ export default function HealingJourney() {
       const midY = (y0 + y1) / 2;
       const midX = centerX + dir * offset;
 
-      // Sprout elegant leaf cluster at the peak of each curve with staggered timing
+      // Sprout leaf clusters matching drawing speed
       leaves.push({
         x: midX,
         y: midY,
         rotate: dir === 1 ? 35 : -145,
-        delay: i * 0.2 + 0.15
+        delay: i * 0.4 + 0.2
       });
       leaves.push({
         x: midX,
         y: midY,
         rotate: dir === 1 ? -15 : -195,
-        delay: i * 0.2 + 0.3
+        delay: i * 0.4 + 0.3
       });
     }
   }
@@ -214,10 +201,10 @@ export default function HealingJourney() {
         
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
           className="text-center mb-20 max-w-2xl mx-auto"
         >
           <h2 className="font-sans font-extrabold text-4xl sm:text-5xl text-stone-900 tracking-tight mb-4">
@@ -243,14 +230,16 @@ export default function HealingJourney() {
                 strokeLinecap="round"
               />
 
-              {/* Active Growing Winding Vine */}
+              {/* Active Growing Winding Vine - duration drawing */}
               <motion.path
                 d={pathD}
                 fill="none"
                 stroke="#3c5144" // forest-600 theme sage green
                 strokeWidth="2.5"
                 strokeLinecap="round"
-                style={{ pathLength: scaleY }}
+                initial={{ pathLength: 0 }}
+                animate={isTimelineInView ? { pathLength: 1 } : { pathLength: 0 }}
+                transition={{ duration: 1.6, ease: "easeInOut" }}
               />
 
               {/* Sprouting Organic Leaves */}
@@ -261,6 +250,7 @@ export default function HealingJourney() {
                   y={leaf.y}
                   rotate={leaf.rotate}
                   delay={leaf.delay}
+                  animate={isTimelineInView}
                 />
               ))}
             </svg>
@@ -273,6 +263,7 @@ export default function HealingJourney() {
                 key={stage.number} 
                 stage={stage} 
                 index={index} 
+                animate={isTimelineInView}
                 nodeRef={(el) => {
                   nodeRefs.current[index] = el;
                 }}
@@ -283,41 +274,12 @@ export default function HealingJourney() {
 
         {/* Minimalist Catalog CTA Section (Flat, Borderless, Apple-Grade) */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.1 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
           className="mt-28 text-center max-w-2xl mx-auto relative"
         >
-          {/* Decorative vine flourish connecting to CTA */}
-          <svg className="absolute -top-16 left-1/2 -translate-x-1/2 w-32 h-20 pointer-events-none opacity-75">
-            <path
-              d={`M 64 0 Q 64 40, 50 60 Q 45 65, 40 68`}
-              stroke="#3c5144"
-              strokeWidth="1.5"
-              fill="none"
-              strokeLinecap="round"
-            />
-            <path
-              d={`M 64 0 Q 64 40, 78 60 Q 83 65, 88 68`}
-              stroke="#3c5144"
-              strokeWidth="1.5"
-              fill="none"
-              strokeLinecap="round"
-            />
-            {/* Leaf flourishes */}
-            <path
-              d="M 40 68 c 3 -8, 12 -6, 10 2 c -2 7, -8 5, -10 -2"
-              fill="#3c5144"
-              opacity="0.85"
-            />
-            <path
-              d="M 88 68 c -3 -8, -12 -6, -10 2 c 2 7, 8 5, 10 -2"
-              fill="#3c5144"
-              opacity="0.85"
-            />
-          </svg>
-
           <h3 className="font-sans font-extrabold text-3xl sm:text-4xl text-stone-900 mb-4 tracking-tight">
             Ready to Start?
           </h3>
@@ -341,4 +303,3 @@ export default function HealingJourney() {
     </section>
   );
 }
-

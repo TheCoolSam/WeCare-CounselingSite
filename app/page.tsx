@@ -8,17 +8,17 @@ import { Phone, Mail, ArrowRight, Menu, X, ChevronDown, ChevronLeft, ChevronRigh
 import HealingJourney from './components/HealingJourney';
 import ginaPhoto from './components/gina.jpg';
 
-// Premium Scroll animation wrapper with Apple-grade ease and breathing scale
+// Premium Scroll animation wrapper with Apple-grade ease
 function ScrollReveal({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const isInView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 30, scale: 0.98 }}
-      animate={isInView ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 30, scale: 0.98 }}
-      transition={{ duration: 0.8, delay, ease: [0.16, 1, 0.3, 1] }}
+      initial={{ opacity: 0, y: 15 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
+      transition={{ duration: 0.6, delay, ease: "easeOut" }}
     >
       {children}
     </motion.div>
