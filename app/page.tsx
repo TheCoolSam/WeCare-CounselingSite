@@ -12,18 +12,24 @@ import ginaPhoto from './components/gina.jpg';
 function ScrollReveal({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-80px' });
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 15 }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
+      initial={isMounted ? { opacity: 0, y: 15 } : false}
+      animate={isInView ? { opacity: 1, y: 0 } : (isMounted ? { opacity: 0, y: 15 } : { opacity: 1, y: 0 })}
       transition={{ duration: 0.6, delay, ease: "easeOut" }}
     >
       {children}
     </motion.div>
   );
 }
+
 
 // Navigation Bar
 function Navigation() {
@@ -275,6 +281,8 @@ function HeroSection() {
 
 // About Section (Portrait Left, Spaced modern columns right)
 function AboutSection() {
+  const [imageLoaded, setImageLoaded] = useState(false);
+
   return (
     <section id="about" className="py-24 sm:py-32 px-5 sm:px-8 bg-white relative">
       <div className="max-w-6xl mx-auto">
@@ -286,13 +294,16 @@ function AboutSection() {
               <div className="relative max-w-sm mx-auto group">
                 {/* Asymmetric Background Layer Plate */}
                 <div className="absolute inset-0 bg-stone-100 rounded-3xl translate-x-4 translate-y-4 -z-10 group-hover:translate-x-3 group-hover:translate-y-3 transition-transform duration-500" />
-                <div className="aspect-[4/5] rounded-3xl overflow-hidden border border-stone-200 bg-stone-100 shadow-md relative group-hover:-translate-y-1 transition-transform duration-500">
+                <div className="aspect-[4/5] rounded-3xl overflow-hidden border border-stone-200 bg-stone-50/50 shadow-md relative group-hover:-translate-y-1 transition-transform duration-500">
                   <Image
                     src={ginaPhoto}
                     alt="Gina Botshtein, LCSW"
                     fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    className={`object-cover transition-all duration-1000 ease-out group-hover:scale-105 ${
+                      imageLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-98'
+                    }`}
                     priority
+                    onLoad={() => setImageLoaded(true)}
                   />
                 </div>
               </div>
