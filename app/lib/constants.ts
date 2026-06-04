@@ -115,11 +115,12 @@ export const CONTACT_INFO = {
 
 export const INSURANCE_PLANS = [
   "Aetna",
+  "United Healthcare",
+  "United Medicare Advantage",
+  "Medicare",
   "Medicaid",
   "Badger Care",
-  "United Healthcare",
-  "WPS",
-  "Medicare"
+  "WPS"
 ];
 
 export const THERAPIST_INFO = {

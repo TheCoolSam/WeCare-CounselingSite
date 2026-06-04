@@ -535,11 +535,12 @@ function ServicesSection() {
 function InsuranceSection() {
   const insurancePlans = [
     { name: 'Aetna' },
+    { name: 'United Healthcare' },
+    { name: 'United Medicare Advantage' },
+    { name: 'Medicare' },
     { name: 'Medicaid' },
     { name: 'Badger Care' },
-    { name: 'United Healthcare' },
-    { name: 'WPS' },
-    { name: 'Medicare' }
+    { name: 'WPS' }
   ];
 
   return (
@@ -556,23 +557,25 @@ function InsuranceSection() {
           </div>
         </ScrollReveal>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-          {insurancePlans.map((plan, index) => (
-            <ScrollReveal key={index} delay={0.05 * index}>
-              <motion.div
-                className="px-6 py-8 rounded-2xl border text-center bg-white border-stone-200 shadow-sm flex items-center justify-center min-h-[96px] cursor-default"
-                whileHover={{ y: -5, borderColor: '#3c5144' }}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              >
-                <h3 className="text-lg font-bold font-sans text-stone-900">
+        <ScrollReveal delay={0.1}>
+          <div className="max-w-4xl mx-auto bg-white border border-stone-200/80 p-8 sm:p-12 rounded-3xl shadow-sm relative overflow-hidden">
+            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-forest-500/10 via-forest-600/30 to-forest-500/10" />
+            
+            <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-4">
+              {insurancePlans.map((plan, index) => (
+                <motion.span
+                  key={index}
+                  whileHover={{ y: -2, backgroundColor: '#f5f7f6', borderColor: '#3c5144', color: '#3c5144' }}
+                  className="px-5 py-3 rounded-full border border-stone-200/80 bg-stone-50 text-stone-700 font-sans text-sm sm:text-base font-bold shadow-xs cursor-default transition-all duration-300"
+                >
                   {plan.name}
-                </h3>
-              </motion.div>
-            </ScrollReveal>
-          ))}
-        </div>
+                </motion.span>
+              ))}
+            </div>
+          </div>
+        </ScrollReveal>
 
-        <ScrollReveal delay={0.4}>
+        <ScrollReveal delay={0.3}>
           <div className="mt-12 text-center max-w-2xl mx-auto">
             <p className="text-stone-400 text-xs italic leading-relaxed">
               * For other insurance carriers, I can provide a comprehensive monthly statement for potential out-of-network reimbursement. We highly recommend verifying your specific mental health benefits with your carrier.
