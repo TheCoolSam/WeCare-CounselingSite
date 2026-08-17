@@ -1,12 +1,14 @@
 'use client';
 
 import React, { useRef, useState, useEffect } from 'react';
-import { motion, useInView, AnimatePresence } from 'framer-motion';
+import { motion, useInView, AnimatePresence, useReducedMotion } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Phone, Mail, ArrowRight, Menu, X, ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react';
 import HealingJourney from './components/HealingJourney';
+import SiteFooter from './components/SiteFooter';
 import ginaPhoto from './components/gina.jpg';
+import { INSURANCE_PLANS, LOCATION_FAQS, PRACTICE_LOCATION } from './lib/constants';
 
 // Premium Scroll animation wrapper with Apple-grade ease
 function ScrollReveal({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
@@ -202,7 +204,7 @@ function Navigation() {
 // Hero Section (Pristine background, slow pulsing organic ambient glows)
 function HeroSection() {
   return (
-    <section id="hero" className="relative min-h-screen flex items-center px-5 sm:px-8 pt-28 pb-20 bg-stone-50 overflow-hidden">
+    <section id="hero" className="relative min-h-screen flex items-center px-5 sm:px-8 pt-28 pb-20 bg-stone-50 overflow-hidden scroll-mt-24">
       {/* Ambient Pulsing Glow Spots */}
       <div className="absolute top-1/4 left-10 w-[45rem] h-[45rem] rounded-full bg-forest-100/10 blur-[130px] mix-blend-multiply pointer-events-none animate-pulse" style={{ animationDuration: '12s' }} />
       <div className="absolute bottom-1/3 right-10 w-[40rem] h-[40rem] rounded-full bg-gold-100/10 blur-[110px] mix-blend-multiply pointer-events-none animate-pulse" style={{ animationDuration: '16s' }} />
@@ -221,7 +223,7 @@ function HeroSection() {
 
             <ScrollReveal delay={0.2}>
               <p className="text-xs font-bold tracking-[0.2em] text-stone-400 uppercase mb-8">
-                Licensed Clinical Social Worker
+                Licensed Clinical Social Worker · {PRACTICE_LOCATION.shortLine}
               </p>
             </ScrollReveal>
 
@@ -234,7 +236,7 @@ function HeroSection() {
 
             <ScrollReveal delay={0.3}>
               <p className="text-base text-stone-500 mb-8 leading-relaxed max-w-xl">
-                With a rare blend of clinical expertise, deep compassion, and genuine warmth, I create personalized therapy experiences that honor your unique story.
+                With a rare blend of clinical expertise, deep compassion, and genuine warmth, I create personalized therapy experiences that honor your unique story — in Milwaukee, Mequon, and communities all around.
               </p>
             </ScrollReveal>
 
@@ -284,7 +286,7 @@ function AboutSection() {
   const [imageLoaded, setImageLoaded] = useState(false);
 
   return (
-    <section id="about" className="py-24 sm:py-32 px-5 sm:px-8 bg-white relative">
+    <section id="about" className="py-24 sm:py-32 px-5 sm:px-8 bg-white relative scroll-mt-24">
       <div className="max-w-6xl mx-auto">
         <div className="grid md:grid-cols-12 gap-12 lg:gap-20 items-center">
           
@@ -299,8 +301,9 @@ function AboutSection() {
                     src={ginaPhoto}
                     alt="Gina Botshtein, LCSW"
                     fill
-                    className={`object-cover transition-all duration-1000 ease-out group-hover:scale-105 ${
-                      imageLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-98'
+                    sizes="(max-width: 768px) 80vw, 384px"
+                    className={`object-cover object-center transition-opacity duration-700 ease-out ${
+                      imageLoaded ? 'opacity-100' : 'opacity-0'
                     }`}
                     priority
                     onLoad={() => setImageLoaded(true)}
@@ -324,7 +327,7 @@ function AboutSection() {
                   For over 30 years, I've had the profound privilege of supporting individuals, families, and teams through life's most challenging moments and transformative growth.
                 </p>
                 <p>
-                  My therapeutic methodology integrates clinical expertise with genuine compassion, creating an environment where you feel truly heard, validated, and structurally equipped to cultivate lasting, meaningful change.
+                  My therapeutic methodology integrates clinical expertise with genuine compassion, creating an environment where you feel truly heard, validated, and structurally equipped to cultivate lasting, meaningful change. I see clients in Milwaukee, Mequon, and nearby communities, in person and online, and I also offer sessions in Russian.
                 </p>
                 <blockquote className="pl-5 border-l-4 border-forest-600 font-serif italic text-lg text-stone-800 my-6 py-1 leading-relaxed">
                   “Healing is not about correcting a broken mechanism; it is about uncovering, honoring, and cultivating the natural wisdom and resilience that has always resided within you.”
@@ -426,25 +429,28 @@ function ServicesSection() {
     {
       num: '01',
       title: 'Individual Therapy',
+      href: '/services/individual-therapy',
       description: 'Grounded, one-on-one sessions addressing anxiety, depressive cycles, life transitions, and intentional personal growth.',
       focus: 'Personalized plans • Cognitive & body-based methods • A safe, supportive space • Flexible scheduling'
     },
     {
       num: '02',
       title: 'Couples Therapy',
+      href: '/services/couples-therapy',
       description: 'Rebuild trust, break repetitive conflict cycles, and deeply enrich intimacy through structured communication and partnership work.',
       focus: 'Communication skills • Resolving recurring conflicts • Rebuilding intimacy • Pre-marital counseling'
     },
     {
       num: '03',
       title: 'Family & Team Support',
+      href: '/services/family-therapy',
       description: 'Navigate complex family dynamics and organizational team challenges with solution-focused communication plans.',
       focus: 'Family dynamics • Parenting support • Team communication • Whole-system wellness'
     }
   ];
 
   return (
-    <section id="services" className="py-24 sm:py-32 px-5 sm:px-8 bg-stone-50 border-t border-b border-stone-200/50 relative overflow-hidden">
+    <section id="services" className="py-24 sm:py-32 px-5 sm:px-8 bg-stone-50 border-t border-b border-stone-200/50 relative overflow-hidden scroll-mt-24">
       {/* Dynamic Ambient Glow Spot behind accordion */}
       <div className="absolute top-1/4 right-0 w-[30rem] h-[30rem] rounded-full bg-forest-100/10 blur-[100px] pointer-events-none" />
 
@@ -493,7 +499,13 @@ function ServicesSection() {
                           {service.num}
                         </span>
                         <h3 className="text-2xl font-bold font-sans text-stone-900 tracking-tight group-hover:text-forest-700 transition-colors">
-                          {service.title}
+                          <Link
+                            href={service.href}
+                            onClick={(e) => e.stopPropagation()}
+                            className="hover:underline underline-offset-4 decoration-forest-600/30"
+                          >
+                            {service.title}
+                          </Link>
                         </h3>
                       </div>
                       <span className="text-stone-400 text-xl font-light group-hover:text-forest-700 transition-colors select-none">
@@ -552,18 +564,11 @@ function LeafSeparator() {
 }
 
 function InsuranceSection() {
-  const insurancePlans = [
-    'Aetna',
-    'United Healthcare',
-    'United Medicare Advantage',
-    'Medicare',
-    'Medicaid',
-    'Badger Care',
-    'WPS'
-  ];
+  const insurancePlans = INSURANCE_PLANS;
+  const prefersReducedMotion = useReducedMotion();
 
   return (
-    <section id="insurance" className="py-24 sm:py-32 bg-stone-50 relative border-t border-b border-stone-200/50 overflow-hidden">
+    <section id="insurance" className="py-24 sm:py-32 bg-stone-50 relative border-t border-b border-stone-200/50 overflow-hidden scroll-mt-24">
       <div className="max-w-6xl mx-auto relative z-10 px-5 sm:px-8">
         <ScrollReveal>
           <div className="text-center mb-16 max-w-2xl mx-auto">
@@ -577,7 +582,9 @@ function InsuranceSection() {
         </ScrollReveal>
       </div>
 
-      {/* Infinite scrolling ticker */}
+        <div className="sr-only">
+          Accepted plans: {insurancePlans.join(', ')}.
+        </div>
       <div className="relative w-full overflow-hidden border-t border-b border-stone-200/50 bg-stone-50/50 py-8 select-none my-4">
         {/* Soft editorial gradient masks at edges */}
         <div className="absolute inset-y-0 left-0 w-16 sm:w-36 bg-gradient-to-r from-stone-50 to-transparent z-10 pointer-events-none" />
@@ -586,12 +593,13 @@ function InsuranceSection() {
         <div className="flex w-max">
           <motion.div
             className="flex items-center gap-12 sm:gap-16 pr-12 sm:pr-16"
-            animate={{ x: [0, "-50%"] }}
-            transition={{
+            aria-hidden="true"
+            animate={prefersReducedMotion ? { x: 0 } : { x: [0, "-50%"] }}
+            transition={prefersReducedMotion ? { duration: 0 } : {
               x: {
                 repeat: Infinity,
                 repeatType: "loop",
-                duration: 35, // Premium slow speed
+                duration: 35,
                 ease: "linear",
               },
             }}
@@ -660,7 +668,7 @@ function TestimonialsSection() {
   const [[page, direction], setPage] = useState([0, 0]);
   const [isHovered, setIsHovered] = useState(false);
 
-  const activeIndex = Math.abs(page % testimonials.length);
+  const activeIndex = ((page % testimonials.length) + testimonials.length) % testimonials.length;
 
   const paginate = (newDirection: number) => {
     setPage([page + newDirection, newDirection]);
@@ -675,7 +683,7 @@ function TestimonialsSection() {
   }, [page, isHovered]);
 
   return (
-    <section id="testimonials" className="py-24 sm:py-32 px-5 sm:px-8 bg-white relative">
+    <section id="testimonials" className="py-24 sm:py-32 px-5 sm:px-8 bg-white relative scroll-mt-24">
       <div className="max-w-4xl mx-auto">
         <ScrollReveal>
           <div className="text-center mb-16 max-w-2xl mx-auto">
@@ -694,7 +702,7 @@ function TestimonialsSection() {
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
-            <span className="absolute right-8 top-4 text-9xl font-serif text-stone-200/50 pointer-events-none select-none select-none">“</span>
+            <span className="absolute right-8 top-4 text-9xl font-serif text-stone-200/50 pointer-events-none select-none">“</span>
 
             <AnimatePresence initial={false} custom={direction} mode="wait">
               <motion.div
@@ -762,7 +770,7 @@ function TestimonialsSection() {
 
         <ScrollReveal delay={0.3}>
           <p className="text-center text-[10px] tracking-wider uppercase font-bold text-stone-400 mt-12">
-            * Client initials are utilized to preserve absolute clinical confidentiality in strict compliance with HIPAA frameworks.
+            * Initials are used to protect client privacy.
           </p>
         </ScrollReveal>
       </div>
@@ -778,6 +786,10 @@ function FAQSection() {
     {
       question: "How much does a therapeutic session cost?",
       answer: "Sessions are $150 for a fifty-minute hour. I'm happy to discuss fees and out-of-network options during our first call."
+    },
+    {
+      question: "Which insurance plans do you accept?",
+      answer: "I am in-network with Aetna, Aetna Medicare, Medicaid, Medicare, UnitedHealthcare / Optum Medicaid, UnitedHealthcare / Optum Medicare, UnitedHealthcare UHC | UBH, WPS Health Solution, and Community Care. Please verify your specific mental health benefits with your carrier. For other plans, I can provide a monthly statement for out-of-network reimbursement."
     },
     {
       question: "What should I expect in our initial consultation?",
@@ -802,11 +814,12 @@ function FAQSection() {
     {
       question: "How do I determine if this therapeutic framework is right for me?",
       answer: "You don't need to be in crisis to benefit from therapy. If you're feeling stuck, going through a transition, or just want to grow — that's reason enough. Reach out and we'll figure out if it's a good fit."
-    }
+    },
+    ...LOCATION_FAQS,
   ];
 
   return (
-    <section id="faq" className="py-24 sm:py-32 px-5 sm:px-8 bg-stone-50 border-t border-b border-stone-200/50 relative">
+    <section id="faq" className="py-24 sm:py-32 px-5 sm:px-8 bg-stone-50 border-t border-b border-stone-200/50 relative scroll-mt-24">
       <div className="max-w-3xl mx-auto relative z-10">
         <ScrollReveal>
           <div className="text-center mb-12">
@@ -926,18 +939,25 @@ function ContactSection() {
     phone: touched.phone && formState.phone && formState.phone.replace(/[^\d]/g, '').length < 10 ? 'Phone number must be 10 digits' : '',
   };
 
-  const isFormValid = formState.name.trim() && formState.email && validateEmail(formState.email) && (!formState.phone || formState.phone.replace(/[^\d]/g, '').length === 10);
+  const isFormValid = Boolean(
+    formState.name.trim() &&
+    formState.email &&
+    validateEmail(formState.email) &&
+    formState.subject &&
+    (!formState.phone || formState.phone.replace(/[^\d]/g, '').length === 10)
+  );
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!isFormValid || !hipaaChecked) return;
     setIsSubmitting(true);
+    setSubmitStatus('idle');
 
     try {
       const formId = process.env.NEXT_PUBLIC_FORMSPREE_FORM_ID || 'xaqqenpb';
       const response = await fetch(`https://formspree.io/f/${formId}`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify(formState),
       });
 
@@ -967,7 +987,7 @@ function ContactSection() {
   };
 
   return (
-    <section id="contact" className="py-24 sm:py-32 px-5 sm:px-8 bg-white relative">
+    <section id="contact" className="py-24 sm:py-32 px-5 sm:px-8 bg-white relative scroll-mt-24">
       <div className="max-w-5xl mx-auto relative z-10">
         <ScrollReveal>
           <div className="text-center mb-16 max-w-2xl mx-auto">
@@ -987,11 +1007,15 @@ function ContactSection() {
               <div className="space-y-8">
                 <div>
                   <p className="text-sm sm:text-base text-stone-500 font-sans leading-relaxed">
-                    Prefer to call or email? Initial consultations are always free and confidential.
+                    Prefer to call or email? Initial consultations are always free and confidential. {PRACTICE_LOCATION.serviceAreaSentence}
                   </p>
                 </div>
 
                 <div className="space-y-6 pt-4 border-t border-stone-200/80">
+                  <p className="text-sm text-stone-600 font-sans">
+                    {PRACTICE_LOCATION.locality}, {PRACTICE_LOCATION.region} {PRACTICE_LOCATION.postalCode}
+                    <span className="block text-stone-400 text-xs mt-1">Serving {PRACTICE_LOCATION.shortLine}</span>
+                  </p>
                   <div className="text-left">
                     <a href="tel:+14146172201" className="inline-flex items-center gap-2 font-semibold text-stone-800 hover:text-forest-600 transition-colors text-base sm:text-lg">
                       <Phone className="w-4 h-4 text-forest-600" />
@@ -1132,7 +1156,7 @@ function ContactSection() {
                   </motion.button>
 
                   <p className="text-[10px] tracking-wider text-stone-400 font-medium text-center mt-4">
-                    Your inquiry is confidential and fully HIPAA compliant.
+                    Please do not include clinical details here. For confidential matters, call or email directly.
                   </p>
                 </form>
               </div>
@@ -1144,50 +1168,6 @@ function ContactSection() {
   );
 }
 
-// Footer
-function Footer() {
-  return (
-    <footer className="bg-forest-900 text-stone-200 py-16 px-5 sm:px-8 border-t border-forest-800 relative z-10 mt-auto">
-      <div className="max-w-6xl mx-auto">
-        <div className="grid sm:grid-cols-3 gap-12 mb-12">
-          <div>
-            <h3 className="font-sans font-extrabold text-lg text-white mb-2 tracking-tight">WECARE COUNSELING</h3>
-            <p className="text-xs tracking-widest text-gold-400 font-bold uppercase mb-4">Gina Botshtein, LCSW</p>
-            <p className="text-xs text-forest-200/80 leading-relaxed font-sans max-w-sm font-normal">
-              Providing three decades of compassionate, evidence-based therapy to help individuals, couples, and teams cultivate structural healing and emotional wholeness.
-            </p>
-          </div>
-          <div>
-            <h4 className="text-xs tracking-widest font-bold text-white uppercase mb-5">Pages</h4>
-            <div className="space-y-3 font-sans text-xs">
-              <Link href="/" className="block text-forest-200 hover:text-gold-400 transition-colors font-semibold uppercase tracking-wider">Home</Link>
-              <Link href="/faq" className="block text-forest-200 hover:text-gold-400 transition-colors font-semibold uppercase tracking-wider">FAQ</Link>
-              <Link href="/contact" className="block text-forest-200 hover:text-gold-400 transition-colors font-semibold uppercase tracking-wider">Contact</Link>
-              <Link href="/privacy" className="block text-forest-200 hover:text-gold-400 transition-colors font-semibold uppercase tracking-wider">Privacy Policy</Link>
-            </div>
-          </div>
-          <div>
-            <h4 className="text-xs tracking-widest font-bold text-white uppercase mb-5">Direct Contact</h4>
-            <div className="space-y-3 font-sans text-xs">
-              <a href="tel:+14146172201" className="flex items-center gap-2.5 text-forest-200 hover:text-gold-400 transition-colors font-semibold tracking-wide">
-                <Phone className="w-3.5 h-3.5 text-gold-400" /> +1 (414) 617-2201
-              </a>
-              <a href="mailto:Gina@wccounseling.net" className="flex items-center gap-2.5 text-forest-200 hover:text-gold-400 transition-colors font-semibold tracking-wide break-all">
-                <Mail className="w-3.5 h-3.5 text-gold-400" /> Gina@wccounseling.net
-              </a>
-            </div>
-          </div>
-        </div>
-        <div className="border-t border-forest-800 pt-8 text-center flex flex-col sm:flex-row justify-between items-center gap-4 text-[10px] tracking-wider font-bold text-forest-300 uppercase">
-          <p>© {new Date().getFullYear()} WeCare Counseling. All rights reserved.</p>
-          <p className="text-[9px] text-forest-400">HIPAA Compliant</p>
-        </div>
-      </div>
-    </footer>
-  );
-}
-
-// Main Page
 export default function Home() {
   return (
     <>
@@ -1202,7 +1182,7 @@ export default function Home() {
         <FAQSection />
         <ContactSection />
       </main>
-      <Footer />
+      <SiteFooter />
     </>
   );
 }

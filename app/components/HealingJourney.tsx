@@ -86,7 +86,7 @@ function TimelineItem({
       {/* Central Circle Node container with callback ref */}
       <div
         ref={nodeRef}
-        className="absolute left-6 top-0 w-9 h-9 z-10 flex items-center justify-center md:left-1/2 md:-translate-x-1/2"
+        className="absolute left-4 sm:left-6 top-0 w-9 h-9 z-10 flex items-center justify-center md:left-1/2 md:-translate-x-1/2"
       >
         <motion.div
           initial={{ scale: 0, borderColor: '#e5e3df' }}
@@ -103,9 +103,9 @@ function TimelineItem({
         initial={{ opacity: 0, x: isEven ? -15 : 15 }}
         animate={animate ? { opacity: 1, x: 0 } : { opacity: 0, x: isEven ? -15 : 15 }}
         transition={{ duration: 0.6, delay: baseDelay + 0.15, ease: [0.22, 1, 0.36, 1] }}
-        className={`pl-24 md:pl-0 md:col-span-5 ${isEven ? 'md:col-start-1 text-left md:text-right md:pr-12 md:ml-auto md:mr-0' : 'md:col-start-8 text-left md:pl-12 md:mr-auto md:ml-0'} mb-0`}
+        className={`pl-16 sm:pl-24 md:pl-0 md:col-span-5 min-w-0 ${isEven ? 'md:col-start-1 text-left md:text-right md:pr-12 md:ml-auto md:mr-0' : 'md:col-start-8 text-left md:pl-12 md:mr-auto md:ml-0'} mb-0`}
       >
-        <p className="text-sm sm:text-base text-stone-600 leading-relaxed font-sans font-light max-w-lg">
+        <p className="text-sm sm:text-base text-stone-600 leading-relaxed font-sans font-light max-w-lg text-pretty">
           {stage.description}
         </p>
       </motion.div>
@@ -119,7 +119,7 @@ export default function HealingJourney() {
   const nodeRefs = useRef<(HTMLDivElement | null)[]>([]);
   
   const [nodeYPositions, setNodeYPositions] = useState<number[]>([]);
-  const [containerWidth, setContainerWidth] = useState(1024);
+  const [containerWidth, setContainerWidth] = useState(0);
 
   const isTimelineInView = useInView(timelineRef, { once: true, margin: "-120px" });
 
@@ -135,7 +135,7 @@ export default function HealingJourney() {
             const rect = node.getBoundingClientRect();
             return rect.top - timelineRect.top + rect.height / 2;
           }
-          return 18 + index * 180; // fallback calculation
+          return 18 + index * 180;
         });
         setNodeYPositions(positions);
       }
@@ -143,16 +143,19 @@ export default function HealingJourney() {
 
     updateDimensions();
     const rafId = requestAnimationFrame(updateDimensions);
+    const observer = new ResizeObserver(updateDimensions);
+    if (timelineRef.current) observer.observe(timelineRef.current);
 
     window.addEventListener('resize', updateDimensions);
     return () => {
       window.removeEventListener('resize', updateDimensions);
+      observer.disconnect();
       cancelAnimationFrame(rafId);
     };
   }, []);
 
   const isDesktop = containerWidth >= 768;
-  const centerX = isDesktop ? containerWidth / 2 : 48;
+  const centerX = isDesktop ? containerWidth / 2 : 32;
 
   // Generate the S-curved winding SVG vine path dynamically in pixels
   let pathD = '';
@@ -166,7 +169,7 @@ export default function HealingJourney() {
       const y1 = nodeYPositions[i + 1];
       const h = y1 - y0;
       const dir = isDesktop ? (i % 2 === 0 ? -1 : 1) : 1;
-      const offset = isDesktop ? 64 : 24;
+      const offset = isDesktop ? 64 : 10;
 
       const cp1x = centerX + dir * offset;
       const cp1y = y0 + h * 0.35;
@@ -186,17 +189,19 @@ export default function HealingJourney() {
         rotate: dir === 1 ? 35 : -145,
         delay: i * 0.4 + 0.2
       });
-      leaves.push({
-        x: midX,
-        y: midY,
-        rotate: dir === 1 ? -15 : -195,
-        delay: i * 0.4 + 0.3
-      });
+      if (isDesktop) {
+        leaves.push({
+          x: midX,
+          y: midY,
+          rotate: dir === 1 ? -15 : -195,
+          delay: i * 0.4 + 0.3
+        });
+      }
     }
   }
 
   return (
-    <section id="journey" className="py-24 sm:py-32 px-5 sm:px-8 bg-white relative overflow-hidden">
+    <section id="journey" className="py-24 sm:py-32 px-5 sm:px-8 bg-white relative overflow-x-clip scroll-mt-24">
       <div className="max-w-5xl mx-auto relative" ref={containerRef}>
         
         {/* Header */}
@@ -220,7 +225,7 @@ export default function HealingJourney() {
           
           {/* Organic Winding SVG Vine */}
           {nodeYPositions.length > 0 && (
-            <svg className="absolute inset-0 w-full h-full pointer-events-none z-0">
+            <svg className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-visible" overflow="visible">
               {/* Background Hairline Winding Vine */}
               <path
                 d={pathD}

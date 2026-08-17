@@ -7,7 +7,7 @@ export const FAQS = [
   },
   {
     question: "Do you accept insurance?",
-    answer: "Yes, I accept most major insurance plans including Aetna, Blue Cross Blue Shield, Cigna, and UnitedHealthcare. I recommend contacting your insurance provider to verify coverage for out-of-network providers. I can provide detailed invoices for reimbursement."
+    answer: "Yes. I am in-network with Aetna, Aetna Medicare, Medicaid, Medicare, UnitedHealthcare / Optum Medicaid, UnitedHealthcare / Optum Medicare, UnitedHealthcare UHC | UBH, WPS Health Solution, and Community Care. I recommend verifying your mental health benefits with your carrier. I can also provide a statement for out-of-network reimbursement."
   },
   {
     question: "What happens in the first session?",
@@ -108,19 +108,61 @@ export const SERVICES = [
 
 export const CONTACT_INFO = {
   phone: "+1 (414) 617-2201",
+  phoneHref: "tel:+14146172201",
   email: "Gina@wccounseling.net",
   hours: "By appointment - Monday to Friday, 9 AM to 6 PM CST",
   officeHours: "9:00 AM - 6:00 PM CST, Monday - Friday"
 };
 
+export const PRACTICE_LOCATION = {
+  legalName: "WeCare Counseling LLC",
+  displayName: "WeCare Counseling",
+  locality: "Mequon",
+  region: "WI",
+  postalCode: "53092",
+  country: "US",
+  psychologyTodayUrl:
+    "https://www.psychologytoday.com/us/therapists/wecare-counseling-llc-mequon-wi/1697499",
+  areaServed: [
+    "Milwaukee",
+    "Mequon",
+    "Thiensville",
+    "Cedarburg",
+    "Grafton",
+    "Whitefish Bay",
+    "Shorewood",
+    "Fox Point",
+    "Bayside",
+    "Glendale",
+  ],
+  shortLine: "Milwaukee, Mequon, and nearby communities",
+  serviceAreaSentence:
+    "I see clients in Milwaukee, Mequon, and nearby communities including Thiensville, Cedarburg, Grafton, Whitefish Bay, Shorewood, Fox Point, Bayside, and Glendale — in person and by telehealth.",
+};
+
+export const LOCATION_FAQS = [
+  {
+    question: "Where is WeCare Counseling?",
+    answer:
+      "I work with clients in Milwaukee, Mequon, and communities all around the greater Milwaukee area. Sessions are available in person and through a secure telehealth platform.",
+  },
+  {
+    question: "Do you see clients in Milwaukee as well as Mequon?",
+    answer:
+      "Yes. I see people in Milwaukee, Mequon, and surrounding North Shore and metro communities. If coming in person is hard, we can meet online from anywhere in Wisconsin.",
+  },
+];
+
 export const INSURANCE_PLANS = [
   "Aetna",
-  "United Healthcare",
-  "United Medicare Advantage",
-  "Medicare",
+  "Aetna Medicare",
   "Medicaid",
-  "Badger Care",
-  "WPS"
+  "Medicare",
+  "UnitedHealthcare / Optum Medicaid",
+  "UnitedHealthcare / Optum Medicare",
+  "UnitedHealthcare UHC | UBH",
+  "WPS Health Solution",
+  "Community Care",
 ];
 
 export const THERAPIST_INFO = {

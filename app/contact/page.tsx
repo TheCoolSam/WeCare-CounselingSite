@@ -4,6 +4,8 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { Phone, Mail, ArrowLeft, ArrowRight } from 'lucide-react';
+import SiteFooter from '../components/SiteFooter';
+import { PRACTICE_LOCATION } from '../lib/constants';
 
 export default function ContactPage() {
   const [formState, setFormState] = useState({
@@ -52,18 +54,25 @@ export default function ContactPage() {
     phone: touched.phone && formState.phone && formState.phone.replace(/[^\d]/g, '').length < 10 ? 'Phone number must be 10 digits' : '',
   };
 
-  const isFormValid = formState.name.trim() && formState.email && validateEmail(formState.email) && (!formState.phone || formState.phone.replace(/[^\d]/g, '').length === 10);
+  const isFormValid = Boolean(
+    formState.name.trim() &&
+    formState.email &&
+    validateEmail(formState.email) &&
+    formState.subject &&
+    (!formState.phone || formState.phone.replace(/[^\d]/g, '').length === 10)
+  );
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!isFormValid || !hipaaChecked) return;
     setIsSubmitting(true);
+    setSubmitStatus('idle');
 
     try {
       const formId = process.env.NEXT_PUBLIC_FORMSPREE_FORM_ID || 'xaqqenpb';
       const response = await fetch(`https://formspree.io/f/${formId}`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify(formState),
       });
 
@@ -120,7 +129,7 @@ export default function ContactPage() {
               Get in Touch
             </h1>
             <p className="text-sm sm:text-base text-stone-500 leading-relaxed font-normal">
-              Ready to start? Reach out to schedule a session or ask any questions.
+              Ready to start? Reach out to schedule a session in Milwaukee, Mequon, or nearby — in person or by telehealth.
             </p>
           </motion.div>
 
@@ -135,11 +144,15 @@ export default function ContactPage() {
               <div className="space-y-8">
                 <div>
                   <p className="text-sm sm:text-base text-stone-500 font-sans leading-relaxed">
-                    Prefer to call or email? Initial consultations are always free and confidential.
+                    Prefer to call or email? Initial consultations are always free and confidential. {PRACTICE_LOCATION.serviceAreaSentence}
                   </p>
                 </div>
 
                 <div className="space-y-6 pt-6 border-t border-stone-200/80">
+                  <p className="text-sm text-stone-600 font-sans">
+                    {PRACTICE_LOCATION.locality}, {PRACTICE_LOCATION.region} {PRACTICE_LOCATION.postalCode}
+                    <span className="block text-stone-400 text-xs mt-1">Serving {PRACTICE_LOCATION.shortLine}</span>
+                  </p>
                   <div className="text-left">
                     <a href="tel:+14146172201" className="inline-flex items-center gap-2 font-semibold text-stone-800 hover:text-forest-600 transition-colors text-base sm:text-lg">
                       <Phone className="w-4 h-4 text-forest-600" />
@@ -284,7 +297,7 @@ export default function ContactPage() {
                   </motion.button>
 
                   <p className="text-[10px] tracking-wider text-stone-400 font-medium text-center mt-4">
-                    Your inquiry is confidential and fully HIPAA compliant.
+                    Please do not include clinical details here. For confidential matters, call or email directly.
                   </p>
                 </form>
               </div>
@@ -293,28 +306,7 @@ export default function ContactPage() {
         </div>
       </main>
 
-      {/* Footer */}
-      <footer className="bg-forest-900 text-stone-200 py-16 px-5 sm:px-8 border-t border-forest-800 relative z-10 mt-auto">
-        <div className="max-w-6xl mx-auto text-center">
-          <h3 className="font-sans font-extrabold text-lg text-white mb-2 tracking-tight">WECARE COUNSELING</h3>
-          <p className="text-xs tracking-widest text-gold-400 font-bold uppercase mb-6">Gina Botshtein, LCSW</p>
-          
-          <div className="flex flex-wrap justify-center gap-6 text-xs font-sans mb-8">
-            <a href="tel:+14146172201" className="flex items-center gap-2.5 text-forest-200 hover:text-gold-400 transition-colors">
-              <Phone className="w-3.5 h-3.5 text-gold-400" /> +1 (414) 617-2201
-            </a>
-            <span className="text-forest-800">|</span>
-            <a href="mailto:Gina@wccounseling.net" className="flex items-center gap-2.5 text-forest-200 hover:text-gold-400 transition-colors break-all">
-              <Mail className="w-3.5 h-3.5 text-gold-400" /> Gina@wccounseling.net
-            </a>
-          </div>
-
-          <div className="border-t border-forest-800 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-[10px] tracking-wider font-bold text-forest-300 uppercase">
-            <p>© {new Date().getFullYear()} WeCare Counseling. All rights reserved.</p>
-            <p className="text-[9px] text-forest-400">Confidential & HIPAA Compliant Healthcare Space</p>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }

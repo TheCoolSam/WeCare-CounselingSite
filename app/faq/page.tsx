@@ -4,6 +4,8 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { ChevronDown, ArrowLeft, ArrowRight } from 'lucide-react';
+import SiteFooter from '../components/SiteFooter';
+import { LOCATION_FAQS } from '../lib/constants';
 
 export default function FAQPage() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -12,6 +14,10 @@ export default function FAQPage() {
     {
       question: "How much does a therapeutic session cost?",
       answer: "Sessions are $150 for a fifty-minute hour. I'm happy to discuss fees and out-of-network options during our first call."
+    },
+    {
+      question: "Which insurance plans do you accept?",
+      answer: "I am in-network with Aetna, Aetna Medicare, Medicaid, Medicare, UnitedHealthcare / Optum Medicaid, UnitedHealthcare / Optum Medicare, UnitedHealthcare UHC | UBH, WPS Health Solution, and Community Care. Please verify your specific mental health benefits with your carrier. For other plans, I can provide a monthly statement for out-of-network reimbursement."
     },
     {
       question: "What should I expect in our initial consultation?",
@@ -44,7 +50,8 @@ export default function FAQPage() {
     {
       question: "Can I bring a partner or support person to my session?",
       answer: "Yes. For couples and family work, having your partner or family member there is often part of the process. For individual sessions, you're welcome to bring a support person to our first meeting if that helps you feel comfortable — just let me know ahead of time."
-    }
+    },
+    ...LOCATION_FAQS,
   ];
 
   return (
@@ -81,7 +88,7 @@ export default function FAQPage() {
               Frequently Asked Questions
             </h1>
             <p className="text-sm sm:text-base text-stone-500 max-w-xl mx-auto leading-relaxed">
-              Common questions about therapy, fees, and what to expect.
+              Common questions about therapy, fees, location, and what to expect.
             </p>
           </motion.div>
 
@@ -172,27 +179,7 @@ export default function FAQPage() {
         </div>
       </main>
 
-      {/* Footer */}
-      <footer className="bg-forest-900 text-stone-200 py-16 px-5 sm:px-8 border-t border-forest-800 relative z-10 mt-auto">
-        <div className="max-w-6xl mx-auto text-center">
-          <h3 className="font-sans font-extrabold text-lg text-white mb-2 tracking-tight">WECARE COUNSELING</h3>
-          <p className="text-xs tracking-widest text-gold-400 font-bold uppercase mb-4">Gina Botshtein, LCSW</p>
-          
-          <div className="flex flex-wrap justify-center gap-4 mb-6 text-sm text-forest-200">
-            <a href="tel:+14146172201" className="hover:text-gold-400 transition-colors">
-              +1 (414) 617-2201
-            </a>
-            <span className="text-forest-800">|</span>
-            <a href="mailto:Gina@wccounseling.net" className="hover:text-gold-400 transition-colors">
-              Gina@wccounseling.net
-            </a>
-          </div>
-          <div className="border-t border-forest-800 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-[10px] tracking-wider font-bold text-forest-300 uppercase">
-            <p>© {new Date().getFullYear()} WeCare Counseling. All rights reserved.</p>
-            <p className="text-[9px] text-forest-400">Confidential & HIPAA Compliant Healthcare Space</p>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }
