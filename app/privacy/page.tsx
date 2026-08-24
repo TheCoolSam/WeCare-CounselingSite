@@ -104,7 +104,7 @@ export default function PrivacyPolicy() {
                 As a licensed clinical social worker providing therapy services, Gina Botshtein is required to comply with the Health Insurance Portability and Accountability Act (HIPAA). When you become a therapy client, all clinical information is protected under HIPAA regulations.
               </p>
               <p className="text-stone-500 leading-relaxed font-sans text-xs bg-white p-4 border border-stone-100 rounded-xl">
-                <strong className="text-stone-900">IMPORTANT NOTICE:</strong> This website and its general contact forms are not part of HIPAA-covered services. If you require HIPAA-protected communication, please call us directly at +1 (414) 617-2201 or email Gina@wccounseling.net to establish a confidential communication channel.
+                <strong className="text-stone-900">IMPORTANT NOTICE:</strong> This website and its general contact forms are not part of HIPAA-covered services. If you require HIPAA-protected communication, please call us directly at +1 (414) 617-2201 or email WCCounseling@outlook.com to establish a confidential communication channel.
               </p>
             </section>
 
@@ -139,7 +139,7 @@ export default function PrivacyPolicy() {
                   <p className="text-xs text-stone-500 font-sans mt-1">Gina Botshtein, LCSW</p>
                 </div>
                 <div className="space-y-1 text-xs sm:text-sm font-sans font-medium text-stone-600">
-                  <p>Email: Gina@wccounseling.net</p>
+                  <p>Email: WCCounseling@outlook.com</p>
                   <p>Phone: +1 (414) 617-2201</p>
                 </div>
               </div>
@@ -172,8 +172,8 @@ export default function PrivacyPolicy() {
                 </div>
                 <div>
                   <p className="text-gold-400 font-bold uppercase tracking-wider mb-1">Email</p>
-                  <a href="mailto:Gina@wccounseling.net" className="font-bold text-white hover:text-gold-400 transition-colors text-base sm:text-lg break-all">
-                    Gina@wccounseling.net
+                  <a href="mailto:WCCounseling@outlook.com" className="font-bold text-white hover:text-gold-400 transition-colors text-base sm:text-lg break-all">
+                    WCCounseling@outlook.com
                   </a>
                 </div>
               </div>

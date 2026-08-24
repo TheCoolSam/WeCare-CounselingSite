@@ -160,9 +160,9 @@ export default function ContactPage() {
                     </a>
                   </div>
                   <div className="text-left">
-                    <a href="mailto:Gina@wccounseling.net" className="inline-flex items-center gap-2 font-semibold text-stone-800 hover:text-forest-600 transition-colors text-base sm:text-lg">
+                    <a href="mailto:WCCounseling@outlook.com" className="inline-flex items-center gap-2 font-semibold text-stone-800 hover:text-forest-600 transition-colors text-base sm:text-lg">
                       <Mail className="w-4 h-4 text-forest-600" />
-                      Gina@wccounseling.net
+                      WCCounseling@outlook.com
                     </a>
                   </div>
                 </div>

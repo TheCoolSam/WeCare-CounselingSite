@@ -39,7 +39,7 @@ export const FAQS = [
   },
   {
     question: "How do I schedule my first session?",
-    answer: "Use the contact form on this site or call me at +1 (414) 617-2201. I'll respond within 24 hours to discuss your needs and find a time that works for you. You can also email Gina@wccounseling.net if that's easier."
+    answer: "Use the contact form on this site or call me at +1 (414) 617-2201. I'll respond within 24 hours to discuss your needs and find a time that works for you. You can also email WCCounseling@outlook.com if that's easier."
   }
 ];
 
@@ -109,7 +109,7 @@ export const SERVICES = [
 export const CONTACT_INFO = {
   phone: "+1 (414) 617-2201",
   phoneHref: "tel:+14146172201",
-  email: "Gina@wccounseling.net",
+  email: "WCCounseling@outlook.com",
   hours: "By appointment - Monday to Friday, 9 AM to 6 PM CST",
   officeHours: "9:00 AM - 6:00 PM CST, Monday - Friday"
 };

@@ -188,8 +188,8 @@ function Navigation() {
                   <a href="tel:+14146172201" className="flex items-center gap-2.5 hover:text-forest-600 transition-colors">
                     <Phone className="w-4 h-4 text-forest-600" /> +1 (414) 617-2201
                   </a>
-                  <a href="mailto:Gina@wccounseling.net" className="flex items-center gap-2.5 hover:text-forest-600 transition-colors break-all">
-                    <Mail className="w-4 h-4 text-forest-600" /> Gina@wccounseling.net
+                  <a href="mailto:WCCounseling@outlook.com" className="flex items-center gap-2.5 hover:text-forest-600 transition-colors break-all">
+                    <Mail className="w-4 h-4 text-forest-600" /> WCCounseling@outlook.com
                   </a>
                 </motion.div>
               </div>
@@ -1023,9 +1023,9 @@ function ContactSection() {
                     </a>
                   </div>
                   <div className="text-left">
-                    <a href="mailto:Gina@wccounseling.net" className="inline-flex items-center gap-2 font-semibold text-stone-800 hover:text-forest-600 transition-colors text-base sm:text-lg">
+                    <a href="mailto:WCCounseling@outlook.com" className="inline-flex items-center gap-2 font-semibold text-stone-800 hover:text-forest-600 transition-colors text-base sm:text-lg">
                       <Mail className="w-4 h-4 text-forest-600" />
-                      Gina@wccounseling.net
+                      WCCounseling@outlook.com
                     </a>
                   </div>
                 </div>
